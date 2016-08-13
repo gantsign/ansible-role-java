@@ -1,21 +1,18 @@
 ---
 # Load version specific values
 - name: load JDK version vars
-  tags: java
   with_first_found:
     - "../vars/jdk-versions/{{ java_version }}.yml"
     - ../vars/jdk-versions/default.yml
   include_vars: "{{ item }}"
 
 - name: load JCE version vars
-  tags: java
   with_first_found:
     - "../vars/jce-versions/{{ java_jce_version }}.yml"
     - ../vars/jce-versions/default.yml
   include_vars: "{{ item }}"
 
 - name: assert version vars
-  tags: java
   assert:
     that:
       - java_redis_sha256sum not in (None, '')
@@ -27,7 +24,6 @@
 
 # Create download directory
 - name: create local Ansible data directory
-  tags: java
   file:
     state: directory
     mode: 'u=rwx,go=rx'
@@ -35,7 +31,6 @@
 
 # Download install files
 - name: download JDK
-  tags: java
   get_url:
     url: "{{ java_redis_mirror }}/{{ java_redis_filename }}"
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
@@ -47,7 +42,6 @@
     mode: 'u=rw,go=r'
 
 - name: download JCE
-  tags: java
   get_url:
     url: "{{ java_jce_redis_mirror }}/{{ java_jce_redis_filename }}"
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
@@ -60,7 +54,6 @@
 
 # Unpack installation
 - name: create Java home directory
-  tags: java
   file:
     path: "{{ java_home }}"
     state: directory
@@ -69,7 +62,6 @@
     mode: 'u=rwx,go=rx'
 
 - name: install JDK
-  tags: java
   unarchive:
     src: "{{ local_ansible_data_path }}/{{ java_redis_filename }}"
     dest: "{{ java_install_dir }}"
@@ -79,13 +71,11 @@
     mode: 'go-w'
 
 - name: install unzip
-  tags: java
   apt:
     name: unzip
     state: present
 
 - name: unzip JCE
-  tags: java
   unarchive:
     src: "{{ local_ansible_data_path }}/{{ java_jce_redis_filename }}"
     dest: "{{ local_ansible_data_path }}"
@@ -93,26 +83,22 @@
     mode: 'go-w'
 
 - name: install local_policy.jar
-  tags: java
   copy:
     src: "{{ local_ansible_data_path }}/{{ java_jce_redis_folder }}/local_policy.jar"
     dest: "{{ java_home }}/jre/lib/security/local_policy.jar"
 
 - name: install US_export_policy.jar
-  tags: java
   copy:
     src: "{{ local_ansible_data_path }}/{{ java_jce_redis_folder }}/US_export_policy.jar"
     dest: "{{ java_home }}/jre/lib/security/US_export_policy.jar"
 
 # Set JAVA_HOME
 - name: make sure /etc/profile.d exists
-  tags: java
   file:
     path: /etc/profile.d
     state: directory
 
 - name: export JAVA_HOME and add to PATH
-  tags: java
   template:
     src:  java.sh.j2
     dest: /etc/profile.d/java.sh
@@ -120,7 +106,6 @@
 
 # Set Java facts
 - name: create Ansible facts.d directory
-  tags: maven
   become: yes
   file:
     state: directory
@@ -130,7 +115,6 @@
     mode: 'u=rwx,go=rx'
 
 - name: install Java facts
-  tags: maven
   become: yes
   template:
     src: facts.j2
@@ -140,6 +124,5 @@
     mode: 'u=rw,go=r'
 
 - name: re-read facts
-  tags: maven
   setup:
     filter: ansible_local
