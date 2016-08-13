@@ -139,7 +139,7 @@
     group: root
     mode: 'u=rw,go=r'
 
-- name: Re-read facts
+- name: re-read facts
   tags: maven
   setup:
     filter: ansible_local
