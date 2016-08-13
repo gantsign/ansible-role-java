@@ -1,29 +1,48 @@
 ---
-language: python
-python: "2.7"
+# Require the standard build environment
+sudo: required
 
-# Use the new container infrastructure
-sudo: false
+# Require Ubuntu 14.04
+dist: trusty
 
-# Install ansible
-addons:
-  apt:
-    packages:
-    - python-pip
+# Require docker
+services:
+  - docker
 
-install:
-  # Install ansible
-  - pip install ansible
+before_install:
+  # Create the docker container
+  - sudo docker run --detach --volume $(pwd):/ansible/ansible-role-java --name test_dkr ubuntu:16.04 /sbin/init
 
-  # Check ansible version
-  - ansible --version
+  # Install dependencies
+  - sudo docker exec test_dkr apt-get -qq update
+  - sudo docker exec test_dkr apt-get -qq -y install ansible
+  - sudo docker exec test_dkr apt-get -qq -y install sudo
 
-  # Create ansible.cfg with correct roles_path
-  - printf '[defaults]\nroles_path=../' >ansible.cfg
+  # Verify dependencies installed
+  - sudo docker exec test_dkr ansible --version
+  - sudo docker exec test_dkr sudo -V
+
+  # Configure test user
+  - sudo docker exec test_dkr useradd test_usr
+  - sudo docker exec test_dkr bash -c "echo 'test_usr ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/test_usr"
+
+  # Verify test user
+  - sudo docker exec --user test_usr test_dkr sudo ansible --version
 
 script:
   # Basic role syntax check
-  - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+  - 'sudo docker exec --user test_usr --tty test_dkr bash -c "cd /ansible/ansible-role-java && ansible-playbook -i tests/inventory --syntax-check tests/test.yml"'
+
+  # Run the playbook with ansible-playbook
+  - 'sudo docker exec --user test_usr --tty test_dkr bash -c "cd /ansible/ansible-role-java && sudo ansible-playbook -i tests/inventory tests/test.yml"'
+
+  # Check the Java is installed
+  - 'sudo docker exec --user test_usr --tty test_dkr bash -c "source /etc/profile && java -version"'
+  - 'sudo docker exec --user test_usr --tty test_dkr bash -c "source /etc/profile && javac -version"'
+
+  # Clean up
+  - sudo docker stop test_dkr
+  - sudo docker rm test_dkr
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
