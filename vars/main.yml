@@ -1,2 +1,19 @@
 ---
-# vars file for java
+# Java JDK version number
+java_jdk_version: "{{ java_version | regex_replace('^([0-9]+)u([0-9]+)$', '1.\\1.0_\\2') }}"
+
+# The root folder of this Java installation
+java_home: "{{ java_install_dir }}/jdk{{ java_jdk_version }}"
+
+# Java JCE version number
+java_jce_version: "{{ java_version | regex_replace('^([0-9]+).*', '\\1') }}"
+
+# Where to download Oracle Java implementation from
+java_mirror_base: 'http://download.oracle.com/otn-pub/java'
+java_mirror: "{{ java_mirror_base }}/jdk"
+
+# File name for the JDK redistributable installation file
+java_redis_filename: "jdk-{{ java_version }}-linux-x64.tar.gz"
+
+# Directory on remote mirror where java redistributable can be found
+java_redis_mirror: "{{ java_mirror }}/{{ java_version }}-b{{ java_version_build }}"
