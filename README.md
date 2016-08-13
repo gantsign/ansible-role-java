@@ -1,38 +1,70 @@
-Role Name
-=========
+Ansible Role: Java
+==================
 
-A brief description of the role goes here.
+Role to install the [Oracle Java JDK](http://www.oracle.com/technetwork/java/index.html) build tool.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+* Ubuntu
+* Ansible >= 2.0
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The following variables will change the behavior of this role (default values
+are shown below):
 
-Dependencies
-------------
+```yaml
+# Java version number
+java_version: '8u102'
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+# Base installation directory for any Java distribution
+java_install_dir: /opt/java
+
+# The root folder of this Java installation
+java_home: "{{ java_install_dir }}/jdk{{ java_version }}"
+
+# Path for Ansible to store downloaded files
+local_ansible_data_path: '/tmp/ansible/data'
+
+# SHA256 sum for the redistributable JDK package
+java_redis_sha256sum: 7cfbe0bc0391a4abe60b3e9eb2a541d2315b99b9cb3a24980e618a89229e04b7
+
+# The build number for this JDK version
+java_version_build: 14
+
+# SHA256 sum for the redistributable JCE Policy Files
+java_jce_redis_sha256sum: f3020a3922efd6626c2fff45695d527f34a8020e938a49292561f18ad1320b59
+
+# Directory on remote mirror where JCE redistributable can be found
+java_jce_redis_mirror: "{{ java_mirror_base }}/jce/8"
+
+# The JCE redistributable file name
+java_jce_redis_filename: jce_policy-8.zip
+
+# The root folder name inside the JCE redistributable 
+java_jce_redis_folder: UnlimitedJCEPolicyJDK8
+```
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yaml
+- hosts: servers
+  roles:
+     - { role: gantsign.java }
+```
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+John Freeman
+
+GantSign Ltd.
+Company No. 06109112 (registered in England)
