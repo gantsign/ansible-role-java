@@ -23,7 +23,7 @@ before_install:
   - sudo docker exec test_dkr sudo -V
 
   # Configure test user
-  - sudo docker exec test_dkr useradd test_usr
+  - sudo docker exec test_dkr useradd --home /home/test_usr test_usr
   - sudo docker exec test_dkr bash -c "echo 'test_usr ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/test_usr"
 
   # Verify test user
@@ -34,7 +34,7 @@ script:
   - 'sudo docker exec --user test_usr --tty test_dkr bash -c "cd /ansible/ansible-role-java && ansible-playbook -i tests/inventory --syntax-check tests/test.yml"'
 
   # Run the playbook with ansible-playbook
-  - 'sudo docker exec --user test_usr --tty test_dkr bash -c "cd /ansible/ansible-role-java && sudo ansible-playbook -i tests/inventory tests/test.yml"'
+  - 'sudo docker exec --user test_usr --tty test_dkr bash -c "cd /ansible/ansible-role-java && ansible-playbook -i tests/inventory tests/test.yml"'
 
   # Check the Java is installed
   - 'sudo docker exec --user test_usr --tty test_dkr bash -c "source /etc/profile && java -version"'

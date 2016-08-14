@@ -54,6 +54,7 @@
 
 # Unpack installation
 - name: create Java home directory
+  become: yes
   file:
     path: "{{ java_home }}"
     state: directory
@@ -62,6 +63,7 @@
     mode: 'u=rwx,go=rx'
 
 - name: install JDK
+  become: yes
   unarchive:
     src: "{{ local_ansible_data_path }}/{{ java_redis_filename }}"
     dest: "{{ java_install_dir }}"
@@ -71,6 +73,7 @@
     mode: 'go-w'
 
 - name: install unzip
+  become: yes
   apt:
     name: unzip
     state: present
@@ -83,25 +86,38 @@
     mode: 'go-w'
 
 - name: install local_policy.jar
+  become: yes
   copy:
     src: "{{ local_ansible_data_path }}/{{ java_jce_redis_folder }}/local_policy.jar"
     dest: "{{ java_home }}/jre/lib/security/local_policy.jar"
+    owner: root
+    group: root
 
 - name: install US_export_policy.jar
+  become: yes
   copy:
     src: "{{ local_ansible_data_path }}/{{ java_jce_redis_folder }}/US_export_policy.jar"
     dest: "{{ java_home }}/jre/lib/security/US_export_policy.jar"
+    owner: root
+    group: root
 
 # Set JAVA_HOME
 - name: make sure /etc/profile.d exists
+  become: yes
   file:
     path: /etc/profile.d
     state: directory
+    owner: root
+    group: root
+    mode: 'u=rwx,go=rx'
 
 - name: export JAVA_HOME and add to PATH
+  become: yes
   template:
     src:  java.sh.j2
     dest: /etc/profile.d/java.sh
+    owner: root
+    group: root
     mode: 'a+x'
 
 # Set Java facts
