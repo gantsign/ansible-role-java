@@ -10,35 +10,31 @@ services:
   - docker
 
 before_install:
-  # Create the docker container
-  - sudo docker run --detach --volume $(pwd):/ansible/ansible-role-java --name test_dkr ubuntu:16.04 /sbin/init
-
-  # Install dependencies
-  - sudo docker exec test_dkr apt-get -qq update
-  - sudo docker exec test_dkr apt-get -qq -y install ansible
-  - sudo docker exec test_dkr apt-get -qq -y install sudo
-
-  # Verify dependencies installed
-  - sudo docker exec test_dkr ansible --version
-  - sudo docker exec test_dkr sudo -V
-
-  # Configure test user
-  - sudo docker exec test_dkr useradd --home /home/test_usr test_usr
-  - sudo docker exec test_dkr bash -c "echo 'test_usr ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/test_usr"
+  # Create the Docker image
+  - sudo docker build --rm --file=tests/Dockerfile --tag=test_img tests
 
   # Verify test user
-  - sudo docker exec --user test_usr test_dkr sudo ansible --version
+  - sudo docker run --rm --user=test_usr test_img sudo ansible --version
 
 script:
+  # Assign the name of the current directory as the repo_name
+  - 'repo_name=${PWD##*/}'
+
+  # Create the Docker container
+  - sudo docker run --detach --volume=$(pwd):/ansible/$repo_name --name=test_dkr test_img /sbin/init
+
+  # Save Docker exec command to an environment variable
+  - 'exec_dkr="sudo docker exec --user=test_usr test_dkr"'
+
   # Basic role syntax check
-  - 'sudo docker exec --user test_usr --tty test_dkr bash -c "cd /ansible/ansible-role-java && ansible-playbook -i tests/inventory --syntax-check tests/test.yml"'
+  - '$exec_dkr bash -c "cd /ansible/$repo_name && ansible-playbook -i tests/inventory --syntax-check tests/test.yml"'
 
   # Run the playbook with ansible-playbook
-  - 'sudo docker exec --user test_usr --tty test_dkr bash -c "cd /ansible/ansible-role-java && ansible-playbook -i tests/inventory tests/test.yml"'
+  - '$exec_dkr bash -c "cd /ansible/$repo_name && ansible-playbook -i tests/inventory tests/test.yml"'
 
   # Check the Java is installed
-  - 'sudo docker exec --user test_usr --tty test_dkr bash -c "source /etc/profile && java -version"'
-  - 'sudo docker exec --user test_usr --tty test_dkr bash -c "source /etc/profile && javac -version"'
+  - '$exec_dkr bash -c "source /etc/profile && java -version"'
+  - '$exec_dkr bash -c "source /etc/profile && javac -version"'
 
   # Clean up
   - sudo docker stop test_dkr
