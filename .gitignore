@@ -1,4 +1,4 @@
-# Created by https://www.gitignore.io/api/windows,linux,osx,vim,emacs,visualstudiocode,intellij,eclipse
+# Created by https://www.gitignore.io/api/windows,linux,osx,vim,emacs,visualstudiocode,intellij,eclipse,ansible
 
 ### Windows ###
 # Windows image file caches
@@ -234,3 +234,7 @@ local.properties
 
 # Code Recommenders
 .recommenders/
+
+
+### Ansible ###
+*.retry
