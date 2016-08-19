@@ -1,4 +1,7 @@
 ---
+language: python
+python: '2.7'
+
 # Require the standard build environment
 sudo: required
 
@@ -9,36 +12,29 @@ dist: trusty
 services:
   - docker
 
-before_install:
-  # Create the Docker image
-  - sudo docker build --rm --file=tests/Dockerfile --tag=test_img tests
+# Cache Ansible and Molecule to speed things up
+cache:
+  - pip
 
-  # Verify test user
-  - sudo docker run --rm --user=test_usr test_img sudo ansible --version
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -o Dpkg::Options::='--force-confold' --force-yes -y docker-engine
+
+install:
+  # Install Ansible
+  - pip install ansible
+
+  # Install Molecule
+  - pip install molecule
+
+  # Check Ansible version
+  - ansible --version
+
+  # Check Molecule version
+  - molecule --version
 
 script:
-  # Assign the name of the current directory as the repo_name
-  - 'repo_name=${PWD##*/}'
-
-  # Create the Docker container
-  - sudo docker run --detach --volume=$(pwd):/ansible/$repo_name --name=test_dkr test_img /sbin/init
-
-  # Save Docker exec command to an environment variable
-  - 'exec_dkr="sudo docker exec --user=test_usr test_dkr"'
-
-  # Basic role syntax check
-  - '$exec_dkr bash -c "cd /ansible/$repo_name && ansible-playbook -i tests/inventory --syntax-check tests/test.yml"'
-
-  # Run the playbook with ansible-playbook
-  - '$exec_dkr bash -c "cd /ansible/$repo_name && ansible-playbook -i tests/inventory tests/test.yml"'
-
-  # Check the Java is installed
-  - '$exec_dkr bash -c "source /etc/profile && java -version"'
-  - '$exec_dkr bash -c "source /etc/profile && javac -version"'
-
-  # Clean up
-  - sudo docker stop test_dkr
-  - sudo docker rm test_dkr
+  - molecule test
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

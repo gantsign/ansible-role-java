@@ -1,0 +1,9 @@
+---
+ansible:
+  playbook: tests/test.yml
+
+docker:
+  containers:
+  - name: ansible-role-java-01
+    image: ubuntu
+    image_version: '16.04'
