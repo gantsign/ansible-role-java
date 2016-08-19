@@ -8,5 +8,5 @@ java_jce_redis_mirror: "{{ java_mirror_base }}/jce/8"
 # The JCE redistributable file name
 java_jce_redis_filename: jce_policy-8.zip
 
-# The root folder name inside the JCE redistributable 
+# The root folder name inside the JCE redistributable
 java_jce_redis_folder: UnlimitedJCEPolicyJDK8

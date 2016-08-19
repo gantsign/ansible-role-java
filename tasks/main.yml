@@ -29,6 +29,14 @@
     mode: 'u=rwx,go=rx'
     dest: "{{ local_ansible_data_path }}"
 
+# Ensure CA certificates installed (so we can download the JDK)
+- name: ensure ca-certificates installed
+  become: yes
+  apt:
+    name: ca-certificates
+    state: present
+  when: ansible_os_family == "Debian"
+
 # Download install files
 - name: download JDK
   get_url:
@@ -67,7 +75,8 @@
   unarchive:
     src: "{{ local_ansible_data_path }}/{{ java_redis_filename }}"
     dest: "{{ java_install_dir }}"
-    creates: "{{ java_home }}/bin/java" 
+    creates: "{{ java_home }}/bin/java"
+    copy: no
     owner: root
     group: root
     mode: 'go-w'
@@ -82,13 +91,15 @@
   unarchive:
     src: "{{ local_ansible_data_path }}/{{ java_jce_redis_filename }}"
     dest: "{{ local_ansible_data_path }}"
-    creates: "{{ local_ansible_data_path }}/{{ java_jce_redis_folder }}/local_policy.jar" 
+    creates: "{{ local_ansible_data_path }}/{{ java_jce_redis_folder }}/local_policy.jar"
+    copy: no
     mode: 'go-w'
 
 - name: install local_policy.jar
   become: yes
   copy:
     src: "{{ local_ansible_data_path }}/{{ java_jce_redis_folder }}/local_policy.jar"
+    remote_src: yes
     dest: "{{ java_home }}/jre/lib/security/local_policy.jar"
     owner: root
     group: root
@@ -97,6 +108,7 @@
   become: yes
   copy:
     src: "{{ local_ansible_data_path }}/{{ java_jce_redis_folder }}/US_export_policy.jar"
+    remote_src: yes
     dest: "{{ java_home }}/jre/lib/security/US_export_policy.jar"
     owner: root
     group: root
