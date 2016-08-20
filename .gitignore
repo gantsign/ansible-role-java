@@ -1,4 +1,4 @@
-# Created by https://www.gitignore.io/api/windows,linux,osx,vim,emacs,visualstudiocode,intellij,eclipse,ansible
+# Created by https://www.gitignore.io/api/windows,linux,osx,vim,emacs,intellij,eclipse,visualstudiocode,ansible
 
 ### Windows ###
 # Windows image file caches
@@ -120,13 +120,6 @@ flycheck_*.el
 # projectiles files
 .projectile
 
-### VisualStudioCode ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-
-
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
@@ -234,6 +227,13 @@ local.properties
 
 # Code Recommenders
 .recommenders/
+
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
 
 
 ### Ansible ###
