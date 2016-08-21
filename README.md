@@ -90,7 +90,7 @@ Role Facts
 
 This role exports the following Ansible facts for use by other roles:
 
-* `ansible_local.java.general.java_home`
+* `ansible_local.java.general.home`
 
     * e.g. `/opt/java/jdk1.8.0_102`
     
