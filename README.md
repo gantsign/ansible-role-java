@@ -85,6 +85,19 @@ Example Playbook
      - { role: gantsign.java }
 ```
 
+Role Facts
+----------
+
+This role exports the following Ansible facts for use by other roles:
+
+* `ansible_local.java.general.java_home`
+
+    * e.g. `/opt/java/jdk1.8.0_102`
+    
+* `ansible_local.java.general.version`
+
+    * e.g. `1.8.0_102`
+
 Development & Testing
 ---------------------
 
