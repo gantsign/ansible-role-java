@@ -29,14 +29,41 @@ java_home: "{{ java_install_dir }}/jdk{{ java_version }}"
 
 # Directory to store files downloaded for Java installation
 java_download_dir: "{{ x_ansible_download_dir | default('~/.ansible/tmp/downloads') }}"
+```
 
-# SHA256 sum for the redistributable JDK package
+### Supported Java versions
+
+The following versions of Java are supported without any additional
+configuration (for other versions follow the Advanced Configuration
+instructions):
+
+* 8u102
+
+Advanced Configuration
+----------------------
+
+The following role variables are dependent on the Java version; to use a
+Java version **not pre-configured by this role** you must configure the
+variables below.
+
+### Minor Version Configuration
+
+The below has to be configured for every minor release of Java.
+
+```yaml
+# SHA256 sum for the redistributable JDK package (i.e. jdk-{{ java_version }}-linux-x64.tar.gz)
 java_redis_sha256sum: 7cfbe0bc0391a4abe60b3e9eb2a541d2315b99b9cb3a24980e618a89229e04b7
 
 # The build number for this JDK version
 java_version_build: 14
+```
 
-# SHA256 sum for the redistributable JCE Policy Files
+### Major Version Configuration 
+
+The below only has to be configured for a new major release of Java.
+
+```yaml
+# SHA256 sum for the redistributable JCE Policy Files (i.e. jce_policy-8.zip)
 java_jce_redis_sha256sum: f3020a3922efd6626c2fff45695d527f34a8020e938a49292561f18ad1320b59
 
 # Directory on remote mirror where JCE redistributable can be found
