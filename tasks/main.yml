@@ -23,11 +23,11 @@
       - java_jce_redis_folder not in (None, '')
 
 # Create download directory
-- name: create local Ansible data directory
+- name: create download directory
   file:
     state: directory
     mode: 'u=rwx,go=rx'
-    dest: "{{ local_ansible_data_path }}"
+    dest: "{{ java_download_dir }}"
 
 # Ensure CA certificates installed (so we can download the JDK)
 - name: ensure ca-certificates installed
@@ -42,7 +42,7 @@
   get_url:
     url: "{{ java_redis_mirror }}/{{ java_redis_filename }}"
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
-    dest: "{{ local_ansible_data_path }}/{{ java_redis_filename }}"
+    dest: "{{ java_download_dir }}/{{ java_redis_filename }}"
     sha256sum: "{{ java_redis_sha256sum }}"
     force: false
     use_proxy: true
@@ -53,7 +53,7 @@
   get_url:
     url: "{{ java_jce_redis_mirror }}/{{ java_jce_redis_filename }}"
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
-    dest: "{{ local_ansible_data_path }}/{{ java_jce_redis_filename }}"
+    dest: "{{ java_download_dir }}/{{ java_jce_redis_filename }}"
     sha256sum: "{{ java_jce_redis_sha256sum }}"
     force: false
     use_proxy: true
@@ -73,7 +73,7 @@
 - name: install JDK
   become: yes
   unarchive:
-    src: "{{ local_ansible_data_path }}/{{ java_redis_filename }}"
+    src: "{{ java_download_dir }}/{{ java_redis_filename }}"
     dest: "{{ java_install_dir }}"
     creates: "{{ java_home }}/bin/java"
     copy: no
@@ -89,16 +89,16 @@
 
 - name: unzip JCE
   unarchive:
-    src: "{{ local_ansible_data_path }}/{{ java_jce_redis_filename }}"
-    dest: "{{ local_ansible_data_path }}"
-    creates: "{{ local_ansible_data_path }}/{{ java_jce_redis_folder }}/local_policy.jar"
+    src: "{{ java_download_dir }}/{{ java_jce_redis_filename }}"
+    dest: "{{ java_download_dir }}"
+    creates: "{{ java_download_dir }}/{{ java_jce_redis_folder }}/local_policy.jar"
     copy: no
     mode: 'go-w'
 
 - name: install local_policy.jar
   become: yes
   copy:
-    src: "{{ local_ansible_data_path }}/{{ java_jce_redis_folder }}/local_policy.jar"
+    src: "{{ java_download_dir }}/{{ java_jce_redis_folder }}/local_policy.jar"
     remote_src: yes
     dest: "{{ java_home }}/jre/lib/security/local_policy.jar"
     owner: root
@@ -107,7 +107,7 @@
 - name: install US_export_policy.jar
   become: yes
   copy:
-    src: "{{ local_ansible_data_path }}/{{ java_jce_redis_folder }}/US_export_policy.jar"
+    src: "{{ java_download_dir }}/{{ java_jce_redis_folder }}/US_export_policy.jar"
     remote_src: yes
     dest: "{{ java_home }}/jre/lib/security/US_export_policy.jar"
     owner: root

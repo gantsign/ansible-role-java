@@ -27,8 +27,8 @@ java_install_dir: /opt/java
 # The root folder of this Java installation
 java_home: "{{ java_install_dir }}/jdk{{ java_version }}"
 
-# Path for Ansible to store downloaded files
-local_ansible_data_path: '/tmp/ansible/data'
+# Directory to store files downloaded for Java installation
+java_download_dir: "{{ x_ansible_download_dir | default('/tmp/ansible/data') }}"
 
 # SHA256 sum for the redistributable JDK package
 java_redis_sha256sum: 7cfbe0bc0391a4abe60b3e9eb2a541d2315b99b9cb3a24980e618a89229e04b7
