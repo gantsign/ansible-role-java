@@ -58,7 +58,7 @@ java_redis_sha256sum: 7cfbe0bc0391a4abe60b3e9eb2a541d2315b99b9cb3a24980e618a8922
 java_version_build: 14
 ```
 
-### Major Version Configuration 
+### Major Version Configuration
 
 The below only has to be configured for a new major release of Java.
 
@@ -72,7 +72,7 @@ java_jce_redis_mirror: "{{ java_mirror_base }}/jce/8"
 # The JCE redistributable file name
 java_jce_redis_filename: jce_policy-8.zip
 
-# The root folder name inside the JCE redistributable 
+# The root folder name inside the JCE redistributable
 java_jce_redis_folder: UnlimitedJCEPolicyJDK8
 ```
 
@@ -90,13 +90,13 @@ Role Facts
 
 This role exports the following Ansible facts for use by other roles:
 
-* `ansible_local.java.general.home`
-
-    * e.g. `/opt/java/jdk1.8.0_102`
-    
 * `ansible_local.java.general.version`
 
     * e.g. `1.8.0_102`
+
+* `ansible_local.java.general.home`
+
+    * e.g. `/opt/java/jdk1.8.0_102`
 
 Development & Testing
 ---------------------
