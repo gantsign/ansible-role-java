@@ -22,6 +22,11 @@
       - java_jce_redis_filename not in (None, '')
       - java_jce_redis_folder not in (None, '')
 
+- name: assert Binary Code License accepted
+  assert:
+    that:
+      - java_license_declaration == 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
+
 # Create download directory
 - name: create download directory
   file:

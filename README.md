@@ -31,6 +31,23 @@ java_home: "{{ java_install_dir }}/jdk{{ java_version }}"
 java_download_dir: "{{ x_ansible_download_dir | default('~/.ansible/tmp/downloads') }}"
 ```
 
+### Oracle Binary Code License Agreement
+
+To use this role you must accept the "Oracle Binary Code License Agreement
+for the Java SE Platform Products and JavaFX"; you can do this by specifying
+the following role variable:
+
+```yaml
+java_license_declaration: 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
+```
+
+If you don't want to embed the declaration in your playbook it can be passed
+by adding the following argument when running `ansible-playbook`:
+
+```
+--extra-vars '{"java_license_declaration": "I accept the \"Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX\" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html\"}'
+```
+
 ### Supported Java versions
 
 The following versions of Java are supported without any additional
