@@ -45,7 +45,7 @@ If you don't want to embed the declaration in your playbook it can be passed
 by adding the following argument when running `ansible-playbook`:
 
 ```
---extra-vars '{"java_license_declaration": "I accept the \"Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX\" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html\"}'
+--extra-vars '{"java_license_declaration": "I accept the \"Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX\" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html"}'
 ```
 
 ### Supported Java versions
