@@ -49,9 +49,9 @@
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
     dest: "{{ java_download_dir }}/{{ java_redis_filename }}"
     sha256sum: "{{ java_redis_sha256sum }}"
-    force: false
-    use_proxy: true
-    validate_certs: true
+    force: no
+    use_proxy: yes
+    validate_certs: yes
     mode: 'u=rw,go=r'
 
 - name: download JCE
@@ -60,9 +60,9 @@
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
     dest: "{{ java_download_dir }}/{{ java_jce_redis_filename }}"
     sha256sum: "{{ java_jce_redis_sha256sum }}"
-    force: false
-    use_proxy: true
-    validate_certs: true
+    force: no
+    use_proxy: yes
+    validate_certs: yes
     mode: 'u=rw,go=r'
 
 # Unpack installation
