@@ -1,0 +1,6 @@
+---
+# SHA256 sum for the redistributable JDK package
+java_redis_sha256sum: '467f323ba38df2b87311a7818bcbf60fe0feb2139c455dfa0e08ba7ed8581328'
+
+# The build number for this JDK version
+java_version_build: 13

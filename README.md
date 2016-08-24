@@ -56,6 +56,7 @@ configuration (for other versions follow the Advanced Configuration
 instructions):
 
 * 8u102
+* 8u101
 * 7u80
 * 7u79
 
