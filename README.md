@@ -49,7 +49,7 @@ by adding the following argument when running `ansible-playbook`:
 --extra-vars '{"java_license_declaration": "I accept the \"Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX\" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html"}'
 ```
 
-### Supported Java versions
+### Supported Java Versions
 
 The following versions of Java are supported without any additional
 configuration (for other versions follow the Advanced Configuration
