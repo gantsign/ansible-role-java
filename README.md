@@ -56,6 +56,8 @@ configuration (for other versions follow the Advanced Configuration
 instructions):
 
 * 8u102
+* 7u80
+* 7u79
 
 Advanced Configuration
 ----------------------
@@ -79,6 +81,9 @@ java_version_build: 14
 ### Major Version Configuration
 
 The below only has to be configured for a new major release of Java.
+
+**Warning:** this role is incompatible with Java 6 and earlier due to the
+different way the JDK was packaged for those releases.
 
 ```yaml
 # SHA256 sum for the redistributable JCE Policy Files (i.e. jce_policy-8.zip)

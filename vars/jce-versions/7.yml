@@ -1,0 +1,12 @@
+---
+# SHA256 sum for the redistributable JCE Policy Files
+java_jce_redis_sha256sum: '7a8d790e7bd9c2f82a83baddfae765797a4a56ea603c9150c87b7cdb7800194d'
+
+# Directory on remote mirror where JCE redistributable can be found
+java_jce_redis_mirror: "{{ java_mirror_base }}/jce/7"
+
+# The JCE redistributable file name
+java_jce_redis_filename: UnlimitedJCEPolicyJDK7.zip
+
+# The root folder name inside the JCE redistributable
+java_jce_redis_folder: UnlimitedJCEPolicy
