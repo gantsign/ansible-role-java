@@ -3,7 +3,7 @@
 java_version: '8u102'
 
 # Base installation directory for any Java distribution
-java_install_dir: /opt/java
+java_install_dir: '/opt/java'
 
 # The root folder of this Java installation
 java_home: "{{ java_install_dir }}/jdk{{ java_version }}"
