@@ -2,6 +2,7 @@ Ansible Role: Java
 ==================
 
 [![Build Status](https://travis-ci.org/gantsign/ansible-role-java.svg?branch=master)](https://travis-ci.org/gantsign/ansible-role-java)
+[![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-gantsign.java-blue.svg)](https://galaxy.ansible.com/gantsign/java)
 
 Role to install the [Oracle Java JDK](http://www.oracle.com/technetwork/java/index.html).
 
