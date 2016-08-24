@@ -23,7 +23,7 @@ are shown below):
 java_version: '8u102'
 
 # Base installation directory for any Java distribution
-java_install_dir: /opt/java
+java_install_dir: '/opt/java'
 
 # The root folder of this Java installation
 java_home: "{{ java_install_dir }}/jdk{{ java_version }}"
@@ -72,7 +72,7 @@ The below has to be configured for every minor release of Java.
 
 ```yaml
 # SHA256 sum for the redistributable JDK package (i.e. jdk-{{ java_version }}-linux-x64.tar.gz)
-java_redis_sha256sum: 7cfbe0bc0391a4abe60b3e9eb2a541d2315b99b9cb3a24980e618a89229e04b7
+java_redis_sha256sum: '7cfbe0bc0391a4abe60b3e9eb2a541d2315b99b9cb3a24980e618a89229e04b7'
 
 # The build number for this JDK version
 java_version_build: 14
@@ -87,16 +87,16 @@ different way the JDK was packaged for those releases.
 
 ```yaml
 # SHA256 sum for the redistributable JCE Policy Files (i.e. jce_policy-8.zip)
-java_jce_redis_sha256sum: f3020a3922efd6626c2fff45695d527f34a8020e938a49292561f18ad1320b59
+java_jce_redis_sha256sum: 'f3020a3922efd6626c2fff45695d527f34a8020e938a49292561f18ad1320b59'
 
 # Directory on remote mirror where JCE redistributable can be found
 java_jce_redis_mirror: "{{ java_mirror_base }}/jce/8"
 
 # The JCE redistributable file name
-java_jce_redis_filename: jce_policy-8.zip
+java_jce_redis_filename: 'jce_policy-8.zip'
 
 # The root folder name inside the JCE redistributable
-java_jce_redis_folder: UnlimitedJCEPolicyJDK8
+java_jce_redis_folder: 'UnlimitedJCEPolicyJDK8'
 ```
 
 Example Playbook
