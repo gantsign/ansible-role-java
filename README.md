@@ -122,6 +122,11 @@ This role exports the following Ansible facts for use by other roles:
 
     * e.g. `/opt/java/jdk1.8.0_102`
 
+More roles from GantSign
+------------------------
+
+You can find more roles from GantSign on [Ansible Galaxy](https://galaxy.ansible.com/gantsign).
+
 Development & Testing
 ---------------------
 
