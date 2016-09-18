@@ -6,6 +6,12 @@ ansible:
 
 docker:
   containers:
+  - name: ansible-role-java-debian-wheezy
+    image: debian
+    image_version: '7'
+  - name: ansible-role-java-debian-jessie
+    image: debian
+    image_version: '8'
   - name: ansible-role-java-ubuntu-trusty
     image: ubuntu
     image_version: '14.04'
