@@ -27,7 +27,14 @@ Requirements
             * Wily (15.10)
             * Xenial (16.04)
 
-        * Note: other versions are likely to work but have not been tested.
+    * RedHat Family
+
+        * CentOS
+
+            * 6
+            * 7
+
+    * Note: other versions are likely to work but have not been tested.
 
 Role Variables
 --------------

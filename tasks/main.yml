@@ -35,12 +35,12 @@
     dest: "{{ java_download_dir }}"
 
 # Ensure CA certificates installed (so we can download the JDK)
-- name: ensure ca-certificates installed
+- name: ensure ca-certificates installed (apt)
   become: yes
   apt:
     name: ca-certificates
     state: present
-  when: ansible_os_family == "Debian"
+  when: ansible_pkg_mgr == 'apt'
 
 # Download install files
 - name: download JDK
@@ -86,11 +86,19 @@
     group: root
     mode: 'go-w'
 
-- name: install unzip
+- name: install unzip (apt)
   become: yes
   apt:
     name: unzip
     state: present
+  when: ansible_pkg_mgr == 'apt'
+
+- name: install unzip (yum)
+  become: yes
+  yum:
+    name: unzip
+    state: present
+  when: ansible_pkg_mgr == 'yum'
 
 - name: unzip JCE
   unarchive:
