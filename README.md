@@ -10,8 +10,24 @@ Role to install the [Oracle Java JDK](http://www.oracle.com/technetwork/java/ind
 Requirements
 ------------
 
-* Ubuntu
 * Ansible >= 2.0
+
+* Linux Distribution
+
+    * Debian Family
+
+        * Debian
+
+            * Wheezy (7)
+            * Jessie (8)
+
+        * Ubuntu
+
+            * Trusty (14.04)
+            * Wily (15.10)
+            * Xenial (16.04)
+
+        * Note: other versions are likely to work but have not been tested.
 
 Role Variables
 --------------
