@@ -54,6 +54,12 @@ java_home: "{{ java_install_dir }}/jdk{{ java_version }}"
 
 # Directory to store files downloaded for Java installation
 java_download_dir: "{{ x_ansible_download_dir | default('~/.ansible/tmp/downloads') }}"
+
+# Timeout for JDK download response in seconds
+java_jdk_download_timeout_seconds: 600
+
+# Timeout for JDK download response in seconds
+java_jce_download_timeout_seconds: 30
 ```
 
 ### Oracle Binary Code License Agreement

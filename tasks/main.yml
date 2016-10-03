@@ -52,6 +52,7 @@
     force: no
     use_proxy: yes
     validate_certs: yes
+    timeout: "{{ java_jdk_download_timeout_seconds }}"
     mode: 'u=rw,go=r'
 
 - name: download JCE
@@ -63,6 +64,7 @@
     force: no
     use_proxy: yes
     validate_certs: yes
+    timeout: "{{ java_jce_download_timeout_seconds }}"
     mode: 'u=rw,go=r'
 
 # Unpack installation
