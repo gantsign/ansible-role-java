@@ -1,6 +1,6 @@
 galaxy_info:
   author: John Freeman
-  description: Role for downloading and installing Oracle Java.
+  description: Role for installing Oracle Java.
   company: GantSign Ltd.
   license: MIT
   min_ansible_version: 2.0
