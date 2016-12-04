@@ -88,19 +88,12 @@
     group: root
     mode: 'go-w'
 
-- name: install unzip (apt)
+- name: install unzip (apt, yum)
   become: yes
-  apt:
+  package:
     name: unzip
     state: present
-  when: ansible_pkg_mgr == 'apt'
-
-- name: install unzip (yum)
-  become: yes
-  yum:
-    name: unzip
-    state: present
-  when: ansible_pkg_mgr == 'yum'
+  when: ansible_pkg_mgr in ('apt', 'yum')
 
 - name: unzip JCE
   unarchive:
