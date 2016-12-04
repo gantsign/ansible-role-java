@@ -50,7 +50,7 @@ java_version: '8u112'
 java_install_dir: '/opt/java'
 
 # The root folder of this Java installation
-java_home: "{{ java_install_dir }}/jdk{{ java_version }}"
+java_home: '{{ java_install_dir }}/jdk{{ java_version }}'
 
 # Directory to store files downloaded for Java installation
 java_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
@@ -123,7 +123,7 @@ different way the JDK was packaged for those releases.
 java_jce_redis_sha256sum: 'f3020a3922efd6626c2fff45695d527f34a8020e938a49292561f18ad1320b59'
 
 # Directory on remote mirror where JCE redistributable can be found
-java_jce_redis_mirror: "{{ java_mirror_base }}/jce/8"
+java_jce_redis_mirror: '{{ java_mirror_base }}/jce/8'
 
 # The JCE redistributable file name
 java_jce_redis_filename: 'jce_policy-8.zip'

@@ -6,7 +6,7 @@ java_version: '8u112'
 java_install_dir: '/opt/java'
 
 # The root folder of this Java installation
-java_home: "{{ java_install_dir }}/jdk{{ java_version }}"
+java_home: '{{ java_install_dir }}/jdk{{ java_version }}'
 
 # Directory to store files downloaded for Java installation
 java_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
