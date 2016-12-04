@@ -108,7 +108,6 @@
     dest: "{{ java_download_dir }}"
     creates: "{{ java_download_dir }}/{{ java_jce_redis_folder }}/local_policy.jar"
     copy: no
-    mode: 'go-w'
 
 - name: install local_policy.jar
   become: yes
@@ -118,6 +117,7 @@
     dest: "{{ java_home }}/jre/lib/security/local_policy.jar"
     owner: root
     group: root
+    mode: 'u=rw,go=r'
 
 - name: install US_export_policy.jar
   become: yes
@@ -127,6 +127,7 @@
     dest: "{{ java_home }}/jre/lib/security/US_export_policy.jar"
     owner: root
     group: root
+    mode: 'u=rw,go=r'
 
 # Set JAVA_HOME
 - name: make sure /etc/profile.d exists
