@@ -2,15 +2,15 @@
 # Load version specific values
 - name: load JDK version vars
   with_first_found:
-    - "../vars/jdk-versions/{{ java_version }}.yml"
+    - '../vars/jdk-versions/{{ java_version }}.yml'
     - ../vars/jdk-versions/default.yml
-  include_vars: "{{ item }}"
+  include_vars: '{{ item }}'
 
 - name: load JCE version vars
   with_first_found:
-    - "../vars/jce-versions/{{ java_jce_version }}.yml"
+    - '../vars/jce-versions/{{ java_jce_version }}.yml'
     - ../vars/jce-versions/default.yml
-  include_vars: "{{ item }}"
+  include_vars: '{{ item }}'
 
 - name: assert version vars
   assert:
@@ -32,7 +32,7 @@
   file:
     state: directory
     mode: 'u=rwx,go=rx'
-    dest: "{{ java_download_dir }}"
+    dest: '{{ java_download_dir }}'
 
 # Ensure CA certificates installed (so we can download the JDK)
 - name: ensure ca-certificates installed (apt)
@@ -45,33 +45,33 @@
 # Download install files
 - name: download JDK
   get_url:
-    url: "{{ java_redis_mirror }}/{{ java_redis_filename }}"
+    url: '{{ java_redis_mirror }}/{{ java_redis_filename }}'
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
-    dest: "{{ java_download_dir }}/{{ java_redis_filename }}"
-    sha256sum: "{{ java_redis_sha256sum }}"
+    dest: '{{ java_download_dir }}/{{ java_redis_filename }}'
+    sha256sum: '{{ java_redis_sha256sum }}'
     force: no
     use_proxy: yes
     validate_certs: yes
-    timeout: "{{ java_jdk_download_timeout_seconds }}"
+    timeout: '{{ java_jdk_download_timeout_seconds }}'
     mode: 'u=rw,go=r'
 
 - name: download JCE
   get_url:
-    url: "{{ java_jce_redis_mirror }}/{{ java_jce_redis_filename }}"
+    url: '{{ java_jce_redis_mirror }}/{{ java_jce_redis_filename }}'
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
-    dest: "{{ java_download_dir }}/{{ java_jce_redis_filename }}"
-    sha256sum: "{{ java_jce_redis_sha256sum }}"
+    dest: '{{ java_download_dir }}/{{ java_jce_redis_filename }}'
+    sha256sum: '{{ java_jce_redis_sha256sum }}'
     force: no
     use_proxy: yes
     validate_certs: yes
-    timeout: "{{ java_jce_download_timeout_seconds }}"
+    timeout: '{{ java_jce_download_timeout_seconds }}'
     mode: 'u=rw,go=r'
 
 # Unpack installation
 - name: create Java home directory
   become: yes
   file:
-    path: "{{ java_home }}"
+    path: '{{ java_home }}'
     state: directory
     owner: root
     group: root
@@ -80,9 +80,9 @@
 - name: install JDK
   become: yes
   unarchive:
-    src: "{{ java_download_dir }}/{{ java_redis_filename }}"
-    dest: "{{ java_install_dir }}"
-    creates: "{{ java_home }}/bin/java"
+    src: '{{ java_download_dir }}/{{ java_redis_filename }}'
+    dest: '{{ java_install_dir }}'
+    creates: '{{ java_home }}/bin/java'
     copy: no
     owner: root
     group: root
@@ -97,17 +97,17 @@
 
 - name: unzip JCE
   unarchive:
-    src: "{{ java_download_dir }}/{{ java_jce_redis_filename }}"
-    dest: "{{ java_download_dir }}"
-    creates: "{{ java_download_dir }}/{{ java_jce_redis_folder }}/local_policy.jar"
+    src: '{{ java_download_dir }}/{{ java_jce_redis_filename }}'
+    dest: '{{ java_download_dir }}'
+    creates: '{{ java_download_dir }}/{{ java_jce_redis_folder }}/local_policy.jar'
     copy: no
 
 - name: install local_policy.jar
   become: yes
   copy:
-    src: "{{ java_download_dir }}/{{ java_jce_redis_folder }}/local_policy.jar"
+    src: '{{ java_download_dir }}/{{ java_jce_redis_folder }}/local_policy.jar'
     remote_src: yes
-    dest: "{{ java_home }}/jre/lib/security/local_policy.jar"
+    dest: '{{ java_home }}/jre/lib/security/local_policy.jar'
     owner: root
     group: root
     mode: 'u=rw,go=r'
@@ -115,9 +115,9 @@
 - name: install US_export_policy.jar
   become: yes
   copy:
-    src: "{{ java_download_dir }}/{{ java_jce_redis_folder }}/US_export_policy.jar"
+    src: '{{ java_download_dir }}/{{ java_jce_redis_folder }}/US_export_policy.jar'
     remote_src: yes
-    dest: "{{ java_home }}/jre/lib/security/US_export_policy.jar"
+    dest: '{{ java_home }}/jre/lib/security/US_export_policy.jar'
     owner: root
     group: root
     mode: 'u=rw,go=r'
