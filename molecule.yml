@@ -28,3 +28,7 @@ docker:
     image: fedora
     image_version: '25'
     command: /bin/bash
+  - name: ansible-role-maven-opensuse-leap
+    image: opensuse
+    image_version: '42.2'
+    command: /bin/bash
