@@ -77,7 +77,7 @@
     group: root
     mode: 'u=rwx,go=rx'
 
-- name: install unarchive module dependencies (apt, yum, dnf)
+- name: install unarchive module dependencies (apt, yum, dnf, zypper)
   become: yes
   package:
     name: '{{ item }}'
@@ -85,7 +85,7 @@
   with_items:
     - tar
     - unzip
-  when: ansible_pkg_mgr in ('apt', 'yum', 'dnf')
+  when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
 
 - name: install JDK
   become: yes
@@ -124,6 +124,13 @@
     owner: root
     group: root
     mode: 'u=rw,go=r'
+
+- name: install profile scripts (zypper)
+  become: yes
+  package:
+    name: aaa_base
+    state: present
+  when: ansible_pkg_mgr == 'zypper'
 
 # Set JAVA_HOME
 - name: make sure /etc/profile.d exists
