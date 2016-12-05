@@ -77,6 +77,16 @@
     group: root
     mode: 'u=rwx,go=rx'
 
+- name: install unarchive module dependencies (apt, yum, dnf)
+  become: yes
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - tar
+    - unzip
+  when: ansible_pkg_mgr in ('apt', 'yum', 'dnf')
+
 - name: install JDK
   become: yes
   unarchive:
@@ -87,13 +97,6 @@
     owner: root
     group: root
     mode: 'go-w'
-
-- name: install unzip (apt, yum)
-  become: yes
-  package:
-    name: unzip
-    state: present
-  when: ansible_pkg_mgr in ('apt', 'yum')
 
 - name: unzip JCE
   unarchive:
