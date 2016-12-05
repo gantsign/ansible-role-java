@@ -1,5 +1,15 @@
 ---
 - hosts: all
   remote_user: root
+
+  pre_tasks:
+    - name: install Ansible dnf dependency (dnf)
+      become: yes
+      command: dnf install -y python2-dnf
+      args:
+        warn: no
+      changed_when: no
+      when: ansible_pkg_mgr == 'dnf'
+
   roles:
     - ansible-role-java
