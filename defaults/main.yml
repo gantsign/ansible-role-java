@@ -1,6 +1,6 @@
 ---
 # Java version number
-java_version: '8u112'
+java_version: '8u121'
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
@@ -16,3 +16,6 @@ java_jdk_download_timeout_seconds: 600
 
 # Timeout for JDK download response in seconds
 java_jce_download_timeout_seconds: 30
+
+# ID in JDK download URL (introduced in 8u121)
+java_jdk_download_id: ''

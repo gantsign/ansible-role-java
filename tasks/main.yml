@@ -42,10 +42,20 @@
     state: present
   when: ansible_pkg_mgr == 'apt'
 
+- name: set download URL fact (without ID)
+  set_fact:
+    java_jdk_download_url: '{{ java_redis_mirror }}/{{ java_redis_filename }}'
+  when: java_jdk_download_id == ''
+
+- name: set download URL fact (with ID)
+  set_fact:
+    java_jdk_download_url: '{{ java_redis_mirror }}/{{ java_jdk_download_id }}/{{ java_redis_filename }}'
+  when: java_jdk_download_id != ''
+
 # Download install files
 - name: download JDK
   get_url:
-    url: '{{ java_redis_mirror }}/{{ java_redis_filename }}'
+    url: '{{ java_jdk_download_url }}'
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
     dest: '{{ java_download_dir }}/{{ java_redis_filename }}'
     sha256sum: '{{ java_redis_sha256sum }}'
