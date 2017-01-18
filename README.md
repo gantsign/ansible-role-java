@@ -54,7 +54,7 @@ are shown below):
 
 ```yaml
 # Java version number
-java_version: '8u112'
+java_version: '8u121'
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
@@ -95,6 +95,7 @@ The following versions of Java are supported without any additional
 configuration (for other versions follow the Advanced Configuration
 instructions):
 
+* 8u121
 * 8u112
 * 8u111
 * 8u102
@@ -119,6 +120,9 @@ java_redis_sha256sum: '7cfbe0bc0391a4abe60b3e9eb2a541d2315b99b9cb3a24980e618a892
 
 # The build number for this JDK version
 java_version_build: 14
+
+# ID in JDK download URL (introduced in 8u121)
+java_jdk_download_id: ''
 ```
 
 ### Major Version Configuration
