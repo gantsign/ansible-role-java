@@ -4,6 +4,12 @@ ansible:
   extra_vars:
     java_license_declaration: 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
 
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
 docker:
   containers:
   - name: ansible-role-java-debian-wheezy
@@ -32,3 +38,6 @@ docker:
     image: opensuse
     image_version: '42.2'
     command: /bin/bash
+
+verifier:
+  name: testinfra
