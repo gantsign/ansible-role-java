@@ -28,3 +28,13 @@ def test_java_installed(Command, File):
     assert java_exe.user == 'root'
     assert java_exe.group == 'root'
     assert oct(java_exe.mode) == '0755'
+
+
+def test_facts_installed(File):
+    fact_file = File('/etc/ansible/facts.d/java.fact')
+
+    assert fact_file.exists
+    assert fact_file.is_file
+    assert fact_file.user == 'root'
+    assert fact_file.group == 'root'
+    assert oct(fact_file.mode) == '0644'
