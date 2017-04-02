@@ -16,6 +16,16 @@ java_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.an
 # variable.
 java_is_default_installation: yes
 
+# Name of the group of Ansible facts relating this Java installation.
+#
+# Override if you want use this role more than once to install multiple versions
+# of Java.
+#
+# e.g. java_fact_group_name: java_8
+# would change the Java home fact to:
+# ansible_local.java_8.general.home
+java_fact_group_name: java
+
 # Timeout for JDK download response in seconds
 java_jdk_download_timeout_seconds: 600
 
