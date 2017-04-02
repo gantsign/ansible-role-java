@@ -151,13 +151,28 @@ java_jce_redis_filename: 'jce_policy-8.zip'
 java_jce_redis_folder: 'UnlimitedJCEPolicyJDK8'
 ```
 
-Example Playbook
-----------------
+Example Playbooks
+-----------------
+
+By default this role will install the latest version of the Oracle JDK supported
+by this role:
 
 ```yaml
 - hosts: servers
   roles:
     - role: gantsign.java
+```
+
+You can install a specific version of the Oracle JDK by specifying the
+`java_version` (note: if the version is not currently supported by this role
+then additional configuration will be required - see
+[Advanced Configuration](#advanced-configuration)):
+
+```yaml
+- hosts: servers
+  roles:
+    - role: gantsign.java
+      java_version: '8u121'
 ```
 
 Role Facts
