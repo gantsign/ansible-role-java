@@ -4,3 +4,6 @@ java_redis_sha256sum: '777bd7d5268408a5a94f5e366c2e43e720c6ce4fe8c59d9a71e2961e5
 
 # The build number for this JDK version
 java_version_build: 15
+
+# ID in JDK download URL
+java_jdk_download_id: ''
