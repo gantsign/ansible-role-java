@@ -20,11 +20,28 @@
       when: ansible_pkg_mgr == 'zypper'
 
   roles:
-    - ansible-role-java
+    - role: ansible-role-java
+
+    - role: ansible-role-java
+      java_version: 7u80
+      java_is_default_installation: no
+      java_fact_group_name: java_7
 
   post_tasks:
-    - name: verify java facts
+    - name: verify default java facts
       assert:
         that:
           - ansible_local.java.general.version is defined
           - ansible_local.java.general.home is defined
+
+    - name: verify java 7 facts
+      assert:
+        that:
+          - ansible_local.java_7.general.version is defined
+          - ansible_local.java_7.general.home is defined
+
+    - name: install find - required for tests (dnf)
+      dnf:
+        name: findutils
+        state: present
+      when: ansible_pkg_mgr == 'dnf'

@@ -70,6 +70,16 @@ java_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.an
 # variable.
 java_is_default_installation: yes
 
+# Name of the group of Ansible facts relating this Java installation.
+#
+# Override if you want use this role more than once to install multiple versions
+# of Java.
+#
+# e.g. java_fact_group_name: java_8
+# would change the Java home fact to:
+# ansible_local.java_8.general.home
+java_fact_group_name: java
+
 # Timeout for JDK download response in seconds
 java_jdk_download_timeout_seconds: 600
 
@@ -175,6 +185,21 @@ then additional configuration will be required - see
       java_version: '8u121'
 ```
 
+You can install the multiple versions of the Oracle JDK by using this role more
+than once:
+
+```yaml
+- hosts: servers
+  roles:
+    - role: ansible-role-java
+      java_version: '8u121'
+
+    - role: ansible-role-java
+      java_version: '7u80'
+      java_is_default_installation: no
+      java_fact_group_name: java_7
+```
+
 Role Facts
 ----------
 
@@ -187,6 +212,18 @@ This role exports the following Ansible facts for use by other roles:
 * `ansible_local.java.general.home`
 
     * e.g. `/opt/java/jdk1.8.0_102`
+
+Overriding `java_fact_group_name` will change the name of the fact e.g.:
+
+```yaml
+java_fact_group_name: java_8
+```
+
+Would change the name of the facts to:
+
+* `ansible_local.java_8.general.version`
+* `ansible_local.java_8.general.home`
+
 
 More Roles From GantSign
 ------------------------

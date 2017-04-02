@@ -15,11 +15,15 @@ def test_java_tools(Command, command):
     assert ' 1.8.0_' in cmd.stderr
 
 
-def test_java_installed(Command, File):
+@pytest.mark.parametrize('version_dir_pattern', [
+    'jdk1\\.7\\.0_[0-9]+$',
+    'jdk1\\.8\\.0_[0-9]+$'
+])
+def test_java_installed(Command, File, version_dir_pattern):
 
     java_home = Command.check_output('find %s | grep --color=never -E %s',
                                      '/opt/java/',
-                                     'jdk1\\.8\\.0_[0-9]+$')
+                                     version_dir_pattern)
 
     java_exe = File(java_home + '/bin/java')
 
@@ -30,8 +34,12 @@ def test_java_installed(Command, File):
     assert oct(java_exe.mode) == '0755'
 
 
-def test_facts_installed(File):
-    fact_file = File('/etc/ansible/facts.d/java.fact')
+@pytest.mark.parametrize('fact_group_name', [
+    'java',
+    'java_7'
+])
+def test_facts_installed(File, fact_group_name):
+    fact_file = File('/etc/ansible/facts.d/' + fact_group_name + '.fact')
 
     assert fact_file.exists
     assert fact_file.is_file
