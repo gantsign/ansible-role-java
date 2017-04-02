@@ -65,6 +65,11 @@ java_home: '{{ java_install_dir }}/jdk{{ java_version }}'
 # Directory to store files downloaded for Java installation
 java_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
 
+# If this is the default installation, profile scripts will be written to set
+# the JAVA_HOME environment variable and add it to the PATH environment
+# variable.
+java_is_default_installation: yes
+
 # Timeout for JDK download response in seconds
 java_jdk_download_timeout_seconds: 600
 
