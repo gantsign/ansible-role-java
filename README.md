@@ -152,7 +152,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-     - { role: gantsign.java }
+    - role: gantsign.java
 ```
 
 Role Facts
