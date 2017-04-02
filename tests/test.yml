@@ -21,3 +21,10 @@
 
   roles:
     - ansible-role-java
+
+  post_tasks:
+    - name: verify java facts
+      assert:
+        that:
+          - ansible_local.java.general.version is defined
+          - ansible_local.java.general.home is defined
