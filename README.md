@@ -193,6 +193,8 @@ than once:
   roles:
     - role: ansible-role-java
       java_version: '8u121'
+      java_is_default_installation: yes
+      java_fact_group_name: java
 
     - role: ansible-role-java
       java_version: '7u80'
