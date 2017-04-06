@@ -215,7 +215,7 @@ This role exports the following Ansible facts for use by other roles:
 
     * e.g. `/opt/java/jdk1.8.0_102`
 
-Overriding `java_fact_group_name` will change the name of the fact e.g.:
+Overriding `java_fact_group_name` will change the names of the facts e.g.:
 
 ```yaml
 java_fact_group_name: java_8
@@ -225,7 +225,6 @@ Would change the name of the facts to:
 
 * `ansible_local.java_8.general.version`
 * `ansible_local.java_8.general.home`
-
 
 More Roles From GantSign
 ------------------------
