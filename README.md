@@ -54,7 +54,7 @@ are shown below):
 
 ```yaml
 # Java version number
-java_version: '8u121'
+java_version: '8u131'
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
@@ -110,6 +110,7 @@ The following versions of Java are supported without any additional
 configuration (for other versions follow the Advanced Configuration
 instructions):
 
+* 8u131
 * 8u121
 * 8u112
 * 8u111
