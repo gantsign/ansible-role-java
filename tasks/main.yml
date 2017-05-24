@@ -160,3 +160,42 @@
 - name: re-read facts
   setup:
     filter: ansible_local
+
+- block:
+
+    - name: link "{{ java_default_link_path }}"
+      file:
+        dest: "{{ java_default_link_path }}"
+        src: "{{ java_home }}"
+        state: link
+
+    - name: alternatives link for "java"
+      alternatives:
+        name: java
+        link: /usr/bin/java
+        path: "{{ java_default_link_path }}/bin/java"
+
+    - name: alternatives link for "javac"
+      alternatives:
+        name: javac
+        link: /usr/bin/javac
+        path: "{{ java_default_link_path }}/bin/javac"
+
+    - name: alternatives link for "jar"
+      alternatives:
+        name: jar
+        link: /usr/bin/jar
+        path: "{{ java_default_link_path }}/bin/jar"
+
+    - name: check if "java_sdk" target exists
+      stat: path=/usr/lib/jvm/java
+      register: filecheck
+
+    - name: alternatives link for "java_sdk"
+      alternatives:
+        name: java_sdk
+        link: /usr/lib/jvm/java
+        path: "{{ java_default_link_path }}"
+      when: filecheck and filecheck.stat.exists
+
+  when: java_is_default_installation

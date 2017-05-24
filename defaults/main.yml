@@ -8,6 +8,12 @@ java_install_dir: '/opt/java'
 # The root folder of this Java installation
 java_home: '{{ java_install_dir }}/jdk{{ java_version }}'
 
+# Name for link to default java install
+java_default_link: 'default'
+
+# The path to java default link
+java_default_link_path: '{{ java_install_dir }}/{{ java_default_link }}'
+
 # Directory to store files downloaded for Java installation
 java_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
 
