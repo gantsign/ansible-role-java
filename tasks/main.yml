@@ -8,7 +8,7 @@
 
 - name: load JCE version vars
   with_first_found:
-    - '../vars/jce-versions/{{ java_jce_version }}.yml'
+    - '../vars/jce-versions/{{ java_major_version }}.yml'
     - ../vars/jce-versions/default.yml
   include_vars: '{{ item }}'
 
@@ -35,7 +35,7 @@
     dest: '{{ java_download_dir }}'
 
 - name: check for JDK on local box
-  local_action: stat path='{{ java_local_archive_dir }}/{{ java_redis_filename }}'
+  local_action: stat path='{{ java_local_archive_dir }}/{{ java_jdk_redis_filename }}'
   register: local_JDK_file
   ignore_errors: yes
   when: java_use_local_archive
@@ -43,14 +43,14 @@
 - name: copy JDK from local box
   become: yes
   copy:
-    src: '{{ java_local_archive_dir }}/{{ java_redis_filename }}'
-    dest: '{{ java_download_dir }}/{{ java_redis_filename }}'
+    src: '{{ java_local_archive_dir }}/{{ java_jdk_redis_filename }}'
+    dest: '{{ java_download_dir }}/{{ java_jdk_redis_filename }}'
     mode: 'u=rw,go=r'
   when: java_use_local_archive and local_JDK_file.stat.exists
 
 - name: check for JDK on remote box
   stat:
-    path: '{{ java_download_dir }}/{{ java_redis_filename }}'
+    path: '{{ java_download_dir }}/{{ java_jdk_redis_filename }}'
     checksum_algorithm: sha256
   register: remote_JDK_file
   ignore_errors: yes
@@ -70,22 +70,12 @@
     state: present
   when: ansible_pkg_mgr == 'apt'
 
-- name: set download URL fact (without ID)
-  set_fact:
-    java_jdk_download_url: '{{ java_redis_mirror }}/{{ java_redis_filename }}'
-  when: java_jdk_download_id == ''
-
-- name: set download URL fact (with ID)
-  set_fact:
-    java_jdk_download_url: '{{ java_redis_mirror }}/{{ java_jdk_download_id }}/{{ java_redis_filename }}'
-  when: java_jdk_download_id != ''
-
 # Download install files
 - name: download JDK
   get_url:
-    url: '{{ java_jdk_download_url }}'
+    url: '{{ java_jdk_redis_mirror }}/{{ java_jdk_redis_filename }}'
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
-    dest: '{{ java_download_dir }}/{{ java_redis_filename }}'
+    dest: '{{ java_download_dir }}/{{ java_jdk_redis_filename }}'
     sha256sum: '{{ java_redis_sha256sum }}'
     force: no
     use_proxy: yes
@@ -158,7 +148,7 @@
 - name: install JDK
   become: yes
   unarchive:
-    src: '{{ java_download_dir }}/{{ java_redis_filename }}'
+    src: '{{ java_download_dir }}/{{ java_jdk_redis_filename }}'
     dest: '{{ java_install_dir }}'
     creates: '{{ java_home }}/bin/java'
     copy: no

@@ -92,6 +92,15 @@ java_jdk_download_timeout_seconds: 600
 
 # Timeout for JDK download response in seconds
 java_jce_download_timeout_seconds: 30
+
+# Base location for Java mirror
+java_mirror_base: 'http://download.oracle.com/otn-pub/java'
+
+# Mirror location for JDK download (e.g. https://example.com/provisioning/files)
+java_jdk_redis_mirror: '{{ java_mirror_base }}/jdk/{{ java_version }}-b{{ java_version_build }}/{{ java_jdk_download_id }}'
+
+# Mirror location for JCE download (e.g. https://example.com/provisioning/files)
+java_jce_redis_mirror: '{{ java_mirror_base }}/jce/{{ java_major_version }}'
 ```
 
 ### Oracle Binary Code License Agreement
@@ -117,16 +126,15 @@ The following versions of Java are supported without any additional
 configuration (for other versions follow the Advanced Configuration
 instructions):
 
+**Current release**
+
 * 8u131
 
-**Archived versions** As of 23 May 2017 all the archived Java versions (i.e.
-everything but the latest release) have been moved from the Oracle public
-download area to behind the Oracle Technology Network login.
+**Caution:** the current versions will be moved to Oracle's archives when a
+newer version is released; if you don't want your provisioning to break when
+that happens, you should follow the advice for archived versions below.
 
-This Ansible role is no longer able to download archived versions of Java from
-Oracle; to workaround this limitation you should manually download the
-`jdk-VERSION-linux-x64.tar.gz` file from Oracle and put it into
-`java_local_archive_dir`.
+**Archived versions**
 
 * 8u121
 * 8u112
@@ -135,6 +143,27 @@ Oracle; to workaround this limitation you should manually download the
 * 8u101
 * 7u80
 * 7u79
+
+As of 23 May 2017 all the archived Java versions (i.e. everything but the latest
+release) have been moved from the Oracle public download area to behind the
+Oracle Technology Network login.
+
+This Ansible role is no longer able to download archived versions of Java from
+Oracle; to workaround this limitation you have 3 options:
+
+1) Specify the `java_jdk_redis_mirror` (and optionally the
+`java_jce_redis_mirror`) to point to a private mirror containing the
+installation packages.
+
+2) Copy the installation packages to the location specified by
+`java_local_archive_dir` on the local machine before running this role.
+
+3) Copy/restore the installation packages to the location specified by
+`java_download_dir` on the remote machine before running this role.
+
+If manually downloading the JDK, make sure you download the file matching
+`jdk-VERSION-linux-x64.tar.gz`, other variants of the JDK/JRE will not work with
+this role.
 
 Advanced Configuration
 ----------------------
