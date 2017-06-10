@@ -34,6 +34,34 @@
     mode: 'u=rwx,go=rx'
     dest: '{{ java_download_dir }}'
 
+- name: check for JDK on local box
+  local_action: stat path='{{ java_local_archive_dir }}/{{ java_redis_filename }}'
+  register: local_JDK_file
+  ignore_errors: yes
+  when: java_use_local_archive
+
+- name: copy JDK from local box
+  become: yes
+  copy:
+    src: '{{ java_local_archive_dir }}/{{ java_redis_filename }}'
+    dest: '{{ java_download_dir }}/{{ java_redis_filename }}'
+    mode: 'u=rw,go=r'
+  when: java_use_local_archive and local_JDK_file.stat.exists
+
+- name: check for JDK on remote box
+  stat:
+    path: '{{ java_download_dir }}/{{ java_redis_filename }}'
+    checksum_algorithm: sha256
+  register: remote_JDK_file
+  ignore_errors: yes
+
+- name: assert existing JDK matches checksum
+  assert:
+    that:
+      - remote_JDK_file.stat.checksum == java_redis_sha256sum
+    msg: 'Checksum failed: {{ remote_JDK_file.stat.checksum }} != {{ java_redis_sha256sum }}'
+  when: remote_JDK_file.stat.exists
+
 # Ensure CA certificates installed (so we can download the JDK)
 - name: ensure ca-certificates installed (apt)
   become: yes
@@ -64,6 +92,35 @@
     validate_certs: yes
     timeout: '{{ java_jdk_download_timeout_seconds }}'
     mode: 'u=rw,go=r'
+  when: not remote_JDK_file.stat.exists
+
+- name: check for JCE on local box
+  local_action: stat path='{{ java_local_archive_dir }}/{{ java_jce_redis_filename }}'
+  register: local_JCE_file
+  ignore_errors: yes
+  when: java_use_local_archive
+
+- name: copy JCE from local box
+  become: yes
+  copy:
+    src: '{{ java_local_archive_dir }}/{{ java_jce_redis_filename }}'
+    dest: '{{ java_download_dir }}/{{ java_jce_redis_filename }}'
+    mode: 'u=rw,go=r'
+  when: java_use_local_archive and local_JCE_file.stat.exists
+
+- name: check for JCE on remote box
+  stat:
+    path: '{{ java_download_dir }}/{{ java_jce_redis_filename }}'
+    checksum_algorithm: sha256
+  register: remote_JCE_file
+  ignore_errors: yes
+
+- name: assert existing JCE matches checksum
+  assert:
+    that:
+      - remote_JCE_file.stat.checksum == java_jce_redis_sha256sum
+    msg: 'Checksum failed: {{ remote_JCE_file.stat.checksum }} != {{ java_jce_redis_sha256sum }}'
+  when: remote_JCE_file.stat.exists
 
 - name: download JCE
   get_url:
@@ -76,6 +133,7 @@
     validate_certs: yes
     timeout: '{{ java_jce_download_timeout_seconds }}'
     mode: 'u=rw,go=r'
+  when: not remote_JCE_file.stat.exists
 
 # Unpack installation
 - name: create Java home directory
