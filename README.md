@@ -62,8 +62,15 @@ java_install_dir: '/opt/java'
 # The root folder of this Java installation
 java_home: '{{ java_install_dir }}/jdk{{ java_version }}'
 
-# Directory to store files downloaded for Java installation
+# Directory to store files downloaded for Java installation on the remote box
 java_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
+
+# Location Java installations packages can be found on the local box
+# local packages will be uses in preference to downloading new packages.
+java_local_archive_dir: '{{ playbook_dir }}/files'
+
+# Wether to use installation packages in the local archive (if available)
+java_use_local_archive: yes
 
 # If this is the default installation, profile scripts will be written to set
 # the JAVA_HOME environment variable and add the bin directory to the PATH
@@ -111,6 +118,16 @@ configuration (for other versions follow the Advanced Configuration
 instructions):
 
 * 8u131
+
+**Archived versions** As of 23 May 2017 all the archived Java versions (i.e.
+everything but the latest release) have been moved from the Oracle public
+download area to behind the Oracle Technology Network login.
+
+This Ansible role is no longer able to download archived versions of Java from
+Oracle; to workaround this limitation you should manually download the
+`jdk-VERSION-linux-x64.tar.gz` file from Oracle and put it into
+`java_local_archive_dir`.
+
 * 8u121
 * 8u112
 * 8u111

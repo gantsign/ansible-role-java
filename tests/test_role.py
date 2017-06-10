@@ -16,7 +16,6 @@ def test_java_tools(Command, command):
 
 
 @pytest.mark.parametrize('version_dir_pattern', [
-    'jdk1\\.7\\.0_[0-9]+$',
     'jdk1\\.8\\.0_[0-9]+$'
 ])
 def test_java_installed(Command, File, version_dir_pattern):
@@ -35,8 +34,7 @@ def test_java_installed(Command, File, version_dir_pattern):
 
 
 @pytest.mark.parametrize('fact_group_name', [
-    'java',
-    'java_7'
+    'java'
 ])
 def test_facts_installed(File, fact_group_name):
     fact_file = File('/etc/ansible/facts.d/' + fact_group_name + '.fact')
