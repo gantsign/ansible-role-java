@@ -24,5 +24,5 @@
     dest: /etc/profile.d/java.sh
     owner: root
     group: root
-    mode: 'a+x'
+    mode: 'u=rw,go=r'
   when: java_is_default_installation
