@@ -41,3 +41,12 @@ java_jce_download_timeout_seconds: 30
 
 # ID in JDK download URL (introduced in 8u121)
 java_jdk_download_id: ''
+
+# Base location for Java mirror
+java_mirror_base: 'http://download.oracle.com/otn-pub/java'
+
+# Mirror location for JDK download (e.g. https://example.com/provisioning/files)
+java_jdk_redis_mirror: '{{ java_mirror_base }}/jdk/{{ java_version }}-b{{ java_version_build }}/{{ java_jdk_download_id }}'
+
+# Mirror location for JCE download (e.g. https://example.com/provisioning/files)
+java_jce_redis_mirror: '{{ java_mirror_base }}/jce/{{ java_major_version }}'

@@ -2,9 +2,6 @@
 # SHA256 sum for the redistributable JCE Policy Files
 java_jce_redis_sha256sum: 'f3020a3922efd6626c2fff45695d527f34a8020e938a49292561f18ad1320b59'
 
-# Directory on remote mirror where JCE redistributable can be found
-java_jce_redis_mirror: '{{ java_mirror_base }}/jce/8'
-
 # The JCE redistributable file name
 java_jce_redis_filename: 'jce_policy-8.zip'
 
