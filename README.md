@@ -54,7 +54,7 @@ are shown below):
 
 ```yaml
 # Java version number
-java_version: '8u141'
+java_version: '8u144'
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
@@ -128,7 +128,7 @@ instructions):
 
 **Current release**
 
-* 8u141
+* 8u144
 
 **Caution:** the current versions will be moved to Oracle's archives when a
 newer version is released; if you don't want your provisioning to break when
@@ -136,6 +136,7 @@ that happens, you should follow the advice for archived versions below.
 
 **Archived versions**
 
+* 8u141
 * 8u131
 * 8u121
 * 8u112
@@ -230,7 +231,7 @@ then additional configuration will be required - see
 - hosts: servers
   roles:
     - role: gantsign.java
-      java_version: '8u141'
+      java_version: '8u144'
 ```
 
 You can install the multiple versions of the Oracle JDK by using this role more
@@ -240,7 +241,7 @@ than once:
 - hosts: servers
   roles:
     - role: ansible-role-java
-      java_version: '8u141'
+      java_version: '8u144'
       java_is_default_installation: yes
       java_fact_group_name: java
 
