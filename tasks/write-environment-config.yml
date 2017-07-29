@@ -20,7 +20,7 @@
 - name: export JAVA_HOME and add to PATH
   become: yes
   template:
-    src:  java.sh.j2
+    src: java.sh.j2
     dest: /etc/profile.d/java.sh
     owner: root
     group: root
