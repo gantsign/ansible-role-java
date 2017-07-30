@@ -21,6 +21,7 @@
 
     - name: create local archive directory
       local_action: file state=directory mode='u=rwx,go=rx' dest='{{ java_local_archive_dir }}'
+      when: java_use_local_archive
 
     - name: download JDK for offline install
       local_action: >
@@ -33,6 +34,7 @@
         validate_certs=yes
         timeout='{{ java_jdk_download_timeout_seconds }}'
         mode='u=rw,go=r'
+      when: java_use_local_archive
 
     - name: download JCE for offline install
       local_action: >
@@ -45,6 +47,7 @@
         validate_certs=yes
         timeout='{{ java_jdk_download_timeout_seconds }}'
         mode='u=rw,go=r'
+      when: java_use_local_archive
 
   roles:
     - role: ansible-role-java

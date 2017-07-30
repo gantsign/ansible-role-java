@@ -1,6 +1,25 @@
 ---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+lint:
+  name: yamllint
+
+platforms:
+  - name: ansible-role-java-ubuntu-trusty
+    image: ubuntu:14.04
+    groups:
+      - online
+
 provisioner:
   name: ansible
+  playbooks:
+    setup: ../default/create.yml
+    teardown: ../default/destroy.yml
+    converge: ../default/playbook.yml
   inventory:
     group_vars:
       online:
@@ -13,25 +32,11 @@ provisioner:
   lint:
     name: ansible-lint
 
-dependency:
-  name: galaxy
-
-driver:
-  name: docker
-
-lint:
-  name: yamllint
-
-platforms:
-  - name: ansible-role-java-ubuntu-xenial
-    image: ubuntu:16.04
-    groups:
-      - offline
-
 scenario:
-  name: default
+  name: ubuntu-trusty-online
 
 verifier:
   name: testinfra
+  directory: ../default/tests/
   lint:
     name: flake8

@@ -2,10 +2,40 @@
 language: python
 python: '2.7'
 
-# Spin off separate builds for each of the following versions of Ansible
-env:
-  - ANSIBLE_VERSION=2.0.2
-  - ANSIBLE_VERSION=2.3.0
+matrix:
+  include:
+    - env:
+        - MOLECULE_SCENARIO=ubuntu-trusty-online
+        - ANSIBLE_VERSION=2.2.0
+        - DOCKER_LIB=docker-py
+    - env:
+        - MOLECULE_SCENARIO=ubuntu-xenial-offline
+        - ANSIBLE_VERSION=2.3.0
+        - DOCKER_LIB=docker
+    - env:
+        - MOLECULE_SCENARIO=debian-wheezy-online
+        - ANSIBLE_VERSION=2.2.0
+        - DOCKER_LIB=docker-py
+    - env:
+        - MOLECULE_SCENARIO=debian-jessie-offline
+        - ANSIBLE_VERSION=2.3.0
+        - DOCKER_LIB=docker
+    - env:
+        - MOLECULE_SCENARIO=centos-6-online
+        - ANSIBLE_VERSION=2.2.0
+        - DOCKER_LIB=docker-py
+    - env:
+        - MOLECULE_SCENARIO=centos-7-offline
+        - ANSIBLE_VERSION=2.3.0
+        - DOCKER_LIB=docker
+    # - env:
+    #     - MOLECULE_SCENARIO=fedora-25-online
+    #     - ANSIBLE_VERSION=2.3.0
+    #     - DOCKER_LIB=docker
+    # - env:
+    #     - MOLECULE_SCENARIO=opensuse-leap-online
+    #     - ANSIBLE_VERSION=2.3.0
+    #     - DOCKER_LIB=docker
 
 # Require the standard build environment
 sudo: required
@@ -30,7 +60,7 @@ install:
   - pip install "ansible~=$ANSIBLE_VERSION"
 
   # Install Python API for Docker (required by Molecule Docker driver)
-  - pip install docker
+  - pip install $DOCKER_LIB
 
   # Install Molecule
   - pip install 'molecule==2.0.0.rc12'
@@ -42,11 +72,11 @@ install:
   - molecule --version
 
   # Build the Docker images
-  - molecule create
-  - molecule destroy
+  - molecule --debug create --scenario-name=$MOLECULE_SCENARIO
+  - molecule destroy --scenario-name=$MOLECULE_SCENARIO
 
 script:
-  - molecule test
+  - molecule test --scenario-name=$MOLECULE_SCENARIO
 
 branches:
   only:
