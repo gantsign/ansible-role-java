@@ -17,48 +17,18 @@ driver:
 
 docker:
   containers:
-  - name: ansible-role-java-debian-wheezy
-    image: debian
-    image_version: '7'
-    ansible_groups:
-    - online
-  - name: ansible-role-java-debian-jessie
-    image: debian
-    image_version: '8'
-    ansible_groups:
-    - offline
-  - name: ansible-role-java-ubuntu-trusty
-    image: ubuntu
-    image_version: '14.04'
-    ansible_groups:
-    - online
-  - name: ansible-role-java-ubuntu-xenial
-    image: ubuntu
-    image_version: '16.04'
-    ansible_groups:
-    - offline
-  - name: ansible-role-java-centos-6
-    image: centos
-    image_version: '6'
-    ansible_groups:
-    - online
-  - name: ansible-role-java-centos-7
-    image: centos
-    image_version: '7'
-    ansible_groups:
-    - offline
-  - name: ansible-role-maven-fedora-25
-    image: fedora
-    image_version: '25'
-    command: /bin/bash
-    ansible_groups:
-    - online
-  - name: ansible-role-maven-opensuse-leap
-    image: opensuse
-    image_version: '42.2'
-    command: /bin/bash
-    ansible_groups:
-    - online
+    - name: ansible-role-maven-fedora-25
+      image: fedora
+      image_version: '25'
+      command: /bin/bash
+      ansible_groups:
+        - online
+    - name: ansible-role-maven-opensuse-leap
+      image: opensuse
+      image_version: '42.2'
+      command: /bin/bash
+      ansible_groups:
+        - online
 
 verifier:
   name: testinfra
