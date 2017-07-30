@@ -1,0 +1,34 @@
+---
+ansible:
+  playbook: tests/test.yml
+  group_vars:
+    online:
+      java_use_local_archive: no
+    offline:
+      java_use_local_archive: yes
+  extra_vars:
+    java_license_declaration: 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
+
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+docker:
+  containers:
+    - name: ansible-role-maven-fedora-25
+      image: fedora
+      image_version: '25'
+      command: /bin/bash
+      ansible_groups:
+        - online
+    - name: ansible-role-maven-opensuse-leap
+      image: opensuse
+      image_version: '42.2'
+      command: /bin/bash
+      ansible_groups:
+        - online
+
+verifier:
+  name: testinfra
