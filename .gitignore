@@ -248,4 +248,5 @@ local.properties
 __pycache__
 .cache
 .molecule
+/tests/files/*
 /molecule/*/files/*
