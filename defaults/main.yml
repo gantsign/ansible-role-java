@@ -1,6 +1,6 @@
 ---
 # Java version number
-java_version: '8u141'
+java_version: '8u144'
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
