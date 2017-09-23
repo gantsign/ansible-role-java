@@ -1,0 +1,3 @@
+---
+# Path for JDK download within Oracle Technology Network Java
+java_otn_jdk_path: 'jdk/{{ java_full_version }}-b{{ java_version_build }}/{{ java_jdk_download_id }}'

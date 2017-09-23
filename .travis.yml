@@ -16,7 +16,17 @@ matrix:
         - DOCKER_LIB=docker-py
         - MOLECULE_VERSION=2.0.4
     - env:
+        - MOLECULE_SCENARIO=ubuntu-trusty-java9
+        - ANSIBLE_VERSION=2.2.0
+        - DOCKER_LIB=docker-py
+        - MOLECULE_VERSION=2.0.4
+    - env:
         - MOLECULE_SCENARIO=ubuntu-xenial-offline
+        - ANSIBLE_VERSION=2.3.0
+        - DOCKER_LIB=docker
+        - MOLECULE_VERSION=2.0.4
+    - env:
+        - MOLECULE_SCENARIO=ubuntu-xenial-java9
         - ANSIBLE_VERSION=2.3.0
         - DOCKER_LIB=docker
         - MOLECULE_VERSION=2.0.4
@@ -26,7 +36,17 @@ matrix:
         - DOCKER_LIB=docker-py
         - MOLECULE_VERSION=2.0.4
     - env:
+        - MOLECULE_SCENARIO=debian-wheezy-java9
+        - ANSIBLE_VERSION=2.2.0
+        - DOCKER_LIB=docker-py
+        - MOLECULE_VERSION=2.0.4
+    - env:
         - MOLECULE_SCENARIO=debian-jessie-offline
+        - ANSIBLE_VERSION=2.3.0
+        - DOCKER_LIB=docker
+        - MOLECULE_VERSION=2.0.4
+    - env:
+        - MOLECULE_SCENARIO=debian-jessie-java9
         - ANSIBLE_VERSION=2.3.0
         - DOCKER_LIB=docker
         - MOLECULE_VERSION=2.0.4
@@ -36,7 +56,17 @@ matrix:
         - DOCKER_LIB=docker-py
         - MOLECULE_VERSION=2.0.4
     - env:
+        - MOLECULE_SCENARIO=centos-6-java9
+        - ANSIBLE_VERSION=2.2.0
+        - DOCKER_LIB=docker-py
+        - MOLECULE_VERSION=2.0.4
+    - env:
         - MOLECULE_SCENARIO=centos-7-offline
+        - ANSIBLE_VERSION=2.3.0
+        - DOCKER_LIB=docker
+        - MOLECULE_VERSION=2.0.4
+    - env:
+        - MOLECULE_SCENARIO=centos-7-java9
         - ANSIBLE_VERSION=2.3.0
         - DOCKER_LIB=docker
         - MOLECULE_VERSION=2.0.4

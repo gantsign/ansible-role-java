@@ -1,0 +1,11 @@
+---
+- include: install-unlimited-jce.yml
+  when: java_major_version | version_compare('9', '<')
+
+- name: enable unlimited strength JCE (Java 9)
+  lineinfile:
+    dest: '{{ java_home }}/conf/security/java.security'
+    state: present
+    regexp: '^crypto\.policy='
+    line: 'crypto.policy=unlimited'
+  when: java_major_version | version_compare('9', '>=')

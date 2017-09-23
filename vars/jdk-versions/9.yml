@@ -1,0 +1,9 @@
+---
+# Path for JDK download within Oracle Technology Network
+java_otn_jdk_path: 'jdk/{{ java_full_version }}'
+
+# The root folder of this Java installation
+java_home: '{{ java_install_dir }}/jdk-9'
+
+# Java JDK version number
+java_jdk_version: '{{ java_major_version }}'

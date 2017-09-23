@@ -1,0 +1,12 @@
+---
+# SHA256 sum for the redistributable JDK package
+java_redis_sha256sum: '1c6d783a54fcc0673ed1f8c5e8650b1d8977ca3e856a03fba0090198e0f16f6d'
+
+# The build number for this JDK version
+java_version_build: '181'
+
+# ID in JDK download URL
+java_jdk_download_id: ''
+
+# File name for the JDK redistributable installation file
+java_jdk_redis_filename: 'jdk-9_linux-x64_bin.tar.gz'
