@@ -54,13 +54,15 @@ are shown below):
 
 ```yaml
 # Java version number
+# * Specify '8'or '9' to get the latest patch version of that release (from the
+#   supported versions below)
 java_version: '8u144'
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
 
 # The root folder of this Java installation
-java_home: '{{ java_install_dir }}/jdk{{ java_version }}'
+java_home: '{{ java_install_dir }}/jdk{{ java_full_version }}'
 
 # Directory to store files downloaded for Java installation on the remote box
 java_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
@@ -90,17 +92,23 @@ java_fact_group_name: java
 # Timeout for JDK download response in seconds
 java_jdk_download_timeout_seconds: 600
 
-# Timeout for JDK download response in seconds
-java_jce_download_timeout_seconds: 30
-
 # Base location for Java mirror
 java_mirror_base: 'http://download.oracle.com/otn-pub/java'
 
 # Mirror location for JDK download (e.g. https://example.com/provisioning/files)
-java_jdk_redis_mirror: '{{ java_mirror_base }}/jdk/{{ java_version }}-b{{ java_version_build }}/{{ java_jdk_download_id }}'
+java_jdk_redis_mirror: '{{ java_mirror_base }}/{{ java_otn_jdk_path }}'
+
+
+### The following only apply to Java versions prior to 9 ###
+
+# ID in JDK download URL (introduced in 8u121)
+java_jdk_download_id: ''
+
+# Timeout for JDK download response in seconds
+java_jce_download_timeout_seconds: 30
 
 # Mirror location for JCE download (e.g. https://example.com/provisioning/files)
-java_jce_redis_mirror: '{{ java_mirror_base }}/jce/{{ java_major_version }}'
+java_jce_redis_mirror: '{{ java_mirror_base }}/{{ java_otn_jce_path }}'
 ```
 
 ### Oracle Binary Code License Agreement
@@ -126,8 +134,9 @@ The following versions of Java are supported without any additional
 configuration (for other versions follow the Advanced Configuration
 instructions):
 
-**Current release**
+**Current releases**
 
+* 9+181
 * 8u144
 
 **Caution:** the current versions will be moved to Oracle's archives when a
@@ -179,7 +188,7 @@ variables below.
 The below has to be configured for every minor release of Java.
 
 ```yaml
-# SHA256 sum for the redistributable JDK package (i.e. jdk-{{ java_version }}-linux-x64.tar.gz)
+# SHA256 sum for the redistributable JDK package (i.e. jdk-{{ java_full_version }}-linux-x64.tar.gz)
 java_redis_sha256sum: '7cfbe0bc0391a4abe60b3e9eb2a541d2315b99b9cb3a24980e618a89229e04b7'
 
 # The build number for this JDK version
@@ -191,24 +200,8 @@ java_jdk_download_id: ''
 
 ### Major Version Configuration
 
-The below only has to be configured for a new major release of Java.
-
-**Warning:** this role is incompatible with Java 6 and earlier due to the
-different way the JDK was packaged for those releases.
-
-```yaml
-# SHA256 sum for the redistributable JCE Policy Files (i.e. jce_policy-8.zip)
-java_jce_redis_sha256sum: 'f3020a3922efd6626c2fff45695d527f34a8020e938a49292561f18ad1320b59'
-
-# Directory on remote mirror where JCE redistributable can be found
-java_jce_redis_mirror: '{{ java_mirror_base }}/jce/8'
-
-# The JCE redistributable file name
-java_jce_redis_filename: 'jce_policy-8.zip'
-
-# The root folder name inside the JCE redistributable
-java_jce_redis_folder: 'UnlimitedJCEPolicyJDK8'
-```
+This role is incompatible with Java 6 and earlier due to the different way the
+JDK was packaged for those releases.
 
 Example Playbooks
 -----------------
@@ -241,14 +234,14 @@ than once:
 - hosts: servers
   roles:
     - role: ansible-role-java
-      java_version: '8u144'
+      java_version: '8'
       java_is_default_installation: yes
       java_fact_group_name: java
 
     - role: ansible-role-java
-      java_version: '7u80'
+      java_version: '9'
       java_is_default_installation: no
-      java_fact_group_name: java_7
+      java_fact_group_name: java_9
 ```
 
 Role Facts

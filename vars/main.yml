@@ -1,12 +1,21 @@
 ---
+# Defaullt Java 8 version number
+java_default_java8_version: '8u144'
+
+# Defaullt Java 9 version number
+java_default_java9_version: '9+181'
+
+# Java Full version number
+java_full_version: "{{ (java_version == '8') | ternary(java_default_java8_version, (java_version == '9') | ternary(java_default_java9_version, java_version)) }}"
+
 # Java Major version number
-java_major_version: "{{ java_version | regex_replace('^([0-9]+).*', '\\1') }}"
+java_major_version: "{{ java_full_version | regex_replace('^([0-9]+).*', '\\1') }}"
 
 # Java JDK version number
-java_jdk_version: "{{ java_version | regex_replace('^([0-9]+)u([0-9]+)$', '1.\\1.0_\\2') }}"
+java_jdk_version: "{{ java_full_version | regex_replace('^([0-9]+)[u\\+]([0-9]+)$', '1.\\1.0_\\2') }}"
 
 # The root folder of this Java installation
 java_home: '{{ java_install_dir }}/jdk{{ java_jdk_version }}'
 
 # File name for the JDK redistributable installation file
-java_jdk_redis_filename: 'jdk-{{ java_version }}-linux-x64.tar.gz'
+java_jdk_redis_filename: 'jdk-{{ java_full_version }}-linux-x64.tar.gz'

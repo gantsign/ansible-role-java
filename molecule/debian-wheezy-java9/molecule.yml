@@ -1,0 +1,42 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+lint:
+  name: yamllint
+
+platforms:
+  - name: ansible-role-java-debian-wheezy-java9
+    image: debian:7
+    groups:
+      - online
+
+provisioner:
+  name: ansible
+  playbooks:
+    create: ../java9/create.yml
+    destroy: ../java9/destroy.yml
+    converge: ../java9/playbook.yml
+  inventory:
+    group_vars:
+      online:
+        java_use_local_archive: no
+      offline:
+        java_use_local_archive: yes
+  options:
+    extra-vars:
+      java_license_declaration: 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
+  lint:
+    name: ansible-lint
+
+scenario:
+  name: debian-wheezy-java9
+
+verifier:
+  name: testinfra
+  directory: ../java9/tests/
+  lint:
+    name: flake8
