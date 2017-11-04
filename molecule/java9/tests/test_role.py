@@ -10,18 +10,25 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 def test_java(Command):
     cmd = Command('. /etc/profile && java -version')
     assert cmd.rc == 0
-    assert 'java version "9"' in cmd.stderr
+    assert 'java version "9.' in cmd.stderr
 
 
 def test_javac(Command):
     cmd = Command('. /etc/profile && javac -version')
     assert cmd.rc == 0
-    assert 'javac 9' in cmd.stdout
+    assert 'javac 9.' in cmd.stdout
 
 
-def test_java_installed(File):
+@pytest.mark.parametrize('version_dir_pattern', [
+    'jdk-9\\.[0-9]+\\.[0-9]+$'
+])
+def test_java_installed(Command, File, version_dir_pattern):
 
-    java_exe = File('/opt/java/jdk-9/bin/java')
+    java_home = Command.check_output('find %s | grep --color=never -E %s',
+                                     '/opt/java/',
+                                     version_dir_pattern)
+
+    java_exe = File(java_home + '/bin/java')
 
     assert java_exe.exists
     assert java_exe.is_file
