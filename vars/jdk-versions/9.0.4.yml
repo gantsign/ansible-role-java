@@ -1,0 +1,12 @@
+---
+# Path for JDK download within Oracle Technology Network
+java_otn_jdk_path: 'jdk/{{ java_full_version }}+{{ java_version_build }}/{{ java_jdk_download_id }}'
+
+# SHA256 sum for the redistributable JDK package
+java_redis_sha256sum: '90c4ea877e816e3440862cfa36341bc87d05373d53389ec0f2d54d4e8c95daa2'
+
+# The build number for this JDK version
+java_version_build: '11'
+
+# ID in JDK download URL
+java_jdk_download_id: 'c2514751926b4512b076cc82f959763f'
