@@ -1,9 +1,9 @@
 ---
 # Defaullt Java 8 version number
-java_default_java8_version: '8u151'
+java_default_java8_version: '8u161'
 
 # Defaullt Java 9 version number
-java_default_java9_version: '9.0.1'
+java_default_java9_version: '9.0.4'
 
 # Java Full version number
 java_full_version: "{{ (java_version == '8') | ternary(java_default_java8_version, (java_version == '9') | ternary(java_default_java9_version, java_version)) }}"
