@@ -11,7 +11,6 @@ lint:
 platforms:
   - name: ansible-role-java-opensuse-leap
     image: opensuse:42.2
-    command: /bin/bash
     groups:
       - online
 
