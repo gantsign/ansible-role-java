@@ -8,7 +8,8 @@ matrix:
         # Molecule 1 tests for Ansible 2.0, Fedora and OpenSUSE.
         - MOLECULE_SCENARIO=
         - ANSIBLE_VERSION=2.0.2
-        - DOCKER_LIB=docker
+        # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
+        - DOCKER_LIB='docker<3.0'
         - MOLECULE_VERSION=1.24
     - env:
         - MOLECULE_SCENARIO=ubuntu-trusty-online
@@ -23,12 +24,14 @@ matrix:
     - env:
         - MOLECULE_SCENARIO=ubuntu-xenial-offline
         - ANSIBLE_VERSION=2.3.0
-        - DOCKER_LIB=docker
+        # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
+        - DOCKER_LIB='docker<3.0'
         - MOLECULE_VERSION=2.0.4
     - env:
         - MOLECULE_SCENARIO=ubuntu-xenial-java9
         - ANSIBLE_VERSION=2.3.0
-        - DOCKER_LIB=docker
+        # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
+        - DOCKER_LIB='docker<3.0'
         - MOLECULE_VERSION=2.0.4
     - env:
         - MOLECULE_SCENARIO=debian-wheezy-online
@@ -43,12 +46,14 @@ matrix:
     - env:
         - MOLECULE_SCENARIO=debian-jessie-offline
         - ANSIBLE_VERSION=2.3.0
-        - DOCKER_LIB=docker
+        # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
+        - DOCKER_LIB='docker<3.0'
         - MOLECULE_VERSION=2.0.4
     - env:
         - MOLECULE_SCENARIO=debian-jessie-java9
         - ANSIBLE_VERSION=2.3.0
-        - DOCKER_LIB=docker
+        # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
+        - DOCKER_LIB='docker<3.0'
         - MOLECULE_VERSION=2.0.4
     - env:
         - MOLECULE_SCENARIO=centos-6-online
@@ -63,23 +68,27 @@ matrix:
     - env:
         - MOLECULE_SCENARIO=centos-7-offline
         - ANSIBLE_VERSION=2.3.0
-        - DOCKER_LIB=docker
+        # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
+        - DOCKER_LIB='docker<3.0'
         - MOLECULE_VERSION=2.0.4
     - env:
         - MOLECULE_SCENARIO=centos-7-java9
         - ANSIBLE_VERSION=2.3.0
-        - DOCKER_LIB=docker
+        # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
+        - DOCKER_LIB='docker<3.0'
         - MOLECULE_VERSION=2.0.4
     # Fedora and OpenSUSE are not currently working with Molecule 2.0.
     # - env:
     #     - MOLECULE_SCENARIO=fedora-25-online
     #     - ANSIBLE_VERSION=2.3.0
-    #     - DOCKER_LIB=docker
+    #     # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
+    #     - DOCKER_LIB='docker<3.0'
     #     - MOLECULE_VERSION=2.0.4
     # - env:
     #     - MOLECULE_SCENARIO=opensuse-leap-online
     #     - ANSIBLE_VERSION=2.3.0
-    #     - DOCKER_LIB=docker
+    #     # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
+    #     - DOCKER_LIB='docker<3.0'
     #     - MOLECULE_VERSION=2.0.4
 
 # Require the standard build environment
@@ -105,7 +114,7 @@ install:
   - pip install "ansible~=$ANSIBLE_VERSION"
 
   # Install Python API for Docker (required by Molecule Docker driver)
-  - pip install $DOCKER_LIB
+  - pip install "$DOCKER_LIB"
 
   # Install Molecule
   - pip install "molecule==$MOLECULE_VERSION"
