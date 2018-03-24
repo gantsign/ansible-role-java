@@ -54,8 +54,8 @@ are shown below):
 
 ```yaml
 # Java version number
-# * Specify '8'or '9' to get the latest patch version of that release (from the
-#   supported versions below)
+# * Specify '8', '9' or '10' to get the latest patch version of that release
+#   (from the supported versions below)
 java_version: '8u161'
 
 # Base installation directory for any Java distribution
@@ -133,6 +133,7 @@ instructions):
 
 **Current releases**
 
+* 10.0.0
 * 9.0.4
 * 8u161
 
@@ -240,9 +241,9 @@ than once:
       java_fact_group_name: java
 
     - role: ansible-role-java
-      java_version: '9'
+      java_version: '10'
       java_is_default_installation: no
-      java_fact_group_name: java_9
+      java_fact_group_name: java_10
 ```
 
 Role Facts

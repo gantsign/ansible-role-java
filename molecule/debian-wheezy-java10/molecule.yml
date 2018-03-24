@@ -9,17 +9,17 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-java-debian-jessie-java9
-    image: debian:8
+  - name: ansible-role-java-debian-wheezy-java10
+    image: debian:7
     groups:
-      - offline
+      - online
 
 provisioner:
   name: ansible
   playbooks:
-    create: ../java9/create.yml
-    destroy: ../java9/destroy.yml
-    converge: ../java9/playbook.yml
+    create: ../java10/create.yml
+    destroy: ../java10/destroy.yml
+    converge: ../java10/playbook.yml
   inventory:
     group_vars:
       online:
@@ -33,10 +33,10 @@ provisioner:
     name: ansible-lint
 
 scenario:
-  name: debian-jessie-java9
+  name: debian-wheezy-java10
 
 verifier:
   name: testinfra
-  directory: ../java9/tests/
+  directory: ../java10/tests/
   lint:
     name: flake8

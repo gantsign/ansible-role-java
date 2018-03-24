@@ -1,0 +1,12 @@
+---
+# Path for JDK download within Oracle Technology Network
+java_otn_jdk_path: 'jdk/{{ java_full_version }}+{{ java_version_build }}'
+
+# The root folder of this Java installation
+java_home: '{{ java_install_dir }}/jdk-{{ java_full_version }}'
+
+# Java JDK version number
+java_jdk_version: '{{ java_major_version }}'
+
+# File name for the JDK redistributable installation file
+java_jdk_redis_filename: 'jdk-{{ java_full_version }}_linux-x64_bin.tar.gz'

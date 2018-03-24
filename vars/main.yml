@@ -5,8 +5,11 @@ java_default_java8_version: '8u161'
 # Default Java 9 version number
 java_default_java9_version: '9.0.4'
 
+# Default Java 10 version number
+java_default_java10_version: '10.0.0'
+
 # Java Full version number
-java_full_version: "{{ (java_version == '8') | ternary(java_default_java8_version, (java_version == '9') | ternary(java_default_java9_version, java_version)) }}"
+java_full_version: "{{ (java_version == '8') | ternary(java_default_java8_version, (java_version == '9') | ternary(java_default_java9_version, (java_version == '10') | ternary(java_default_java10_version, java_version))) }}"
 
 # Java Major version number
 java_major_version: "{{ java_full_version | regex_replace('^([0-9]+).*', '\\1') }}"
