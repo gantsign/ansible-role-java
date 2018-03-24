@@ -23,13 +23,13 @@ matrix:
         - MOLECULE_VERSION=2.11
     - env:
         - MOLECULE_SCENARIO=ubuntu-xenial-offline
-        - ANSIBLE_VERSION=2.3.0
+        - ANSIBLE_VERSION=2.4.3
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
         - MOLECULE_VERSION=2.11
     - env:
         - MOLECULE_SCENARIO=ubuntu-xenial-java9
-        - ANSIBLE_VERSION=2.3.0
+        - ANSIBLE_VERSION=2.4.3
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
         - MOLECULE_VERSION=2.11
@@ -45,13 +45,13 @@ matrix:
         - MOLECULE_VERSION=2.11
     - env:
         - MOLECULE_SCENARIO=debian-jessie-offline
-        - ANSIBLE_VERSION=2.3.0
+        - ANSIBLE_VERSION=2.4.3
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
         - MOLECULE_VERSION=2.11
     - env:
         - MOLECULE_SCENARIO=debian-jessie-java9
-        - ANSIBLE_VERSION=2.3.0
+        - ANSIBLE_VERSION=2.4.3
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
         - MOLECULE_VERSION=2.11
@@ -67,26 +67,26 @@ matrix:
         - MOLECULE_VERSION=2.11
     - env:
         - MOLECULE_SCENARIO=centos-7-offline
-        - ANSIBLE_VERSION=2.3.0
+        - ANSIBLE_VERSION=2.4.3
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
         - MOLECULE_VERSION=2.11
     - env:
         - MOLECULE_SCENARIO=centos-7-java9
-        - ANSIBLE_VERSION=2.3.0
+        - ANSIBLE_VERSION=2.4.3
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
         - MOLECULE_VERSION=2.11
     # Fedora and OpenSUSE are not currently working with Molecule 2.0.
     # - env:
     #     - MOLECULE_SCENARIO=fedora-25-online
-    #     - ANSIBLE_VERSION=2.3.0
+    #     - ANSIBLE_VERSION=2.4.3
     #     # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
     #     - DOCKER_LIB='docker<3.0'
     #     - MOLECULE_VERSION=2.11
     # - env:
     #     - MOLECULE_SCENARIO=opensuse-leap-online
-    #     - ANSIBLE_VERSION=2.3.0
+    #     - ANSIBLE_VERSION=2.4.3
     #     # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
     #     - DOCKER_LIB='docker<3.0'
     #     - MOLECULE_VERSION=2.11
