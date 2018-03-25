@@ -44,9 +44,6 @@ java_jdk_redis_mirror: '{{ java_mirror_base }}/{{ java_otn_jdk_path }}'
 
 ### The following only apply to Java versions prior to 9 ###
 
-# ID in JDK download URL (introduced in 8u121)
-java_jdk_download_id: ''
-
 # Timeout for JDK download response in seconds
 java_jce_download_timeout_seconds: 30
 
