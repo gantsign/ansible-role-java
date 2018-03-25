@@ -8,4 +8,4 @@
     state: present
     regexp: '^crypto\.policy='
     line: 'crypto.policy=unlimited'
-  when: java_major_version | version_compare('9', '>=')
+  when: java_major_version | version_compare('9', '==')

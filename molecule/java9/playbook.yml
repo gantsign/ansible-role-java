@@ -26,22 +26,9 @@
     - name: download JDK for offline install
       local_action: >
         get_url
-        url='http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz'
+        url='http://download.oracle.com/otn-pub/java/jdk/9.0.4+11/c2514751926b4512b076cc82f959763f/jdk-9.0.4_linux-x64_bin.tar.gz'
         headers='Cookie:oraclelicense=accept-securebackup-cookie'
-        dest='{{ java_local_archive_dir }}/jdk-8u131-linux-x64.tar.gz'
-        force=no
-        use_proxy=yes
-        validate_certs=yes
-        timeout='{{ java_jdk_download_timeout_seconds }}'
-        mode='u=rw,go=r'
-      when: java_use_local_archive
-
-    - name: download JCE for offline install
-      local_action: >
-        get_url
-        url='http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip'
-        headers='Cookie:oraclelicense=accept-securebackup-cookie'
-        dest='{{ java_local_archive_dir }}/jce_policy-8.zip'
+        dest='{{ java_local_archive_dir }}/jdk-9.0.4_linux-x64_bin.tar.gz'
         force=no
         use_proxy=yes
         validate_certs=yes
