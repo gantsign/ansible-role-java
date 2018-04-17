@@ -131,7 +131,6 @@ instructions):
 **Current releases**
 
 * 10.0.0
-* 9.0.4
 * 8u171
 * 8u172
 
@@ -141,6 +140,7 @@ that happens, you should follow the advice for archived versions below.
 
 **Archived versions**
 
+* 9.0.4
 * 9.0.1
 * 9.0.0
 * 8u161

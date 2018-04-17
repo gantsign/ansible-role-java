@@ -28,12 +28,6 @@ matrix:
         - DOCKER_LIB='docker<3.0'
         - MOLECULE_VERSION=2.11
     - env:
-        - MOLECULE_SCENARIO=ubuntu-xenial-java9
-        - ANSIBLE_VERSION=2.4.3
-        # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
-        - DOCKER_LIB='docker<3.0'
-        - MOLECULE_VERSION=2.11
-    - env:
         - MOLECULE_SCENARIO=ubuntu-xenial-java10
         - ANSIBLE_VERSION=2.4.3
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
