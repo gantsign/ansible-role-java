@@ -133,6 +133,7 @@ instructions):
 * 10.0.0
 * 9.0.4
 * 8u171
+* 8u172
 
 **Caution:** the current versions will be moved to Oracle's archives when a
 newer version is released; if you don't want your provisioning to break when
