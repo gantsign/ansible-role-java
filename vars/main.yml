@@ -1,6 +1,6 @@
 ---
 # Default Java 8 version number
-java_default_java8_version: '8u161'
+java_default_java8_version: '8u171'
 
 # Default Java 9 version number
 java_default_java9_version: '9.0.4'
