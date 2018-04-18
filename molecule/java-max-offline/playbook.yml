@@ -22,6 +22,7 @@
 
   roles:
     - role: ansible-role-java
+      java_use_local_archive: yes
       java_version: '10'
 
   post_tasks:
