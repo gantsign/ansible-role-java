@@ -10,7 +10,7 @@ Role to install the [Oracle Java JDK](http://www.oracle.com/technetwork/java/ind
 Requirements
 ------------
 
-* Ansible >= 2.0
+* Ansible >= 2.2
 
 * Linux Distribution
 
