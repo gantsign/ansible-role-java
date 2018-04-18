@@ -5,91 +5,77 @@ python: '2.7'
 matrix:
   include:
     - env:
-        # Molecule 1 tests for Ansible 2.0, Fedora and OpenSUSE.
-        - MOLECULE_SCENARIO=
-        - ANSIBLE_VERSION=2.0.2
-        # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
-        - DOCKER_LIB='docker<3.0'
-        - MOLECULE_VERSION=1.24
-    - env:
         - MOLECULE_SCENARIO=ubuntu-min-java-min-online
         - ANSIBLE_VERSION=2.2.0
         - DOCKER_LIB=docker-py
-        - MOLECULE_VERSION=2.12.1
     - env:
         - MOLECULE_SCENARIO=ubuntu-min-java-max-online
         - ANSIBLE_VERSION=2.2.0
         - DOCKER_LIB=docker-py
-        - MOLECULE_VERSION=2.12.1
     - env:
         - MOLECULE_SCENARIO=ubuntu-max-java-min-offline
         - ANSIBLE_VERSION=2.4.3
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
-        - MOLECULE_VERSION=2.12.1
     - env:
         - MOLECULE_SCENARIO=ubuntu-max-java-max-offline
         - ANSIBLE_VERSION=2.4.3
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
-        - MOLECULE_VERSION=2.12.1
     - env:
         - MOLECULE_SCENARIO=debian-min-java-min-online
         - ANSIBLE_VERSION=2.2.0
         - DOCKER_LIB=docker-py
-        - MOLECULE_VERSION=2.12.1
     - env:
         - MOLECULE_SCENARIO=debian-min-java-max-online
         - ANSIBLE_VERSION=2.2.0
         - DOCKER_LIB=docker-py
-        - MOLECULE_VERSION=2.12.1
     - env:
         - MOLECULE_SCENARIO=debian-max-java-min-offline
         - ANSIBLE_VERSION=2.4.3
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
-        - MOLECULE_VERSION=2.12.1
     - env:
         - MOLECULE_SCENARIO=debian-max-java-max-offline
         - ANSIBLE_VERSION=2.4.3
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
-        - MOLECULE_VERSION=2.12.1
     - env:
         - MOLECULE_SCENARIO=centos-min-java-min-online
         - ANSIBLE_VERSION=2.2.0
         - DOCKER_LIB=docker-py
-        - MOLECULE_VERSION=2.12.1
     - env:
         - MOLECULE_SCENARIO=centos-min-java-max-online
         - ANSIBLE_VERSION=2.2.0
         - DOCKER_LIB=docker-py
-        - MOLECULE_VERSION=2.12.1
     - env:
         - MOLECULE_SCENARIO=centos-max-java-min-offline
         - ANSIBLE_VERSION=2.4.3
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
-        - MOLECULE_VERSION=2.12.1
     - env:
         - MOLECULE_SCENARIO=centos-max-java-max-offline
         - ANSIBLE_VERSION=2.4.3
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
-        - MOLECULE_VERSION=2.12.1
-    # Fedora and OpenSUSE are not currently working with Molecule 2.0.
-    # - env:
-    #     - MOLECULE_SCENARIO=fedora-java-min-online
-    #     - ANSIBLE_VERSION=2.4.3
-    #     # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
-    #     - DOCKER_LIB='docker<3.0'
-    #     - MOLECULE_VERSION=2.12.1
-    # - env:
-    #     - MOLECULE_SCENARIO=opensuse-java-min-online
-    #     - ANSIBLE_VERSION=2.4.3
-    #     # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
-    #     - DOCKER_LIB='docker<3.0'
-    #     - MOLECULE_VERSION=2.12.1
+    - env:
+        - MOLECULE_SCENARIO=fedora-java-min-online
+        - ANSIBLE_VERSION=2.2.0
+        - DOCKER_LIB=docker-py
+    - env:
+        - MOLECULE_SCENARIO=opensuse-java-min-online
+        - ANSIBLE_VERSION=2.2.0
+        - DOCKER_LIB=docker-py
+    - env:
+        - MOLECULE_SCENARIO=fedora-java-min-online
+        - ANSIBLE_VERSION=2.4.3
+        # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
+        - DOCKER_LIB='docker<3.0'
+    - env:
+        - MOLECULE_SCENARIO=opensuse-java-min-online
+        - ANSIBLE_VERSION=2.4.3
+        # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
+        - DOCKER_LIB='docker<3.0'
 
 # Require the standard build environment
 sudo: required
@@ -117,7 +103,7 @@ install:
   - pip install "$DOCKER_LIB"
 
   # Install Molecule
-  - pip install "molecule==$MOLECULE_VERSION"
+  - pip install "molecule==2.12.1"
 
   # Check Ansible version
   - ansible --version
@@ -126,10 +112,11 @@ install:
   - molecule --version
 
   # Build the Docker images
-  - .travis/docker-build.sh
+  - molecule create --scenario-name=$MOLECULE_SCENARIO
+  - molecule destroy --scenario-name=$MOLECULE_SCENARIO
 
 script:
-  - .travis/build.sh
+  - molecule test --scenario-name=$MOLECULE_SCENARIO
 
 branches:
   only:
