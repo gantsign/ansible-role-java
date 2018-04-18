@@ -2,7 +2,7 @@
 # Java version number
 # * Specify '8', '9' or '10' to get the latest patch version of that release
 #   (from the supported versions below)
-java_version: '8u161'
+java_version: '8u171'
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'

@@ -1,6 +1,6 @@
 ---
 # Path for JDK download within Oracle Technology Network
-java_otn_jdk_path: 'jdk/{{ java_full_version }}+{{ java_version_build }}'
+java_otn_jdk_path: 'jdk/{{ java_full_version }}+{{ java_version_build }}/{{ java_jdk_download_id }}'
 
 # The root folder of this Java installation
 java_home: '{{ java_install_dir }}/jdk-{{ java_full_version }}'
