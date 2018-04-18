@@ -35,6 +35,7 @@
 
   roles:
     - role: ansible-role-java
+      java_use_local_archive: yes
 
   post_tasks:
     - name: verify java facts
