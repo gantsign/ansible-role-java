@@ -19,6 +19,7 @@ provisioner:
   playbooks:
     create: ../java10/create.yml
     destroy: ../java10/destroy.yml
+    prepare: ../java10/prepare.yml
     converge: ../java10/playbook.yml
   inventory:
     group_vars:
