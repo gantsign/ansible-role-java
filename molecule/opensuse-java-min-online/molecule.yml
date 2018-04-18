@@ -10,7 +10,7 @@ lint:
 
 platforms:
   - name: ansible-role-java-opensuse-leap
-    image: opensuse:42.2
+    image: opensuse:42.3
 
 provisioner:
   name: ansible
