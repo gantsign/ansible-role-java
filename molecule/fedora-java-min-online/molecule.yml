@@ -1,7 +1,25 @@
 ---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+lint:
+  name: yamllint
+
+platforms:
+  - name: ansible-role-java-fedora-25
+    image: fedora:25
+    groups:
+      - online
+
 provisioner:
   name: ansible
   playbooks:
+    create: ../default/create.yml
+    destroy: ../default/destroy.yml
+    prepare: ../default/prepare.yml
     converge: ../java-min-online/playbook.yml
   inventory:
     group_vars:
@@ -15,23 +33,8 @@ provisioner:
   lint:
     name: ansible-lint
 
-dependency:
-  name: galaxy
-
-driver:
-  name: docker
-
-lint:
-  name: yamllint
-
-platforms:
-  - name: ansible-role-java-ubuntu-xenial
-    image: ubuntu:16.04
-    groups:
-      - offline
-
 scenario:
-  name: default
+  name: fedora-java-min-online
 
 verifier:
   name: testinfra
