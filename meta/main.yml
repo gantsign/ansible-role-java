@@ -23,6 +23,7 @@ galaxy_info:
         - xenial
     - name: Debian
       versions:
+        - stretch
         - jessie
         - wheezy
   galaxy_tags:
