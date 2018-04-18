@@ -20,7 +20,7 @@ provisioner:
     create: ../default/create.yml
     destroy: ../default/destroy.yml
     prepare: ../default/prepare.yml
-    converge: ../default/playbook.yml
+    converge: ../offline/playbook.yml
   inventory:
     group_vars:
       online:

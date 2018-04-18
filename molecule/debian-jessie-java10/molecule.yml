@@ -20,7 +20,7 @@ provisioner:
     create: ../java10/create.yml
     destroy: ../java10/destroy.yml
     prepare: ../java10/prepare.yml
-    converge: ../java10/playbook.yml
+    converge: ../java10-offline/playbook.yml
   inventory:
     group_vars:
       online:
