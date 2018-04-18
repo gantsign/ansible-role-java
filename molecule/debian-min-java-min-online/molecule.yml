@@ -20,7 +20,7 @@ provisioner:
     create: ../default/create.yml
     destroy: ../default/destroy.yml
     prepare: ../default/prepare.yml
-    converge: ../default/playbook.yml
+    converge: ../java-min-online/playbook.yml
   inventory:
     group_vars:
       online:
@@ -34,10 +34,10 @@ provisioner:
     name: ansible-lint
 
 scenario:
-  name: debian-wheezy-online
+  name: debian-min-java-min-online
 
 verifier:
   name: testinfra
-  directory: ../default/tests/
+  directory: ../java-min/tests/
   lint:
     name: flake8

@@ -17,10 +17,10 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    create: ../java10/create.yml
-    destroy: ../java10/destroy.yml
-    prepare: ../java10/prepare.yml
-    converge: ../java10-offline/playbook.yml
+    create: ../default/create.yml
+    destroy: ../default/destroy.yml
+    prepare: ../default/prepare.yml
+    converge: ../java-max-offline/playbook.yml
   inventory:
     group_vars:
       online:
@@ -34,10 +34,10 @@ provisioner:
     name: ansible-lint
 
 scenario:
-  name: debian-jessie-java10
+  name: debian-max-java-max-offline
 
 verifier:
   name: testinfra
-  directory: ../java10/tests/
+  directory: ../java-max/tests/
   lint:
     name: flake8

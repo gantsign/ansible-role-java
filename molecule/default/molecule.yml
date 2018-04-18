@@ -1,6 +1,8 @@
 ---
 provisioner:
   name: ansible
+  playbooks:
+    converge: ../java-min-online/playbook.yml
   inventory:
     group_vars:
       online:
@@ -33,5 +35,6 @@ scenario:
 
 verifier:
   name: testinfra
+  directory: ../java-min/tests/
   lint:
     name: flake8
