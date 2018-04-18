@@ -10,7 +10,7 @@ lint:
 
 platforms:
   - name: ansible-role-java-debian-jessie-java10
-    image: debian:8
+    image: debian:9
 
 provisioner:
   name: ansible
