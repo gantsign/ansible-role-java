@@ -54,6 +54,7 @@
   local_action: stat path='{{ java_local_archive_dir }}/{{ java_jdk_redis_filename }}'
   register: local_JDK_file
   ignore_errors: yes
+  become: no
   when: java_use_local_archive
 
 - name: copy JDK from local box
