@@ -56,7 +56,7 @@ are shown below):
 # Java version number
 # * Specify '8', '9' or '10' to get the latest patch version of that release
 #   (from the supported versions below)
-java_version: '8u171'
+java_version: '8u181'
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
@@ -131,8 +131,7 @@ instructions):
 **Current releases**
 
 * 10.0.1
-* 8u171
-* 8u172
+* 8u181
 
 **Caution:** the current versions will be moved to Oracle's archives when a
 newer version is released; if you don't want your provisioning to break when
@@ -144,6 +143,8 @@ that happens, you should follow the advice for archived versions below.
 * 9.0.4
 * 9.0.1
 * 9.0.0
+* 8u172
+* 8u171
 * 8u161
 * 8u151
 * 8u144
@@ -226,7 +227,7 @@ then additional configuration will be required - see
 - hosts: servers
   roles:
     - role: gantsign.java
-      java_version: '8u171'
+      java_version: '8u181'
 ```
 
 You can install the multiple versions of the Oracle JDK by using this role more
