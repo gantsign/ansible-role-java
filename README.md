@@ -130,7 +130,7 @@ instructions):
 
 **Current releases**
 
-* 10.0.1
+* 10.0.2
 * 8u181
 
 **Caution:** the current versions will be moved to Oracle's archives when a
@@ -139,6 +139,7 @@ that happens, you should follow the advice for archived versions below.
 
 **Archived versions**
 
+* 10.0.1
 * 10.0.0
 * 9.0.4
 * 9.0.1
