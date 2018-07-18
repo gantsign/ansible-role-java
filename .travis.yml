@@ -14,12 +14,12 @@ matrix:
         - DOCKER_LIB=docker-py
     - env:
         - MOLECULE_SCENARIO=ubuntu-max-java-min-offline
-        - ANSIBLE_VERSION=2.4.3
+        - ANSIBLE_VERSION=2.6.1
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
     - env:
         - MOLECULE_SCENARIO=ubuntu-max-java-max-offline
-        - ANSIBLE_VERSION=2.4.3
+        - ANSIBLE_VERSION=2.6.1
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
     - env:
@@ -32,12 +32,12 @@ matrix:
         - DOCKER_LIB=docker-py
     - env:
         - MOLECULE_SCENARIO=debian-max-java-min-offline
-        - ANSIBLE_VERSION=2.4.3
+        - ANSIBLE_VERSION=2.6.1
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
     - env:
         - MOLECULE_SCENARIO=debian-max-java-max-offline
-        - ANSIBLE_VERSION=2.4.3
+        - ANSIBLE_VERSION=2.6.1
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
     - env:
@@ -50,12 +50,12 @@ matrix:
         - DOCKER_LIB=docker-py
     - env:
         - MOLECULE_SCENARIO=centos-max-java-min-offline
-        - ANSIBLE_VERSION=2.4.3
+        - ANSIBLE_VERSION=2.6.1
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
     - env:
         - MOLECULE_SCENARIO=centos-max-java-max-offline
-        - ANSIBLE_VERSION=2.4.3
+        - ANSIBLE_VERSION=2.6.1
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
     - env:
@@ -68,12 +68,12 @@ matrix:
         - DOCKER_LIB=docker-py
     - env:
         - MOLECULE_SCENARIO=fedora-java-min-online
-        - ANSIBLE_VERSION=2.4.3
+        - ANSIBLE_VERSION=2.6.1
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
     - env:
         - MOLECULE_SCENARIO=opensuse-java-min-online
-        - ANSIBLE_VERSION=2.4.3
+        - ANSIBLE_VERSION=2.6.1
         # Limit version as workaround for: https://github.com/ansible/ansible/issues/35612
         - DOCKER_LIB='docker<3.0'
 
