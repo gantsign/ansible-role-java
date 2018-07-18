@@ -6,11 +6,11 @@ matrix:
   include:
     - env:
         - MOLECULE_SCENARIO=ubuntu-min-java-min-online
-        - ANSIBLE_VERSION=2.2.0
+        - ANSIBLE_VERSION=2.4.6
         - DOCKER_LIB=docker-py
     - env:
         - MOLECULE_SCENARIO=ubuntu-min-java-max-online
-        - ANSIBLE_VERSION=2.2.0
+        - ANSIBLE_VERSION=2.4.6
         - DOCKER_LIB=docker-py
     - env:
         - MOLECULE_SCENARIO=ubuntu-max-java-min-offline
@@ -24,11 +24,11 @@ matrix:
         - DOCKER_LIB='docker<3.0'
     - env:
         - MOLECULE_SCENARIO=debian-min-java-min-online
-        - ANSIBLE_VERSION=2.2.0
+        - ANSIBLE_VERSION=2.4.6
         - DOCKER_LIB=docker-py
     - env:
         - MOLECULE_SCENARIO=debian-min-java-max-online
-        - ANSIBLE_VERSION=2.2.0
+        - ANSIBLE_VERSION=2.4.6
         - DOCKER_LIB=docker-py
     - env:
         - MOLECULE_SCENARIO=debian-max-java-min-offline
@@ -42,11 +42,11 @@ matrix:
         - DOCKER_LIB='docker<3.0'
     - env:
         - MOLECULE_SCENARIO=centos-min-java-min-online
-        - ANSIBLE_VERSION=2.2.0
+        - ANSIBLE_VERSION=2.4.6
         - DOCKER_LIB=docker-py
     - env:
         - MOLECULE_SCENARIO=centos-min-java-max-online
-        - ANSIBLE_VERSION=2.2.0
+        - ANSIBLE_VERSION=2.4.6
         - DOCKER_LIB=docker-py
     - env:
         - MOLECULE_SCENARIO=centos-max-java-min-offline
@@ -60,11 +60,11 @@ matrix:
         - DOCKER_LIB='docker<3.0'
     - env:
         - MOLECULE_SCENARIO=fedora-java-min-online
-        - ANSIBLE_VERSION=2.2.0
+        - ANSIBLE_VERSION=2.4.6
         - DOCKER_LIB=docker-py
     - env:
         - MOLECULE_SCENARIO=opensuse-java-min-online
-        - ANSIBLE_VERSION=2.2.0
+        - ANSIBLE_VERSION=2.4.6
         - DOCKER_LIB=docker-py
     - env:
         - MOLECULE_SCENARIO=fedora-java-min-online
