@@ -132,9 +132,10 @@
     group: root
     mode: 'go-w'
 
-- include: unlimited-jce.yml
+- import_tasks: unlimited-jce.yml
 
-- include: write-environment-config.yml
+- name: write environment config
+  include_tasks: write-environment-config.yml
   when: java_is_default_installation
 
 # Set Java facts
