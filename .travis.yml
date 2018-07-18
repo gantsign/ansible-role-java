@@ -103,7 +103,7 @@ install:
   - pip install "$DOCKER_LIB"
 
   # Install Molecule
-  - pip install "molecule==2.12.1"
+  - pip install "molecule==2.16.0"
 
   # Check Ansible version
   - ansible --version
