@@ -29,4 +29,5 @@ galaxy_info:
   galaxy_tags:
     - java
     - jdk
+    - development
 dependencies: []
