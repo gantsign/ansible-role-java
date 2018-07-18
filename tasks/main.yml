@@ -21,7 +21,7 @@
     - '../vars/jce-versions/{{ java_major_version }}.yml'
     - ../vars/jce-versions/default.yml
   include_vars: '{{ item }}'
-  when: java_major_version | version_compare('9', '<')
+  when: java_major_version is version_compare('9', '<')
 
 - name: assert JDK version vars
   assert:
@@ -36,7 +36,7 @@
       - java_jce_redis_mirror not in (None, '')
       - java_jce_redis_filename not in (None, '')
       - java_jce_redis_folder not in (None, '')
-  when: java_major_version | version_compare('9', '<')
+  when: java_major_version is version_compare('9', '<')
 
 - name: assert Binary Code License accepted
   assert:
