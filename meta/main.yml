@@ -31,4 +31,5 @@ galaxy_info:
     - jdk
     - development
     - web
+    - system
 dependencies: []
