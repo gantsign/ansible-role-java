@@ -27,6 +27,6 @@ scenario:
 
 verifier:
   name: testinfra
-  directory: ../java-min/tests/
+  directory: ../java-min/tests
   lint:
     name: flake8
