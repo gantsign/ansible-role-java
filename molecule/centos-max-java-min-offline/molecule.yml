@@ -9,7 +9,7 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-java-centos-7
+  - name: ansible-role-java-centos-max
     image: centos:7
 
 provisioner:

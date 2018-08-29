@@ -9,7 +9,7 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-java-ubuntu-xenial-java10
+  - name: ansible-role-java-ubuntu-max-java-max
     image: ubuntu:16.04
 
 provisioner:
