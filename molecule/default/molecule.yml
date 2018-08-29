@@ -19,7 +19,7 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-java-ubuntu-xenial
+  - name: ansible-role-java-default
     image: ubuntu:16.04
 
 scenario:

@@ -9,7 +9,7 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-java-debian-jessie-java10
+  - name: ansible-role-java-debian-max-java-max
     image: debian:9
 
 provisioner:
