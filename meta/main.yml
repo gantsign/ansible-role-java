@@ -26,7 +26,6 @@ galaxy_info:
       versions:
         - stretch
         - jessie
-        - wheezy
   galaxy_tags:
     - java
     - jdk
