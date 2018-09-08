@@ -42,7 +42,7 @@ Requirements
 
         * openSUSE
 
-            * 42.3
+            * 15.0
 
     * Note: other versions are likely to work but have not been tested.
 
