@@ -118,6 +118,7 @@
     state: present
   with_items:
     - tar
+    - gzip
     - unzip
   when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
 
