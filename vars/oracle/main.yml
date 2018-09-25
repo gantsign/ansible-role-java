@@ -13,3 +13,12 @@ java_full_version: "{{ (java_version == '8') | ternary(java_default_java8_versio
 
 # File name for the JDK redistributable installation file
 java_vendor_jdk_redis_filename: 'jdk-{{ java_full_version }}-linux-x64.tar.gz'
+
+# Base location for Java mirror
+java_vendor_mirror_base: 'http://download.oracle.com/otn-pub/java'
+
+# Mirror location for JDK download (e.g. https://example.com/provisioning/files)
+java_vendor_jdk_redis_mirror: '{{ java_mirror_base }}/{{ java_otn_jdk_path }}'
+
+# Mirror location for JCE download (e.g. https://example.com/provisioning/files)
+java_vendor_jce_redis_mirror: '{{ java_mirror_base }}/{{ java_otn_jce_path }}'

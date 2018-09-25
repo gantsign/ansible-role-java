@@ -90,19 +90,19 @@ java_fact_group_name: java
 java_jdk_download_timeout_seconds: 600
 
 # Base location for Java mirror
-java_mirror_base: 'http://download.oracle.com/otn-pub/java'
+java_mirror_base: '{{ java_vendor_mirror_base }}'
 
 # Mirror location for JDK download (e.g. https://example.com/provisioning/files)
-java_jdk_redis_mirror: '{{ java_mirror_base }}/{{ java_otn_jdk_path }}'
+java_jdk_redis_mirror: '{{ java_vendor_jdk_redis_mirror }}'
 
 
-### The following only apply to Java versions prior to 9 ###
+### The following only apply to Oracle Java versions prior to 9 ###
 
 # Timeout for JDK download response in seconds
 java_jce_download_timeout_seconds: 30
 
 # Mirror location for JCE download (e.g. https://example.com/provisioning/files)
-java_jce_redis_mirror: '{{ java_mirror_base }}/{{ java_otn_jce_path }}'
+java_jce_redis_mirror: '{{ java_vendor_jce_redis_mirror }}'
 ```
 
 ### Oracle Binary Code License Agreement
