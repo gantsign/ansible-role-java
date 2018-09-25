@@ -6,20 +6,20 @@
 # Load version specific values
 - name: load JDK major version vars
   with_first_found:
-    - '../vars/jdk-versions/{{ java_major_version }}.yml'
-    - ../vars/jdk-versions/default.yml
+    - '../vars/oracle/jdk-versions/{{ java_major_version }}.yml'
+    - ../vars/oracle/jdk-versions/default.yml
   include_vars: '{{ item }}'
 
 - name: load JDK version vars
   with_first_found:
-    - '../vars/jdk-versions/{{ java_full_version }}.yml'
-    - ../vars/jdk-versions/default.yml
+    - '../vars/oracle/jdk-versions/{{ java_full_version }}.yml'
+    - ../vars/oracle/jdk-versions/default.yml
   include_vars: '{{ item }}'
 
 - name: load JCE version vars
   with_first_found:
-    - '../vars/jce-versions/{{ java_major_version }}.yml'
-    - ../vars/jce-versions/default.yml
+    - '../vars/oracle/jce-versions/{{ java_major_version }}.yml'
+    - ../vars/oracle/jce-versions/default.yml
   include_vars: '{{ item }}'
   when: java_major_version is version_compare('9', '<')
 
