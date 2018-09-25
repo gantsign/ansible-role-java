@@ -1,4 +1,7 @@
 ---
+- name: load Oracle JDK vars
+  include_vars: ../vars/oracle/main.yml
+
 - name: java version to install
   debug:
     var: java_full_version

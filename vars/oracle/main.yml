@@ -1,0 +1,15 @@
+---
+# Default Java 8 version number
+java_default_java8_version: '8u181'
+
+# Default Java 9 version number
+java_default_java9_version: '9.0.4'
+
+# Default Java 10 version number
+java_default_java10_version: '10.0.2'
+
+# Java Full version number
+java_full_version: "{{ (java_version == '8') | ternary(java_default_java8_version, (java_version == '9') | ternary(java_default_java9_version, (java_version == '10') | ternary(java_default_java10_version, java_version))) }}"
+
+# File name for the JDK redistributable installation file
+java_vendor_jdk_redis_filename: 'jdk-{{ java_full_version }}-linux-x64.tar.gz'
