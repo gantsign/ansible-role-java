@@ -1,0 +1,136 @@
+---
+- name: java version to install
+  debug:
+    var: java_full_version
+
+# Load version specific values
+- name: load JDK major version vars
+  with_first_found:
+    - '../vars/jdk-versions/{{ java_major_version }}.yml'
+    - ../vars/jdk-versions/default.yml
+  include_vars: '{{ item }}'
+
+- name: load JDK version vars
+  with_first_found:
+    - '../vars/jdk-versions/{{ java_full_version }}.yml'
+    - ../vars/jdk-versions/default.yml
+  include_vars: '{{ item }}'
+
+- name: load JCE version vars
+  with_first_found:
+    - '../vars/jce-versions/{{ java_major_version }}.yml'
+    - ../vars/jce-versions/default.yml
+  include_vars: '{{ item }}'
+  when: java_major_version is version_compare('9', '<')
+
+- name: assert JDK version vars
+  assert:
+    that:
+      - java_redis_sha256sum not in (None, '')
+      - java_version_build not in (None, '')
+
+- name: assert JCE version vars
+  assert:
+    that:
+      - java_jce_redis_sha256sum not in (None, '')
+      - java_jce_redis_mirror not in (None, '')
+      - java_jce_redis_filename not in (None, '')
+      - java_jce_redis_folder not in (None, '')
+  when: java_major_version is version_compare('9', '<')
+
+- name: assert Binary Code License accepted
+  assert:
+    that:
+      - java_license_declaration == 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
+
+# Create download directory
+- name: create download directory
+  file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ java_download_dir }}'
+
+- name: check for JDK on local box
+  local_action: stat path='{{ java_local_archive_dir }}/{{ java_jdk_redis_filename }}'
+  register: local_JDK_file
+  ignore_errors: yes
+  become: no
+  when: java_use_local_archive
+
+- name: copy JDK from local box
+  become: yes
+  copy:
+    src: '{{ java_local_archive_dir }}/{{ java_jdk_redis_filename }}'
+    dest: '{{ java_download_dir }}/{{ java_jdk_redis_filename }}'
+    mode: 'u=rw,go=r'
+  when: java_use_local_archive and local_JDK_file.stat.exists
+
+- name: check for JDK on remote box
+  stat:
+    path: '{{ java_download_dir }}/{{ java_jdk_redis_filename }}'
+    checksum_algorithm: sha256
+  register: remote_JDK_file
+  ignore_errors: yes
+
+- name: assert existing JDK matches checksum
+  assert:
+    that:
+      - remote_JDK_file.stat.checksum == java_redis_sha256sum
+    msg: 'Checksum failed: {{ remote_JDK_file.stat.checksum }} != {{ java_redis_sha256sum }}'
+  when: remote_JDK_file.stat.exists
+
+# Ensure CA certificates installed (so we can download the JDK)
+- name: ensure ca-certificates installed (apt)
+  become: yes
+  apt:
+    name: ca-certificates
+    state: present
+  when: ansible_pkg_mgr == 'apt'
+
+# Download install files
+- name: download JDK
+  get_url:
+    url: '{{ java_jdk_redis_mirror }}/{{ java_jdk_redis_filename }}'
+    headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
+    dest: '{{ java_download_dir }}/{{ java_jdk_redis_filename }}'
+    sha256sum: '{{ java_redis_sha256sum }}'
+    force: no
+    use_proxy: yes
+    validate_certs: yes
+    timeout: '{{ java_jdk_download_timeout_seconds }}'
+    mode: 'u=rw,go=r'
+  when: not remote_JDK_file.stat.exists
+
+# Unpack installation
+- name: create Java home directory
+  become: yes
+  file:
+    path: '{{ java_home }}'
+    state: directory
+    owner: root
+    group: root
+    mode: 'u=rwx,go=rx'
+
+- name: install unarchive module dependencies (apt, yum, dnf, zypper)
+  become: yes
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - tar
+    - gzip
+    - unzip
+  when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
+
+- name: install JDK
+  become: yes
+  unarchive:
+    src: '{{ java_download_dir }}/{{ java_jdk_redis_filename }}'
+    dest: '{{ java_install_dir }}'
+    creates: '{{ java_home }}/bin/java'
+    copy: no
+    owner: root
+    group: root
+    mode: 'go-w'
+
+- import_tasks: unlimited-jce.yml
