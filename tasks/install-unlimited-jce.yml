@@ -3,6 +3,7 @@
   local_action: stat path='{{ java_local_archive_dir }}/{{ java_jce_redis_filename }}'
   register: local_JCE_file
   ignore_errors: yes
+  become: no
   when: java_use_local_archive
 
 - name: copy JCE from local box
