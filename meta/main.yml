@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: John Freeman
-  description: Role for installing Oracle Java.
+  description: Role for installing the Java JDK.
   company: GantSign Ltd.
   license: MIT
   min_ansible_version: 2.4
@@ -28,6 +28,7 @@ galaxy_info:
   galaxy_tags:
     - java
     - jdk
+    - adoptopenjdk
     - development
     - web
     - system

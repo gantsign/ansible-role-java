@@ -1,9 +1,24 @@
 ---
 # Java Major version number
-java_major_version: "{{ java_full_version | regex_replace('^([0-9]+).*', '\\1') }}"
+java_major_version: "{{ java_version | regex_replace('^(?:jdk-?)?([0-9]+).*', '\\1') }}"
 
 # The root folder of this Java installation
 java_home: '{{ java_vendor_home }}'
 
+# The actual JDK vendor to use
+java_actual_vendor: "{{ (java_vendor == 'oracle' or (java_vendor == 'default' and java_major_version in ('7', '8', '9', '10'))) | ternary('oracle', 'adoptopenjdk') }}"
+
+
+### The following are for Oracle JDK only ###
+
 # File name for the JDK redistributable installation file
 java_jdk_redis_filename: 'jdk-{{ java_full_version }}-linux-x64.tar.gz'
+
+
+### The following are for AdoptOpenJDK only ###
+
+# Operating System
+java_os: linux
+
+# Architecture
+java_arch: x64

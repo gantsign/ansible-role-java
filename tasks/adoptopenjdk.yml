@@ -1,0 +1,110 @@
+---
+- name: assert JDK major version supported
+  assert:
+    that:
+      - java_major_version in ('8', '9', '10', '11')
+
+- name: load AdoptOpenJDK vars
+  include_vars: ../vars/adoptopenjdk/main.yml
+
+- name: create download directory
+  file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ java_download_dir }}'
+
+- name: copy local JDK
+  include_tasks: adoptopenjdk-copy-local-jdk.yml
+  when:
+    - java_use_local_archive
+    - java_redis_sha256sum not in (None, '', omit)
+    - java_redis_filename not in (None, '', omit)
+
+- name: check for JDK on remote box
+  stat:
+    path: '{{ java_download_dir }}/{{ java_redis_filename }}'
+    checksum_algorithm: sha256
+  register: remote_JDK_file
+  ignore_errors: yes
+  when: java_redis_filename not in (None, '', omit)
+
+- name: query AdoptOpenJDK
+  include_tasks: adoptopenjdk-query.yml
+  when: >
+    java_release == 'latest'
+    or java_redis_filename in (None, '', omit)
+    or java_redis_sha256sum in (None, '', omit)
+    or (java_redis_mirror in (None, '', omit) and not remote_JDK_file.stat.exists)
+
+- name: java version to install
+  debug:
+    var: java_full_version
+
+- name: set JDK version
+  set_fact:
+    java_jdk_version: "{{ java_full_version | regex_replace('^jdk-?([0-9]+([u\\.][0-9]+)*).*', '\\1') }}"
+
+- name: fetch checksum
+  include_tasks: adoptopenjdk-checksum.yml
+  when: java_redis_sha256sum in (None, '', omit)
+
+- name: check for JDK on remote box
+  stat:
+    path: '{{ java_download_dir }}/{{ java_redis_filename }}'
+    checksum_algorithm: sha256
+  register: remote_JDK_file
+  ignore_errors: yes
+
+- name: assert existing JDK matches checksum
+  assert:
+    that:
+      - remote_JDK_file.stat.checksum == java_redis_sha256sum
+    msg: 'Checksum failed: {{ remote_JDK_file.stat.checksum }} != {{ java_redis_sha256sum }}'
+  when: remote_JDK_file.stat.exists
+
+- name: download JDK
+  get_url:
+    url: '{{ java_redis_url }}'
+    dest: '{{ java_download_dir }}/{{ java_redis_filename }}'
+    sha256sum: '{{ java_redis_sha256sum }}'
+    force: no
+    timeout: '{{ java_download_timeout_seconds }}'
+    mode: 'u=rw,go=r'
+  when: not remote_JDK_file.stat.exists
+
+- name: set default Java Home
+  set_fact:
+    java_vendor_home: "{{ java_install_dir }}/{{ java_full_version | regex_replace('^(jdk-?[0-9]+([u\\.][0-9]+)*).*', '\\1') }}{{ (java_implementation == 'hotspot') | ternary('', '-' + java_implementation) }}"
+
+- name: create Java home directory
+  become: yes
+  file:
+    path: '{{ java_home }}'
+    state: directory
+    owner: root
+    group: root
+    mode: 'u=rwx,go=rx'
+
+- name: install unarchive module dependencies (apt, yum, dnf, zypper)
+  become: yes
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - tar
+    - gzip
+    - unzip
+  when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
+
+- name: install JDK
+  become: yes
+  unarchive:
+    src: '{{ java_download_dir }}/{{ java_redis_filename }}'
+    extra_opts:
+      - '--strip-components=2'
+    dest: '{{ java_home }}'
+    creates: '{{ java_home }}/bin/java'
+    copy: no
+    owner: root
+    group: root
+    mode: 'go-w'

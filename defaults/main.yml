@@ -1,7 +1,7 @@
 ---
 # Java version number
-# * Specify '8', '9' or '10' to get the latest patch version of that release
-#   (from the supported versions below)
+# Specify '8', '9', '10' or '11' to get the latest patch version of that
+# release.
 java_version: '8u181'
 
 # Base installation directory for any Java distribution
@@ -32,6 +32,16 @@ java_is_default_installation: yes
 # ansible_local.java_8.general.home
 java_fact_group_name: java
 
+# The JDK vendor (oracle/adoptopenjdk)
+# Default is oracle for Java < 11 and adoptopenjdk for Java >= 11
+java_vendor: default
+
+# The SHA-256 for the JDK redistributable
+java_redis_sha256sum:
+
+
+### The following only apply to Oracle Java versions ###
+
 # Timeout for JDK download response in seconds
 java_jdk_download_timeout_seconds: 600
 
@@ -42,10 +52,28 @@ java_mirror_base: 'http://download.oracle.com/otn-pub/java'
 java_jdk_redis_mirror: '{{ java_mirror_base }}/{{ java_otn_jdk_path }}'
 
 
-### The following only apply to Java versions prior to 9 ###
+### The following only apply to Oracle Java versions prior to 9 ###
 
 # Timeout for JDK download response in seconds
 java_jce_download_timeout_seconds: 30
 
 # Mirror location for JCE download (e.g. https://example.com/provisioning/files)
 java_jce_redis_mirror: '{{ java_mirror_base }}/{{ java_otn_jce_path }}'
+
+
+### The following only apply to AdoptOpenJDK ###
+
+# Mirror location for JDK download (e.g. https://example.com/provisioning/files)
+java_redis_mirror:
+
+# File name for the JDK redistributable installation file
+java_redis_filename:
+
+# OpenJDK Implementation (hotspot, openj9)
+java_implementation: hotspot
+
+# Timeout for JDK download response in seconds
+java_download_timeout_seconds: 600
+
+# The timeout for the AdoptOpenJDK API
+java_api_timeout_seconds: 30
