@@ -5,25 +5,22 @@
   pre_tasks:
     - name: create local archive directory
       local_action: file state=directory mode='u=rwx,go=rx' dest='{{ java_local_archive_dir }}'
-      when: java_use_local_archive
 
     - name: download JDK for offline install
       local_action: >
         get_url
-        url='http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_linux-x64_bin.tar.gz'
-        headers='Cookie:oraclelicense=accept-securebackup-cookie'
-        dest='{{ java_local_archive_dir }}/jdk-10.0.2_linux-x64_bin.tar.gz'
+        url='https://api.adoptopenjdk.net/v2/binary/releases/openjdk11?openjdk_impl=hotspot&os=linux&arch=x64&release={{ 'jdk-11+28' | urlencode }}&type=jdk'
+        dest='{{ java_local_archive_dir }}/OpenJDK11-jdk_x64_linux_hotspot_11_28.tar.gz'
         force=no
-        use_proxy=yes
-        validate_certs=yes
         timeout='{{ java_jdk_download_timeout_seconds }}'
         mode='u=rw,go=r'
-      when: java_use_local_archive
 
   roles:
     - role: ansible-role-java
       java_use_local_archive: yes
-      java_version: '10'
+      java_version: 'jdk-11+28'
+      java_redis_filename: 'OpenJDK11-jdk_x64_linux_hotspot_11_28.tar.gz'
+      java_redis_sha256sum: 'e1e18fc9ce2917473da3e0acb5a771bc651f600c0195a3cb40ef6f22f21660af'
 
   post_tasks:
     - name: verify java facts

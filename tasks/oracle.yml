@@ -1,4 +1,9 @@
 ---
+- name: assert JDK major version supported
+  assert:
+    that:
+      - java_major_version in ('7', '8', '9', '10')
+
 - name: load Oracle JDK vars
   include_vars: ../vars/oracle/main.yml
 

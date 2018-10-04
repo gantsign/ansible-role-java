@@ -1,0 +1,15 @@
+---
+- name: check for JDK on local box
+  local_action: stat path='{{ java_local_archive_dir }}/{{ java_redis_filename }}'
+  register: java_local_file
+  ignore_errors: yes
+  become: no
+  when: java_use_local_archive
+
+- name: copy JDK from local box
+  become: yes
+  copy:
+    src: '{{ java_local_archive_dir }}/{{ java_redis_filename }}'
+    dest: '{{ java_download_dir }}/{{ java_redis_filename }}'
+    mode: 'u=rw,go=r'
+  when: java_use_local_archive and java_local_file.stat.exists

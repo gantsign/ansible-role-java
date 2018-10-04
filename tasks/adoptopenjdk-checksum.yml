@@ -1,0 +1,17 @@
+---
+- name: download checksum
+  get_url:
+    url: '{{ java_redis_sha256sum_url }}'
+    dest: '{{ java_download_dir }}/{{ java_redis_filename }}.sha256'
+    force: no
+    timeout: '{{ java_api_timeout_seconds }}'
+    mode: 'u=rw,go=r'
+
+- name: read checksum file
+  slurp:
+    src: '{{ java_download_dir }}/{{ java_redis_filename }}.sha256'
+  register: java_checksum_file
+
+- name: set JDK checksum var from file
+  set_fact:
+    java_redis_sha256sum: "{{ java_checksum_file.content | b64decode | regex_replace('^([0-9a-f]+).*', '\\1') | trim }}"

@@ -1,5 +1,10 @@
 ---
-- import_tasks: oracle.yml
+- name: assert JDK vendor
+  assert:
+    that:
+      - java_vendor in ('default', 'oracle', 'adoptopenjdk')
+
+- include_tasks: '{{ java_actual_vendor }}.yml'
 
 - name: write environment config
   include_tasks: write-environment-config.yml
@@ -27,3 +32,8 @@
 - name: re-read facts
   setup:
     filter: ansible_local
+
+- name: clear facts
+  set_fact:
+    java_redis_sha256sum:
+    java_redis_filename:
