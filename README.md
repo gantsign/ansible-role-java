@@ -66,7 +66,7 @@ are shown below):
 # Java version number
 # Specify '8', '9', '10' or '11' to get the latest patch version of that
 # release.
-java_version: '8u181'
+java_version: 'jdk-11+28'
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
@@ -155,8 +155,8 @@ links:
 Example Playbooks
 -----------------
 
-By default this role will install the latest version of the Oracle JDK supported
-by this role:
+By default this role will install the latest LTS JDK version provided by
+AdoptOpenJDK that has been tested and is known to work with this role:
 
 ```yaml
 - hosts: servers
@@ -181,13 +181,13 @@ once:
   roles:
     - role: ansible-role-java
       java_version: '8'
-      java_is_default_installation: yes
-      java_fact_group_name: java
+      java_is_default_installation: no
+      java_fact_group_name: java_8
 
     - role: ansible-role-java
       java_version: '11'
-      java_is_default_installation: no
-      java_fact_group_name: java_11
+      java_is_default_installation: yes
+      java_fact_group_name: java
 ```
 
 Role Facts
