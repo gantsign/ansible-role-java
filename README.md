@@ -5,7 +5,17 @@ Ansible Role: Java
 [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-gantsign.java-blue.svg)](https://galaxy.ansible.com/gantsign/java)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gantsign/ansible-role-java/master/LICENSE)
 
-Role to install the [Oracle Java JDK](http://www.oracle.com/technetwork/java/index.html).
+Role to install the Java JDK.
+
+This roles supports the following JDK vendors:
+
+* [AdoptOpenJDK](https://adoptopenjdk.net)
+    * For Java >= 8 (default for Java >= 11)
+* [Oracle JDK](http://www.oracle.com/technetwork/java/index.html)
+    * For Java < 11 (default for Java < 11)
+
+**Deprecation notice:** support for the Oracle JDK will be dropped once
+Oracle ends public support for the Oracle JDK (in January 2019).
 
 Requirements
 ------------
@@ -54,8 +64,8 @@ are shown below):
 
 ```yaml
 # Java version number
-# * Specify '8', '9' or '10' to get the latest patch version of that release
-#   (from the supported versions below)
+# Specify '8', '9', '10' or '11' to get the latest patch version of that
+# release.
 java_version: '8u181'
 
 # Base installation directory for any Java distribution
@@ -86,6 +96,16 @@ java_is_default_installation: yes
 # ansible_local.java_8.general.home
 java_fact_group_name: java
 
+# The JDK vendor (oracle/adoptopenjdk)
+# Default is oracle for Java < 11 and adoptopenjdk for Java >= 11
+java_vendor: default
+
+# The SHA-256 for the JDK redistributable
+java_redis_sha256sum:
+
+
+### The following only apply to Oracle Java versions ###
+
 # Timeout for JDK download response in seconds
 java_jdk_download_timeout_seconds: 600
 
@@ -96,116 +116,41 @@ java_mirror_base: 'http://download.oracle.com/otn-pub/java'
 java_jdk_redis_mirror: '{{ java_mirror_base }}/{{ java_otn_jdk_path }}'
 
 
-### The following only apply to Java versions prior to 9 ###
+### The following only apply to Oracle Java versions prior to 9 ###
 
 # Timeout for JDK download response in seconds
 java_jce_download_timeout_seconds: 30
 
 # Mirror location for JCE download (e.g. https://example.com/provisioning/files)
 java_jce_redis_mirror: '{{ java_mirror_base }}/{{ java_otn_jce_path }}'
+
+
+### The following only apply to AdoptOpenJDK ###
+
+# Mirror location for JDK download (e.g. https://example.com/provisioning/files)
+java_redis_mirror:
+
+# File name for the JDK redistributable installation file
+java_redis_filename:
+
+# OpenJDK Implementation (hotspot, openj9)
+java_implementation: hotspot
+
+# Timeout for JDK download response in seconds
+java_download_timeout_seconds: 600
+
+# The timeout for the AdoptOpenJDK API
+java_api_timeout_seconds: 30
 ```
 
-### Oracle Binary Code License Agreement
+JDK vendor specific configuration
+---------------------------------
 
-To use this role you must accept the "Oracle Binary Code License Agreement
-for the Java SE Platform Products and JavaFX"; you can do this by specifying
-the following role variable:
+You can view the JDK vendor specific configuration by clicking on the following
+links:
 
-```yaml
-java_license_declaration: 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
-```
-
-If you don't want to embed the declaration in your playbook it can be passed
-by adding the following argument when running `ansible-playbook`:
-
-```
---extra-vars '{"java_license_declaration": "I accept the \"Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX\" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html"}'
-```
-
-### Supported Java Versions
-
-The following versions of Java are supported without any additional
-configuration (for other versions follow the Advanced Configuration
-instructions):
-
-**Current releases**
-
-* 10.0.2
-* 8u181
-
-**Caution:** the current versions will be moved to Oracle's archives when a
-newer version is released; if you don't want your provisioning to break when
-that happens, you should follow the advice for archived versions below.
-
-**Archived versions**
-
-* 10.0.1
-* 10.0.0
-* 9.0.4
-* 9.0.1
-* 9.0.0
-* 8u172
-* 8u171
-* 8u161
-* 8u151
-* 8u144
-* 8u141
-* 8u131
-* 8u121
-* 8u112
-* 8u111
-* 8u102
-* 8u101
-* 7u80
-* 7u79
-
-As of 23 May 2017 all the archived Java versions (i.e. everything but the latest
-release) have been moved from the Oracle public download area to behind the
-Oracle Technology Network login.
-
-This Ansible role is no longer able to download archived versions of Java from
-Oracle; to workaround this limitation you have 3 options:
-
-1) Specify the `java_jdk_redis_mirror` (and optionally the
-`java_jce_redis_mirror`) to point to a private mirror containing the
-installation packages.
-
-2) Copy the installation packages to the location specified by
-`java_local_archive_dir` on the local machine before running this role.
-
-3) Copy/restore the installation packages to the location specified by
-`java_download_dir` on the remote machine before running this role.
-
-If manually downloading the JDK, make sure you download the file matching
-`jdk-VERSION-linux-x64.tar.gz`, other variants of the JDK/JRE will not work with
-this role.
-
-Advanced Configuration
-----------------------
-
-The following role variables are dependent on the Java version; to use a
-Java version **not pre-configured by this role** you must configure the
-variables below.
-
-### Minor Version Configuration
-
-The below has to be configured for every minor release of Java.
-
-```yaml
-# SHA256 sum for the redistributable JDK package (i.e. jdk-{{ java_full_version }}-linux-x64.tar.gz)
-java_redis_sha256sum: '7cfbe0bc0391a4abe60b3e9eb2a541d2315b99b9cb3a24980e618a89229e04b7'
-
-# The build number for this JDK version
-java_version_build: 14
-
-# ID in JDK download URL (introduced in 8u121)
-java_jdk_download_id: ''
-```
-
-### Major Version Configuration
-
-This role is incompatible with Java 6 and earlier due to the different way the
-JDK was packaged for those releases.
+* [AdoptOpenJDK](https://github.com/gantsign/ansible-role-java/docs/AdoptOpenJDK.md)
+* [Oracle JDK](https://github.com/gantsign/ansible-role-java/docs/OracleJDK.md)
 
 Example Playbooks
 -----------------
@@ -219,10 +164,7 @@ by this role:
     - role: gantsign.java
 ```
 
-You can install a specific version of the Oracle JDK by specifying the
-`java_version` (note: if the version is not currently supported by this role
-then additional configuration will be required - see
-[Advanced Configuration](#advanced-configuration)):
+You can install a specific version of the JDK by specifying the `java_version`.
 
 ```yaml
 - hosts: servers
@@ -231,8 +173,8 @@ then additional configuration will be required - see
       java_version: '8u181'
 ```
 
-You can install the multiple versions of the Oracle JDK by using this role more
-than once:
+You can install the multiple versions of the JDK by using this role more than
+once:
 
 ```yaml
 - hosts: servers
@@ -243,9 +185,9 @@ than once:
       java_fact_group_name: java
 
     - role: ansible-role-java
-      java_version: '10'
+      java_version: '11'
       java_is_default_installation: no
-      java_fact_group_name: java_10
+      java_fact_group_name: java_11
 ```
 
 Role Facts
