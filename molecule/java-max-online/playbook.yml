@@ -5,8 +5,6 @@
   roles:
     - role: ansible-role-java
       java_use_local_archive: no
-      java_version: 'jdk-11+28'
-      java_vendor: adoptopenjdk
 
   post_tasks:
     - name: verify java facts
