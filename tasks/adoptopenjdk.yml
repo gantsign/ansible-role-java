@@ -108,3 +108,10 @@
     owner: root
     group: root
     mode: 'go-w'
+
+- name: generate CDS archive
+  become: yes
+  command: '{{ java_home }}/bin/java -Xshare:dump'
+  args:
+    creates: '{{ java_home }}/lib/server/classes.jsa'
+  when: java_major_version == '11' and java_implementation == 'hotspot'
