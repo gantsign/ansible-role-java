@@ -20,7 +20,7 @@ Oracle ends public support for the Oracle JDK (in January 2019).
 Requirements
 ------------
 
-* Ansible >= 2.4
+* Ansible >= 2.5
 
 * Linux Distribution
 
