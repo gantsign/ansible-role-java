@@ -10,9 +10,9 @@
     - name: download JDK for offline install
       local_action: >
         get_url
-        url='http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz'
+        url='http://download.oracle.com/otn-pub/java/jdk/8u191-b12/2787e4a523244c269598db4e85c51e0c/jdk-8u191-linux-x64.tar.gz'
         headers='Cookie:oraclelicense=accept-securebackup-cookie'
-        dest='{{ java_local_archive_dir }}/jdk-8u181-linux-x64.tar.gz'
+        dest='{{ java_local_archive_dir }}/jdk-8u191-linux-x64.tar.gz'
         force=no
         use_proxy=yes
         validate_certs=yes
@@ -35,7 +35,7 @@
 
   roles:
     - role: ansible-role-java
-      java_version: 8u181
+      java_version: 8u191
       java_use_local_archive: yes
 
   post_tasks:
