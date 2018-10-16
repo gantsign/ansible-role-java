@@ -170,7 +170,7 @@ You can install a specific version of the JDK by specifying the `java_version`.
 - hosts: servers
   roles:
     - role: gantsign.java
-      java_version: '8u181'
+      java_version: '8u191'
 ```
 
 You can install the multiple versions of the JDK by using this role more than
