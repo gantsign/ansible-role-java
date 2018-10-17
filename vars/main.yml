@@ -22,3 +22,6 @@ java_os: linux
 
 # Architecture
 java_arch: x64
+
+# Heap size
+java_heap_size: normal

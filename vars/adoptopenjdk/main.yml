@@ -6,4 +6,4 @@ java_release: "{{ (java_version in ('8', '9', '10', '11')) | ternary('latest', j
 java_full_version: '{{ java_version }}'
 
 # The URL for the AdoptOpenJDK API request
-java_api_request: 'https://api.adoptopenjdk.net/v2/info/releases/openjdk{{ java_major_version }}?openjdk_impl={{ java_implementation }}&os={{ java_os }}&arch={{ java_arch }}&release={{ java_release | urlencode }}&type=jdk'
+java_api_request: 'https://api.adoptopenjdk.net/v2/info/releases/openjdk{{ java_major_version }}?openjdk_impl={{ java_implementation }}&os={{ java_os }}&arch={{ java_arch }}&release={{ java_release | urlencode }}&type=jdk&heap_size={{ java_heap_size }}'

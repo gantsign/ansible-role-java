@@ -9,7 +9,7 @@
     - name: download JDK for offline install
       local_action: >
         get_url
-        url='https://api.adoptopenjdk.net/v2/binary/releases/openjdk11?openjdk_impl=hotspot&os=linux&arch=x64&release={{ 'jdk-11+28' | urlencode }}&type=jdk'
+        url='https://api.adoptopenjdk.net/v2/binary/releases/openjdk11?openjdk_impl=hotspot&os=linux&arch=x64&release={{ 'jdk-11+28' | urlencode }}&type=jdk&heap_size=normal'
         dest='{{ java_local_archive_dir }}/OpenJDK11-jdk_x64_linux_hotspot_11_28.tar.gz'
         force=no
         timeout='{{ java_jdk_download_timeout_seconds }}'
