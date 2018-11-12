@@ -17,7 +17,7 @@
   include_tasks: adoptopenjdk-copy-local-jdk.yml
   when:
     - java_use_local_archive
-    - java_redis_sha256sum not in (None, '', omit)
+    - java_redis_sha256sum_adoptopen not in (None, '', omit)
     - java_redis_filename not in (None, '', omit)
 
 - name: check for JDK on remote box
@@ -33,7 +33,7 @@
   when: >
     java_release == 'latest'
     or java_redis_filename in (None, '', omit)
-    or java_redis_sha256sum in (None, '', omit)
+    or java_redis_sha256sum_adoptopen in (None, '', omit)
     or (java_redis_mirror in (None, '', omit) and not remote_JDK_file.stat.exists)
 
 - name: java version to install
@@ -46,7 +46,6 @@
 
 - name: fetch checksum
   include_tasks: adoptopenjdk-checksum.yml
-  when: java_redis_sha256sum in (None, '', omit)
 
 - name: check for JDK on remote box
   stat:
@@ -58,15 +57,15 @@
 - name: assert existing JDK matches checksum
   assert:
     that:
-      - remote_JDK_file.stat.checksum == java_redis_sha256sum
-    msg: 'Checksum failed: {{ remote_JDK_file.stat.checksum }} != {{ java_redis_sha256sum }}'
+      - remote_JDK_file.stat.checksum == java_redis_sha256sum_adoptopen
+    msg: 'Checksum failed: {{ remote_JDK_file.stat.checksum }} != {{ java_redis_sha256sum_adoptopen }}'
   when: remote_JDK_file.stat.exists
 
 - name: download JDK
   get_url:
     url: '{{ java_redis_url }}'
     dest: '{{ java_download_dir }}/{{ java_redis_filename }}'
-    sha256sum: '{{ java_redis_sha256sum }}'
+    sha256sum: '{{ java_redis_sha256sum_adoptopen }}'
     force: no
     timeout: '{{ java_download_timeout_seconds }}'
     mode: 'u=rw,go=r'

@@ -20,7 +20,6 @@
 - name: set checksum URL var from API
   set_fact:
     java_redis_sha256sum_url: '{{ (java_api_response.json[0] | default(java_api_response.json)).binaries[0].checksum_link }}'
-  when: java_redis_sha256sum in (None, '', omit)
 
 - name: set JDK filename var from API
   set_fact:
