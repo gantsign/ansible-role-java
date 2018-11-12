@@ -14,4 +14,4 @@
 
 - name: set JDK checksum var from file
   set_fact:
-    java_redis_sha256sum: "{{ java_checksum_file.content | b64decode | regex_replace('^([0-9a-f]+).*', '\\1') | trim }}"
+    java_redis_sha256sum_adoptopen: "{{ java_checksum_file.content | b64decode | regex_replace('^([0-9a-f]+).*', '\\1') | trim }}"
