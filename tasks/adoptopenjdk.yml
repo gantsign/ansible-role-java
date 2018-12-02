@@ -96,12 +96,24 @@
     - unzip
   when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
 
+# Workaround for: https://github.com/AdoptOpenJDK/openjdk-build/issues/660
+- name: check JDK archive layout
+  become: yes
+  shell: >
+    tar --list --file {{ (java_download_dir + '/' + java_redis_filename) | quote }} | grep --quiet '^\.'
+  args:
+    # [WARNING]: Consider using the unarchive module rather than running tar.
+    warn: no
+  register: java_jdk_layout
+  failed_when: no
+  changed_when: no
+
 - name: install JDK
   become: yes
   unarchive:
     src: '{{ java_download_dir }}/{{ java_redis_filename }}'
     extra_opts:
-      - "--strip-components={{ (java_major_version in ('8', '9', '10')) | ternary('2', '1') }}"
+      - "--strip-components={{ (java_jdk_layout.rc == 0) | ternary('2', '1') }}"
     dest: '{{ java_home }}'
     creates: '{{ java_home }}/bin/java'
     copy: no
