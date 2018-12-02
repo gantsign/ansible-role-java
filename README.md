@@ -149,8 +149,8 @@ JDK vendor specific configuration
 You can view the JDK vendor specific configuration by clicking on the following
 links:
 
-* [AdoptOpenJDK](https://github.com/gantsign/ansible-role-java/docs/AdoptOpenJDK.md)
-* [Oracle JDK](https://github.com/gantsign/ansible-role-java/docs/OracleJDK.md)
+* [AdoptOpenJDK](https://github.com/gantsign/ansible-role-java/blob/master/docs/AdoptOpenJDK.md)
+* [Oracle JDK](https://github.com/gantsign/ansible-role-java/blob/master/docs/OracleJDK.md)
 
 Example Playbooks
 -----------------
