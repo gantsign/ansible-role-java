@@ -20,7 +20,7 @@
       java_use_local_archive: yes
       java_version: 'jdk-11.0.1+13'
       java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.1_13.tar.gz'
-      java_redis_sha256sum: '7e9904e1bfa197e6e72570207cb2bd63dd7cc4bf5f97bc5454c1fc5a559a8bf1'
+      java_redis_sha256sum: '22bd2f1a2e0cb6e4075967bfeda4a960b0325879305aa739a0ba2d6e5cd4c3e2'
 
   post_tasks:
     - name: verify java facts
