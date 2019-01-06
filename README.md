@@ -150,7 +150,7 @@ You can view the JDK vendor specific configuration by clicking on the following
 links:
 
 * [AdoptOpenJDK](https://github.com/gantsign/ansible-role-java/blob/master/docs/AdoptOpenJDK.md)
-* [Oracle JDK](https://github.com/gantsign/ansible-role-java/blob/master/docs/OracleJDK.md)
+* [Oracle JDK](https://github.com/gantsign/ansible-role-java/blob/master/docs/OracleJDK.md) - **Important:** you must read and follow these instructions (to accept the Oracle Binary Code License Agreement) to be able to install the Oracle JDK.
 
 Example Playbooks
 -----------------
