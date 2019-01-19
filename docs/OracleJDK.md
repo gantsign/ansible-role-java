@@ -25,8 +25,7 @@ instructions):
 
 **Current releases**
 
-* 8u192
-* 8u191
+* 8u201
 
 **Caution:** the current versions will be moved to Oracle's archives when a
 newer version is released; if you don't want your provisioning to break when
@@ -40,6 +39,8 @@ that happens, you should follow the advice for archived versions below.
 * 9.0.4
 * 9.0.1
 * 9.0.0
+* 8u192
+* 8u191
 * 8u181
 * 8u172
 * 8u171
