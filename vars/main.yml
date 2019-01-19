@@ -6,7 +6,7 @@ java_major_version: "{{ java_version | regex_replace('^(?:jdk-?)?([0-9]+).*', '\
 java_home: '{{ java_vendor_home }}'
 
 # The actual JDK vendor to use
-java_actual_vendor: "{{ (java_vendor == 'oracle' or (java_vendor == 'default' and java_major_version in ('7', '8', '9', '10'))) | ternary('oracle', 'adoptopenjdk') }}"
+java_actual_vendor: "{{ (java_vendor == 'oracle' or ((java_vendor == 'default') and (java_major_version == '7'))) | ternary('oracle', 'adoptopenjdk') }}"
 
 
 ### The following are for Oracle JDK only ###

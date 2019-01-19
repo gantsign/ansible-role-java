@@ -10,9 +10,12 @@ Role to install the Java JDK.
 This roles supports the following JDK vendors:
 
 * [AdoptOpenJDK](https://adoptopenjdk.net)
-    * For Java >= 8 (default for Java >= 11)
+    * For Java >= 8 (default for Java >= 8)
 * [Oracle JDK](http://www.oracle.com/technetwork/java/index.html)
-    * For Java < 11 (default for Java < 11)
+    * For Java < 11 (default for Java 7)
+
+**Important:** since the 7.0.0 release of this role AdoptOpenJDK is the default
+for Java >= 8, prior to that Oracle JDK was the default for Java < 11.
 
 **Deprecation notice:** support for the Oracle JDK will be dropped once
 Oracle ends public support for the Oracle JDK (in January 2019).
@@ -97,7 +100,7 @@ java_is_default_installation: yes
 java_fact_group_name: java
 
 # The JDK vendor (oracle/adoptopenjdk)
-# Default is oracle for Java < 11 and adoptopenjdk for Java >= 11
+# Default is oracle for Java 7 and adoptopenjdk for Java >= 8
 java_vendor: default
 
 # The SHA-256 for the JDK redistributable
@@ -170,7 +173,7 @@ You can install a specific version of the JDK by specifying the `java_version`.
 - hosts: servers
   roles:
     - role: gantsign.java
-      java_version: '8u202'
+      java_version: 'jdk8u202-b08'
 ```
 
 You can install the multiple versions of the JDK by using this role more than
