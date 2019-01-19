@@ -25,6 +25,7 @@ instructions):
 
 **Current releases**
 
+* 8u202
 * 8u201
 
 **Caution:** the current versions will be moved to Oracle's archives when a
