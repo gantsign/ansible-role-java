@@ -4,6 +4,12 @@
     that:
       - java_major_version in ('7', '8', '9', '10')
 
+- name: deprecation warning
+  debug:
+    msg: >
+      [WARNING]: This role will drop support for Oracle JDK in April 2019.
+      Please switch to AdoptOpenJDK.
+
 - name: load Oracle JDK vars
   include_vars: ../vars/oracle/main.yml
 
