@@ -18,7 +18,7 @@ This roles supports the following JDK vendors:
 for Java >= 8, prior to that Oracle JDK was the default for Java < 11.
 
 **Deprecation notice:** support for the Oracle JDK will be dropped once
-Oracle ends public support for the Oracle JDK (in January 2019).
+Oracle ends public support for the Oracle JDK (in April 2019).
 
 Requirements
 ------------
