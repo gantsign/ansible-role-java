@@ -33,7 +33,7 @@ java_is_default_installation: yes
 java_fact_group_name: java
 
 # The JDK vendor (oracle/adoptopenjdk)
-# Default is oracle for Java < 11 and adoptopenjdk for Java >= 11
+# Default is oracle for Java 7 and adoptopenjdk for Java >= 8
 java_vendor: default
 
 # The SHA-256 for the JDK redistributable
