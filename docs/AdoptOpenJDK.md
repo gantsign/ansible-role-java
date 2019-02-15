@@ -29,16 +29,16 @@ configuration:
 
 It's still possible to perform an offline install, but you need to specify a
 bit more information (i.e. `java_redis_filename` and
-`java_redis_sha256sum`). E.g. to perform an offline install of `jdk-11.0.1+13`:
+`java_redis_sha256sum`). E.g. to perform an offline install of `jdk-11.0.2+9`:
 
 ```yaml
 # Before performing the offline install, download
-# `OpenJDK11U-jdk_x64_linux_hotspot_11.0.1_13.tar.gz` to
+# `OpenJDK11U-jdk_x64_linux_hotspot_11.0.2_9.tar.gz` to
 # `{{ playbook_dir }}/files/` on the local machine.
 - hosts: servers
   roles:
     - role: gantsign.java
-      java_version: 'jdk-11.0.1+13'
-      java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.1_13.tar.gz'
-      java_redis_sha256sum: '22bd2f1a2e0cb6e4075967bfeda4a960b0325879305aa739a0ba2d6e5cd4c3e2'
+      java_version: 'jdk-11.0.2+9'
+      java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.2_9.tar.gz'
+      java_redis_sha256sum: 'd02089d834f7702ac1a9776d8d0d13ee174d0656cf036c6b68b9ffb71a6f610e'
 ```
