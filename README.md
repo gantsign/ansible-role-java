@@ -67,7 +67,7 @@ are shown below):
 
 ```yaml
 # Java version number
-# Specify '8', '9', '10' or '11' to get the latest patch version of that
+# Specify '8', '9', '10', '11' or '12' to get the latest patch version of that
 # release.
 java_version: 'jdk-11.0.2+9'
 

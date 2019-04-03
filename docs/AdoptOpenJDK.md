@@ -8,7 +8,7 @@ With [curl](https://curl.haxx.se) and [jq](https://stedolan.github.io/jq) you
 can view the available versions by running the following command:
 
 ```bash
-for ((i = 8; i <= 11; i++)) do (curl --silent http \
+for ((i = 8; i <= 12; i++)) do (curl --silent http \
   "https://api.adoptopenjdk.net/v2/info/releases/openjdk$i?openjdk_impl=hotspot" \
   | jq --raw-output '.[].release_name'); done
 ```
