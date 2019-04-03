@@ -1,0 +1,21 @@
+---
+- name: Converge
+  hosts: all
+
+  roles:
+    - role: ansible-role-java
+      java_use_local_archive: no
+      java_version: jdk-11.0.2+9
+
+  post_tasks:
+    - name: verify java facts
+      assert:
+        that:
+          - ansible_local.java.general.version is defined
+          - ansible_local.java.general.home is defined
+
+    - name: install find - required for tests (dnf)
+      dnf:
+        name: findutils
+        state: present
+      when: ansible_pkg_mgr == 'dnf'

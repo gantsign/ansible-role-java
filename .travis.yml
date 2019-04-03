@@ -12,10 +12,16 @@ matrix:
         - MOLECULE_SCENARIO=ubuntu-min-java-min-online
         - MOLECULEW_ANSIBLE=2.5.10
     - env:
+        - MOLECULE_SCENARIO=ubuntu-min-java-lts-online
+        - MOLECULEW_ANSIBLE=2.5.10
+    - env:
         - MOLECULE_SCENARIO=ubuntu-min-java-max-online
         - MOLECULEW_ANSIBLE=2.5.10
     - env:
         - MOLECULE_SCENARIO=ubuntu-max-java-min-offline
+        - MOLECULEW_ANSIBLE=2.7.0
+    - env:
+        - MOLECULE_SCENARIO=ubuntu-max-java-lts-offline
         - MOLECULEW_ANSIBLE=2.7.0
     - env:
         - MOLECULE_SCENARIO=ubuntu-max-java-max-offline
@@ -24,10 +30,16 @@ matrix:
         - MOLECULE_SCENARIO=debian-min-java-min-online
         - MOLECULEW_ANSIBLE=2.5.10
     - env:
+        - MOLECULE_SCENARIO=debian-min-java-lts-online
+        - MOLECULEW_ANSIBLE=2.5.10
+    - env:
         - MOLECULE_SCENARIO=debian-min-java-max-online
         - MOLECULEW_ANSIBLE=2.5.10
     - env:
         - MOLECULE_SCENARIO=debian-max-java-min-offline
+        - MOLECULEW_ANSIBLE=2.7.0
+    - env:
+        - MOLECULE_SCENARIO=debian-max-java-lts-offline
         - MOLECULEW_ANSIBLE=2.7.0
     - env:
         - MOLECULE_SCENARIO=debian-max-java-max-offline
@@ -36,10 +48,16 @@ matrix:
         - MOLECULE_SCENARIO=centos-min-java-min-online
         - MOLECULEW_ANSIBLE=2.5.10
     - env:
+        - MOLECULE_SCENARIO=centos-min-java-lts-online
+        - MOLECULEW_ANSIBLE=2.5.10
+    - env:
         - MOLECULE_SCENARIO=centos-min-java-max-online
         - MOLECULEW_ANSIBLE=2.5.10
     - env:
         - MOLECULE_SCENARIO=centos-max-java-min-offline
+        - MOLECULEW_ANSIBLE=2.7.0
+    - env:
+        - MOLECULE_SCENARIO=centos-max-java-lts-offline
         - MOLECULEW_ANSIBLE=2.7.0
     - env:
         - MOLECULE_SCENARIO=centos-max-java-max-offline
