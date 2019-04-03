@@ -14,7 +14,7 @@ def test_java(host):
     m = re.search('(?:java|openjdk) version "([0-9]+)', cmd.stderr)
     assert m is not None
     java_version = m.group(1)
-    assert '11' == java_version
+    assert '12' == java_version
 
 
 def test_javac(host):
@@ -23,11 +23,11 @@ def test_javac(host):
     m = re.search('javac ([0-9]+)', cmd.stdout)
     assert m is not None
     java_version = m.group(1)
-    assert '11' == java_version
+    assert '12' == java_version
 
 
 @pytest.mark.parametrize('version_dir_pattern', [
-    'jdk-11(\\.[0-9]+\\.[0-9]+)?$'
+    'jdk-12(\\.[0-9]+\\.[0-9]+)?$'
 ])
 def test_java_installed(host, version_dir_pattern):
 

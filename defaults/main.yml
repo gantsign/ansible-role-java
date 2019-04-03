@@ -2,7 +2,7 @@
 # Java version number
 # Specify '8', '9', '10', '11' or '12' to get the latest patch version of that
 # release.
-java_version: 'jdk-11.0.2+9'
+java_version: 'jdk-12+33'
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
