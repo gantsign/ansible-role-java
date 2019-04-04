@@ -1,6 +1,8 @@
 ---
 - name: check for JDK on local box
-  local_action: stat path='{{ java_local_archive_dir }}/{{ java_redis_filename }}'
+  stat:
+    path: '{{ java_local_archive_dir }}/{{ java_redis_filename }}'
+  delegate_to: localhost
   register: java_local_file
   ignore_errors: yes
   become: no
