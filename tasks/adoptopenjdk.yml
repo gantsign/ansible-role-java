@@ -74,7 +74,7 @@
 
 - name: set default Java Home
   set_fact:
-    java_vendor_home: "{{ java_install_dir }}/{{ java_full_version | regex_replace('^(jdk-?[0-9]+([u\\.][0-9]+)*).*', '\\1') }}{{ (java_implementation == 'hotspot') | ternary('', '-' + java_implementation) }}"
+    java_vendor_home: "{{ java_install_dir }}/{{ java_full_version | regex_replace('^(jdk-?[0-9]+([u\\.][0-9]+)*).*', '\\1') }}{{ (java_implementation == 'hotspot') | ternary('', '-' + java_implementation) }}"  # noqa 204
 
 - name: create Java home directory
   become: yes
@@ -99,7 +99,8 @@
 # Workaround for: https://github.com/AdoptOpenJDK/openjdk-build/issues/660
 - name: check JDK archive layout
   become: yes
-  shell: >
+  shell: |
+    set -o pipefail
     tar --list --file {{ (java_download_dir + '/' + java_redis_filename) | quote }} | grep --quiet '^\.'
   args:
     # [WARNING]: Consider using the unarchive module rather than running tar.

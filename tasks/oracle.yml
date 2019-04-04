@@ -55,7 +55,7 @@
 - name: assert Binary Code License accepted
   assert:
     that:
-      - java_license_declaration == 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
+      - java_license_declaration == 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'  # noqa 204
 
 # Create download directory
 - name: create download directory
@@ -65,7 +65,9 @@
     dest: '{{ java_download_dir }}'
 
 - name: check for JDK on local box
-  local_action: stat path='{{ java_local_archive_dir }}/{{ java_jdk_redis_filename }}'
+  stat:
+    path: '{{ java_local_archive_dir }}/{{ java_jdk_redis_filename }}'
+  delegate_to: localhost
   register: local_JDK_file
   ignore_errors: yes
   become: no
