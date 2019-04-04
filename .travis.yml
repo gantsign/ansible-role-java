@@ -56,6 +56,12 @@ matrix:
     - env:
         - MOLECULE_SCENARIO=opensuse-java-min-online
         - MOLECULEW_ANSIBLE=2.7.0
+    - env:
+        - MOLECULE_SCENARIO=ubuntu-min-java-max-non-lts-online
+        - MOLECULEW_ANSIBLE=2.5.10
+    - env:
+        - MOLECULE_SCENARIO=ubuntu-max-java-max-non-lts-offline
+        - MOLECULEW_ANSIBLE=2.7.0
 
 # Require the standard build environment
 sudo: required

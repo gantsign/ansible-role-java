@@ -1,0 +1,30 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+lint:
+  name: yamllint
+
+platforms:
+  - name: ansible-role-java-ubuntu-max-java-max-non-lts
+    image: ubuntu:18.04
+    dockerfile: ../default/Dockerfile.j2
+
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../java-max-non-lts-offline/playbook.yml
+  lint:
+    name: ansible-lint
+
+scenario:
+  name: ubuntu-max-java-max-non-lts-offline
+
+verifier:
+  name: testinfra
+  directory: ../java-max-non-lts/tests
+  lint:
+    name: flake8
