@@ -9,21 +9,21 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-java-debian-max-java-max
+  - name: ansible-role-java-debian-max-java-max-lts
     image: debian:9
 
 provisioner:
   name: ansible
   playbooks:
-    converge: ../java-max-offline/playbook.yml
+    converge: ../java-max-lts-offline/playbook.yml
   lint:
     name: ansible-lint
 
 scenario:
-  name: debian-max-java-max-offline
+  name: debian-max-java-max-lts-offline
 
 verifier:
   name: testinfra
-  directory: ../java-max/tests
+  directory: ../java-max-lts/tests
   lint:
     name: flake8

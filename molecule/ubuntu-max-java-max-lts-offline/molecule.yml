@@ -9,21 +9,21 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-java-ubuntu-min-java-max
-    image: ubuntu:14.04
+  - name: ansible-role-java-ubuntu-max-java-max-lts
+    image: ubuntu:18.04
 
 provisioner:
   name: ansible
   playbooks:
-    converge: ../java-max-online/playbook.yml
+    converge: ../java-max-lts-offline/playbook.yml
   lint:
     name: ansible-lint
 
 scenario:
-  name: ubuntu-min-java-max-online
+  name: ubuntu-max-java-max-lts-offline
 
 verifier:
   name: testinfra
-  directory: ../java-max/tests
+  directory: ../java-max-lts/tests
   lint:
     name: flake8
