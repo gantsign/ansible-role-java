@@ -11,6 +11,7 @@ lint:
 platforms:
   - name: ansible-role-java-centos-max
     image: centos:7
+    dockerfile: ../default/Dockerfile.j2
 
 provisioner:
   name: ansible
