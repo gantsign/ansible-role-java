@@ -4,9 +4,6 @@
     that:
       - java_major_version in ('8', '9', '10', '11', '12')
 
-- name: load AdoptOpenJDK vars
-  include_vars: ../vars/adoptopenjdk/main.yml
-
 - name: create download directory
   file:
     state: directory
@@ -72,10 +69,6 @@
     mode: 'u=rw,go=r'
   when: not remote_JDK_file.stat.exists
 
-- name: set default Java Home
-  set_fact:
-    java_vendor_home: "{{ java_install_dir }}/{{ java_full_version | regex_replace('^(jdk-?[0-9]+([u\\.][0-9]+)*).*', '\\1') }}{{ (java_implementation == 'hotspot') | ternary('', '-' + java_implementation) }}"  # noqa 204
-
 - name: create Java home directory
   become: yes
   file:
@@ -126,5 +119,5 @@
   become: yes
   command: '{{ java_home }}/bin/java -Xshare:dump'
   args:
-    creates: '{{ java_home }}/lib/server/classes.jsa'
+    creates: "{{ java_home }}{{ (java_major_version == '8') | ternary('/jre/lib/amd64', '/lib') }}/server/classes.jsa"
   when: java_major_version in ('8', '9', '10', '11') and java_implementation == 'hotspot'

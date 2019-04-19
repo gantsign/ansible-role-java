@@ -1,9 +1,0 @@
----
-# SHA256 sum for the redistributable JDK package
-java_redis_sha256sum: '6dbc56a0e3310b69e91bb64db63a485bd7b6a8083f08e48047276380a0e2021e'
-
-# The build number for this JDK version
-java_version_build: '12'
-
-# ID in JDK download URL
-java_jdk_download_id: '2f38c3b165be4555a1fa6e98c45e0808'

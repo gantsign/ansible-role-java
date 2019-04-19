@@ -18,7 +18,7 @@ def test_java_tools(host, command):
 
 
 @pytest.mark.parametrize('version_dir_pattern', [
-    'jdk1\\.8\\.0_[0-9]+$'
+    'jdk8u[0-9]+$'
 ])
 def test_java_installed(host, version_dir_pattern):
 
