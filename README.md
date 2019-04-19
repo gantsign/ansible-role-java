@@ -7,18 +7,9 @@ Ansible Role: Java
 
 Role to install the Java JDK.
 
-This roles supports the following JDK vendors:
-
-* [AdoptOpenJDK](https://adoptopenjdk.net)
-    * For Java >= 8 (default for Java >= 8)
-* [Oracle JDK](http://www.oracle.com/technetwork/java/index.html)
-    * For Java < 11 (default for Java 7)
-
-**Important:** since the 7.0.0 release of this role AdoptOpenJDK is the default
-for Java >= 8, prior to that Oracle JDK was the default for Java < 11.
-
-**Deprecation notice:** support for the Oracle JDK will be dropped once
-Oracle ends public support for the Oracle JDK (in April 2019).
+**Important:** since the 8.0.0 release of this role the Oracle JDK is no longer
+supported, [AdoptOpenJDK](https://adoptopenjdk.net) is used for all Java
+versions. Due to this, support for Java 7 has been discontinued.
 
 Requirements
 ------------
@@ -99,36 +90,8 @@ java_is_default_installation: yes
 # ansible_local.java_8.general.home
 java_fact_group_name: java
 
-# The JDK vendor (oracle/adoptopenjdk)
-# Default is oracle for Java 7 and adoptopenjdk for Java >= 8
-java_vendor: default
-
 # The SHA-256 for the JDK redistributable
 java_redis_sha256sum:
-
-
-### The following only apply to Oracle Java versions ###
-
-# Timeout for JDK download response in seconds
-java_jdk_download_timeout_seconds: 600
-
-# Base location for Java mirror
-java_mirror_base: 'http://download.oracle.com/otn-pub/java'
-
-# Mirror location for JDK download (e.g. https://example.com/provisioning/files)
-java_jdk_redis_mirror: '{{ java_mirror_base }}/{{ java_otn_jdk_path }}'
-
-
-### The following only apply to Oracle Java versions prior to 9 ###
-
-# Timeout for JDK download response in seconds
-java_jce_download_timeout_seconds: 30
-
-# Mirror location for JCE download (e.g. https://example.com/provisioning/files)
-java_jce_redis_mirror: '{{ java_mirror_base }}/{{ java_otn_jce_path }}'
-
-
-### The following only apply to AdoptOpenJDK ###
 
 # Mirror location for JDK download (e.g. https://example.com/provisioning/files)
 java_redis_mirror:
@@ -145,15 +108,6 @@ java_download_timeout_seconds: 600
 # The timeout for the AdoptOpenJDK API
 java_api_timeout_seconds: 30
 ```
-
-JDK vendor specific configuration
----------------------------------
-
-You can view the JDK vendor specific configuration by clicking on the following
-links:
-
-* [AdoptOpenJDK](https://github.com/gantsign/ansible-role-java/blob/master/docs/AdoptOpenJDK.md)
-* [Oracle JDK](https://github.com/gantsign/ansible-role-java/blob/master/docs/OracleJDK.md) - **Important:** you must read and follow these instructions (to accept the Oracle Binary Code License Agreement) to be able to install the Oracle JDK.
 
 Example Playbooks
 -----------------
@@ -176,6 +130,16 @@ You can install a specific version of the JDK by specifying the `java_version`.
       java_version: 'jdk8u202-b08'
 ```
 
+**Note:** with [curl](https://curl.haxx.se) and
+[jq](https://stedolan.github.io/jq) you can view the available versions by
+running the following command:
+
+```bash
+for ((i = 8; i <= 12; i++)) do (curl --silent http \
+  "https://api.adoptopenjdk.net/v2/info/releases/openjdk$i?openjdk_impl=hotspot" \
+  | jq --raw-output '.[].release_name'); done
+```
+
 You can install the multiple versions of the JDK by using this role more than
 once:
 
@@ -193,6 +157,22 @@ once:
       java_fact_group_name: java
 ```
 
+To perform an offline install, you need to specify a bit more information (i.e.
+`java_redis_filename` and `java_redis_sha256sum`). E.g. to perform an offline
+install of `jdk-11.0.2+9`:
+
+```yaml
+# Before performing the offline install, download
+# `OpenJDK11U-jdk_x64_linux_hotspot_11.0.2_9.tar.gz` to
+# `{{ playbook_dir }}/files/` on the local machine.
+- hosts: servers
+  roles:
+    - role: gantsign.java
+      java_version: 'jdk-11.0.2+9'
+      java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.2_9.tar.gz'
+      java_redis_sha256sum: 'd02089d834f7702ac1a9776d8d0d13ee174d0656cf036c6b68b9ffb71a6f610e'
+```
+
 Role Facts
 ----------
 
@@ -200,11 +180,11 @@ This role exports the following Ansible facts for use by other roles:
 
 * `ansible_local.java.general.version`
 
-    * e.g. `1.8.0_102`
+    * e.g. `8u202`
 
 * `ansible_local.java.general.home`
 
-    * e.g. `/opt/java/jdk1.8.0_102`
+    * e.g. `/opt/java/jdk8u202`
 
 Overriding `java_fact_group_name` will change the names of the facts e.g.:
 

@@ -32,36 +32,8 @@ java_is_default_installation: yes
 # ansible_local.java_8.general.home
 java_fact_group_name: java
 
-# The JDK vendor (oracle/adoptopenjdk)
-# Default is oracle for Java 7 and adoptopenjdk for Java >= 8
-java_vendor: default
-
 # The SHA-256 for the JDK redistributable
 java_redis_sha256sum:
-
-
-### The following only apply to Oracle Java versions ###
-
-# Timeout for JDK download response in seconds
-java_jdk_download_timeout_seconds: 600
-
-# Base location for Java mirror
-java_mirror_base: 'http://download.oracle.com/otn-pub/java'
-
-# Mirror location for JDK download (e.g. https://example.com/provisioning/files)
-java_jdk_redis_mirror: '{{ java_mirror_base }}/{{ java_otn_jdk_path }}'
-
-
-### The following only apply to Oracle Java versions prior to 9 ###
-
-# Timeout for JDK download response in seconds
-java_jce_download_timeout_seconds: 30
-
-# Mirror location for JCE download (e.g. https://example.com/provisioning/files)
-java_jce_redis_mirror: '{{ java_mirror_base }}/{{ java_otn_jce_path }}'
-
-
-### The following only apply to AdoptOpenJDK ###
 
 # Mirror location for JDK download (e.g. https://example.com/provisioning/files)
 java_redis_mirror:

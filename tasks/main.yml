@@ -1,10 +1,5 @@
 ---
-- name: assert JDK vendor
-  assert:
-    that:
-      - java_vendor in ('default', 'oracle', 'adoptopenjdk')
-
-- include_tasks: '{{ java_actual_vendor }}.yml'
+- import_tasks: adoptopenjdk.yml
 
 - name: write environment config
   include_tasks: write-environment-config.yml
