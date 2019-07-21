@@ -10,10 +10,10 @@ matrix:
   include:
     - env:
         - MOLECULE_SCENARIO=ubuntu-min-java-min-online
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
     - env:
         - MOLECULE_SCENARIO=ubuntu-min-java-max-lts-online
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
     - env:
         - MOLECULE_SCENARIO=ubuntu-max-java-min-offline
         - MOLECULEW_ANSIBLE=2.8.2
@@ -22,10 +22,10 @@ matrix:
         - MOLECULEW_ANSIBLE=2.8.2
     - env:
         - MOLECULE_SCENARIO=debian-min-java-min-online
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
     - env:
         - MOLECULE_SCENARIO=debian-min-java-max-lts-online
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
     - env:
         - MOLECULE_SCENARIO=debian-max-java-min-offline
         - MOLECULEW_ANSIBLE=2.8.2
@@ -34,10 +34,10 @@ matrix:
         - MOLECULEW_ANSIBLE=2.8.2
     - env:
         - MOLECULE_SCENARIO=centos-min-java-min-online
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
     - env:
         - MOLECULE_SCENARIO=centos-min-java-max-lts-online
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
     - env:
         - MOLECULE_SCENARIO=centos-max-java-min-offline
         - MOLECULEW_ANSIBLE=2.8.2
@@ -46,10 +46,10 @@ matrix:
         - MOLECULEW_ANSIBLE=2.8.2
     - env:
         - MOLECULE_SCENARIO=fedora-java-min-online
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
     - env:
         - MOLECULE_SCENARIO=opensuse-java-min-online
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
     - env:
         - MOLECULE_SCENARIO=fedora-java-min-online
         - MOLECULEW_ANSIBLE=2.8.2
@@ -58,7 +58,7 @@ matrix:
         - MOLECULEW_ANSIBLE=2.8.2
     - env:
         - MOLECULE_SCENARIO=ubuntu-min-java-max-non-lts-online
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
     - env:
         - MOLECULE_SCENARIO=ubuntu-max-java-max-non-lts-offline
         - MOLECULEW_ANSIBLE=2.8.2
