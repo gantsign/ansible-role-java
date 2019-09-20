@@ -12,8 +12,8 @@
 
     - name: download JDK for offline install
       get_url:
-        url: "https://api.adoptopenjdk.net/v2/binary/releases/openjdk11?openjdk_impl=hotspot&os=linux&arch=x64&release={{ 'jdk-11.0.3+7' | urlencode }}&type=jdk&heap_size=normal"  # noqa 204
-        dest: '{{ java_local_archive_dir }}/OpenJDK11U-jdk_x64_linux_hotspot_11.0.3_7.tar.gz'
+        url: "https://api.adoptopenjdk.net/v2/binary/releases/openjdk11?openjdk_impl=hotspot&os=linux&arch=x64&release={{ 'jdk-11.0.4+11' | urlencode }}&type=jdk&heap_size=normal"  # noqa 204
+        dest: '{{ java_local_archive_dir }}/OpenJDK11U-jdk_x64_linux_hotspot_11.0.4_11.tar.gz'
         force: no
         timeout: '{{ java_download_timeout_seconds }}'
         mode: 'u=rw,go=r'
@@ -22,9 +22,9 @@
   roles:
     - role: ansible-role-java
       java_use_local_archive: yes
-      java_version: 'jdk-11.0.3+7'
-      java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.3_7.tar.gz'
-      java_redis_sha256sum: '23cded2b43261016f0f246c85c8948d4a9b7f2d44988f75dad69723a7a526094'
+      java_version: 'jdk-11.0.4+11'
+      java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.4_11.tar.gz'
+      java_redis_sha256sum: '90c33cf3f2ed0bd773f648815de7347e69cfbb3416ef3bf41616ab1c4aa0f5a8'
 
   post_tasks:
     - name: verify java facts
