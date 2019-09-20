@@ -2,7 +2,7 @@
 - name: assert JDK major version supported
   assert:
     that:
-      - java_major_version in ('8', '9', '10', '11', '12')
+      - java_major_version in ('8', '9', '10', '11', '12', '13')
 
 - name: create download directory
   file:
