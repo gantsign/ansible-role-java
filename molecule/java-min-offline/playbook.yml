@@ -13,8 +13,8 @@
 
     - name: download JDK for offline install
       get_url:
-        url: 'https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u212-b03/OpenJDK8U-jdk_x64_linux_hotspot_8u212b03.tar.gz'
-        dest: '{{ java_local_archive_dir }}/OpenJDK8U-jdk_x64_linux_hotspot_8u212b03.tar.gz'
+        url: 'https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_linux_hotspot_8u222b10.tar.gz'
+        dest: '{{ java_local_archive_dir }}/OpenJDK8U-jdk_x64_linux_hotspot_8u222b10.tar.gz'
         force: no
         use_proxy: yes
         validate_certs: yes
@@ -25,10 +25,10 @@
 
   roles:
     - role: ansible-role-java
-      java_version: jdk8u212-b03
+      java_version: jdk8u222-b10
       java_use_local_archive: yes
-      java_redis_filename: 'OpenJDK8U-jdk_x64_linux_hotspot_8u212b03.tar.gz'
-      java_redis_sha256sum: 'dd28d6d2cde2b931caf94ac2422a2ad082ea62f0beee3bf7057317c53093de93'
+      java_redis_filename: 'OpenJDK8U-jdk_x64_linux_hotspot_8u222b10.tar.gz'
+      java_redis_sha256sum: '37356281345b93feb4212e6267109b4409b55b06f107619dde4960e402bafa77'
 
   post_tasks:
     - name: verify java facts
