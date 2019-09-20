@@ -3,7 +3,7 @@
 java_major_version: "{{ java_version | regex_replace('^(?:jdk-?)?([0-9]+).*', '\\1') }}"
 
 # Java AdoptOpenJDK release
-java_release: "{{ (java_version in ('8', '9', '10', '11', '12')) | ternary('latest', java_version) }}"
+java_release: "{{ (java_version in ('8', '9', '10', '11', '12', '13')) | ternary('latest', java_version) }}"
 
 # Java Full version number
 java_full_version: '{{ java_version }}'
