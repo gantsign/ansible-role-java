@@ -16,10 +16,10 @@ matrix:
         - MOLECULEW_ANSIBLE=2.6.18
     - env:
         - MOLECULE_SCENARIO=ubuntu-max-java-min-offline
-        - MOLECULEW_ANSIBLE=2.8.2
+        - MOLECULEW_ANSIBLE=2.9.1
     - env:
         - MOLECULE_SCENARIO=ubuntu-max-java-max-lts-offline
-        - MOLECULEW_ANSIBLE=2.8.2
+        - MOLECULEW_ANSIBLE=2.9.1
     - env:
         - MOLECULE_SCENARIO=debian-min-java-min-online
         - MOLECULEW_ANSIBLE=2.6.18
@@ -28,10 +28,10 @@ matrix:
         - MOLECULEW_ANSIBLE=2.6.18
     - env:
         - MOLECULE_SCENARIO=debian-max-java-min-offline
-        - MOLECULEW_ANSIBLE=2.8.2
+        - MOLECULEW_ANSIBLE=2.9.1
     - env:
         - MOLECULE_SCENARIO=debian-max-java-max-lts-offline
-        - MOLECULEW_ANSIBLE=2.8.2
+        - MOLECULEW_ANSIBLE=2.9.1
     - env:
         - MOLECULE_SCENARIO=centos-min-java-min-online
         - MOLECULEW_ANSIBLE=2.6.18
@@ -40,10 +40,10 @@ matrix:
         - MOLECULEW_ANSIBLE=2.6.18
     - env:
         - MOLECULE_SCENARIO=centos-max-java-min-offline
-        - MOLECULEW_ANSIBLE=2.8.2
+        - MOLECULEW_ANSIBLE=2.9.1
     - env:
         - MOLECULE_SCENARIO=centos-max-java-max-lts-offline
-        - MOLECULEW_ANSIBLE=2.8.2
+        - MOLECULEW_ANSIBLE=2.9.1
     - env:
         - MOLECULE_SCENARIO=fedora-java-min-online
         - MOLECULEW_ANSIBLE=2.6.18
@@ -52,16 +52,16 @@ matrix:
         - MOLECULEW_ANSIBLE=2.6.18
     - env:
         - MOLECULE_SCENARIO=fedora-java-min-online
-        - MOLECULEW_ANSIBLE=2.8.2
+        - MOLECULEW_ANSIBLE=2.9.1
     - env:
         - MOLECULE_SCENARIO=opensuse-java-min-online
-        - MOLECULEW_ANSIBLE=2.8.2
+        - MOLECULEW_ANSIBLE=2.9.1
     - env:
         - MOLECULE_SCENARIO=ubuntu-min-java-max-non-lts-online
         - MOLECULEW_ANSIBLE=2.6.18
     - env:
         - MOLECULE_SCENARIO=ubuntu-max-java-max-non-lts-offline
-        - MOLECULEW_ANSIBLE=2.8.2
+        - MOLECULEW_ANSIBLE=2.9.1
 
 # Require the standard build environment
 sudo: required
