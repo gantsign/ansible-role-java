@@ -14,7 +14,7 @@ versions. Due to this, support for Java 7 has been discontinued.
 Requirements
 ------------
 
-* Ansible >= 2.6
+* Ansible >= 2.7
 
 * Linux Distribution
 
