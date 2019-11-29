@@ -81,12 +81,11 @@
 - name: install unarchive module dependencies (apt, yum, dnf, zypper)
   become: yes
   package:
-    name: '{{ item }}'
+    name:
+      - tar
+      - gzip
+      - unzip
     state: present
-  with_items:
-    - tar
-    - gzip
-    - unzip
   when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
 
 # Workaround for: https://github.com/AdoptOpenJDK/openjdk-build/issues/660
