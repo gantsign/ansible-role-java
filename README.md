@@ -126,7 +126,7 @@ You can install a specific version of the JDK by specifying the `java_version`.
 - hosts: servers
   roles:
     - role: gantsign.java
-      java_version: 'jdk8u232-b09'
+      java_version: 'jdk8u242-b08'
 ```
 
 **Note:** with [curl](https://curl.haxx.se) and
