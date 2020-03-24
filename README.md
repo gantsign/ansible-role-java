@@ -57,8 +57,8 @@ are shown below):
 
 ```yaml
 # Java version number
-# Specify '8', '9', '10', '11', '12' or '13' to get the latest patch version of
-# that release.
+# Specify '8', '9', '10', '11', '12', '13' or '14' to get the latest patch
+# version of that release.
 java_version: 'jdk-11.0.6+10'
 
 # Base installation directory for any Java distribution
@@ -134,7 +134,7 @@ You can install a specific version of the JDK by specifying the `java_version`.
 running the following command:
 
 ```bash
-for ((i = 8; i <= 13; i++)) do (curl --silent http \
+for ((i = 8; i <= 14; i++)) do (curl --silent http \
   "https://api.adoptopenjdk.net/v2/info/releases/openjdk$i?openjdk_impl=hotspot" \
   | jq --raw-output '.[].release_name'); done
 ```
