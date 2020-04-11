@@ -1,9 +1,4 @@
 ---
-- name: assert JDK major version supported
-  assert:
-    that:
-      - java_major_version in ('8', '9', '10', '11', '12', '13', '14')
-
 - name: create download directory
   file:
     state: directory
@@ -28,22 +23,19 @@
 - name: query AdoptOpenJDK
   include_tasks: adoptopenjdk-query.yml
   when: >
-    java_release == 'latest'
+    (java_major_version | default(None)) in (None, '', omit)
+    or java_release_name in (None, '', omit)
     or java_redis_filename in (None, '', omit)
     or java_redis_sha256sum in (None, '', omit)
     or (java_redis_mirror in (None, '', omit) and not remote_JDK_file.stat.exists)
 
 - name: java version to install
   debug:
-    var: java_full_version
+    var: java_release_name
 
 - name: set JDK version
   set_fact:
-    java_jdk_version: "{{ java_full_version | regex_replace('^jdk-?([0-9]+([u\\.][0-9]+)*).*', '\\1') }}"
-
-- name: fetch checksum
-  include_tasks: adoptopenjdk-checksum.yml
-  when: java_redis_sha256sum in (None, '', omit)
+    java_jdk_version: "{{ java_release_name | regex_replace('^jdk-?([0-9]+([u\\.][0-9]+)*).*', '\\1') }}"
 
 - name: check for JDK on remote box
   stat:

@@ -1,18 +1,12 @@
 ---
-# Java Major version number
-java_major_version: "{{ java_version | regex_replace('^(?:jdk-?)?([0-9]+).*', '\\1') }}"
-
 # Java AdoptOpenJDK release
-java_release: "{{ (java_version in ('8', '9', '10', '11', '12', '13', '14')) | ternary('latest', java_version) }}"
-
-# Java Full version number
-java_full_version: '{{ java_version }}'
+java_release: "{{ java_version | string | regex_search('^((?:[0-9]+\\.)*)([0-9]+)$') | ternary('[' + (java_version | string) + ',' + (java_version | string | regex_replace('^((?:[0-9]+\\.)*)([0-9]+)$', '\\1')) + (((java_version | string | regex_replace('^((?:[0-9]+\\.)*)([0-9]+)$', '\\2') | int) + 1) | string) + ')', java_version) }}"
 
 # The root folder of this Java installation
-java_home: "{{ java_install_dir }}/{{ java_full_version | regex_replace('^(jdk-?[0-9]+([u\\.][0-9]+)*).*', '\\1') }}{{ (java_implementation == 'hotspot') | ternary('', '-' + java_implementation) }}"
+java_home: '{{ java_install_dir }}/{{ java_release_name }}'
 
 # The URL for the AdoptOpenJDK API request
-java_api_request: 'https://api.adoptopenjdk.net/v2/info/releases/openjdk{{ java_major_version }}?openjdk_impl={{ java_implementation }}&os={{ java_os }}&arch={{ java_arch }}&release={{ java_release | urlencode }}&type=jdk&heap_size={{ java_heap_size }}'
+java_api_request: 'https://api.adoptopenjdk.net/v3/assets/version/{{ java_release | urlencode }}?jvm_impl={{ java_implementation }}&os={{ java_os }}&architecture={{ java_arch }}&heap_size={{ java_heap_size }}&image_type=jdk&project=jdk&release_type=ga&sort_order=DESC&vendor=adoptopenjdk'
 
 # Operating System
 java_os: linux

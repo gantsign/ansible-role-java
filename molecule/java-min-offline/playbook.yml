@@ -25,7 +25,9 @@
 
   roles:
     - role: ansible-role-java
-      java_version: jdk8u262-b10
+      java_major_version: '8'
+      java_version: '8.0.262+10'
+      java_release_name: 'jdk8u262-b10'
       java_use_local_archive: yes
       java_redis_filename: 'OpenJDK8U-jdk_x64_linux_hotspot_8u262b10.tar.gz'
       java_redis_sha256sum: '733755fd649fad6ae91fc083f7e5a5a0b56410fb6ac1815cff29f744b128b1b1'
