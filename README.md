@@ -59,7 +59,7 @@ are shown below):
 # Java version number
 # Specify '8', '9', '10', '11', '12', '13' or '14' to get the latest patch
 # version of that release.
-java_version: 'jdk-11.0.6+10'
+java_version: 'jdk-11.0.7+10'
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
@@ -135,7 +135,7 @@ running the following command:
 
 ```bash
 for ((i = 8; i <= 14; i++)) do (curl --silent http \
-  "https://api.adoptopenjdk.net/v2/info/releases/openjdk$i?openjdk_impl=hotspot" \
+  "https://api.adoptopenjdk.net/v2/info/releases/openjdk$i?openjdk_impl=hotspot&os=linux" \
   | jq --raw-output '.[].release_name'); done
 ```
 
@@ -158,18 +158,18 @@ once:
 
 To perform an offline install, you need to specify a bit more information (i.e.
 `java_redis_filename` and `java_redis_sha256sum`). E.g. to perform an offline
-install of `jdk-11.0.6+10`:
+install of `jdk-11.0.7+10`:
 
 ```yaml
 # Before performing the offline install, download
-# `OpenJDK11U-jdk_x64_linux_hotspot_11.0.6_10.tar.gz` to
+# `OpenJDK11U-jdk_x64_linux_hotspot_11.0.7_10.tar.gz` to
 # `{{ playbook_dir }}/files/` on the local machine.
 - hosts: servers
   roles:
     - role: gantsign.java
-      java_version: 'jdk-11.0.6+10'
-      java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.6_10.tar.gz'
-      java_redis_sha256sum: '330d19a2eaa07ed02757d7a785a77bab49f5ee710ea03b4ee2fa220ddd0feffc'
+      java_version: 'jdk-11.0.7+10'
+      java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.7_10.tar.gz'
+      java_redis_sha256sum: 'ee60304d782c9d5654bf1a6b3f38c683921c1711045e1db94525a51b7024a2ca'
 ```
 
 Role Facts
