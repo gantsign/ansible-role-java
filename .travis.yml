@@ -6,7 +6,7 @@ env:
   global:
     - MOLECULEW_USE_SYSTEM=true
 
-matrix:
+jobs:
   include:
     - env:
         - MOLECULE_SCENARIO=ubuntu-min-java-min-online
