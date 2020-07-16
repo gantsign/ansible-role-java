@@ -1,28 +1,37 @@
 ---
+- name: querying java version
+  debug:
+    var: java_release
+
 - name: query version info
   uri:
     url: '{{ java_api_request }}'
     return_content: yes
   register: java_api_response
 
-- name: set full version var from API
+- name: set major version var from API
   set_fact:
-    java_full_version: '{{ (java_api_response.json[0] | default(java_api_response.json)).release_name }}'
-  when: java_release == 'latest'
+    java_major_version: '{{ (java_api_response.json[0] | default(java_api_response.json)).version_data.major }}'
+  when: (java_major_version | default(None)) in (None, '', omit)
+
+- name: set release name var from API
+  set_fact:
+    java_release_name: '{{ (java_api_response.json[0] | default(java_api_response.json)).release_name }}'
+  when: (java_release_name | default(None)) in (None, '', omit)
 
 - name: set JDK URL var from API
   set_fact:
-    java_redis_url: '{{ (java_api_response.json[0] | default(java_api_response.json)).binaries[0].binary_link }}'
+    java_redis_url: '{{ (java_api_response.json[0] | default(java_api_response.json)).binaries[0].package.link }}'
   when:
     - java_redis_mirror in (None, '', omit)
     - java_redis_filename in (None, '', omit) or not remote_JDK_file.stat.exists
 
 - name: set checksum URL var from API
   set_fact:
-    java_redis_sha256sum_url: '{{ (java_api_response.json[0] | default(java_api_response.json)).binaries[0].checksum_link }}'
+    java_redis_sha256sum: '{{ (java_api_response.json[0] | default(java_api_response.json)).binaries[0].package.checksum }}'
   when: java_redis_sha256sum in (None, '', omit)
 
 - name: set JDK filename var from API
   set_fact:
-    java_redis_filename: '{{ (java_api_response.json[0] | default(java_api_response.json)).binaries[0].binary_name }}'
+    java_redis_filename: '{{ (java_api_response.json[0] | default(java_api_response.json)).binaries[0].package.name }}'
   when: java_redis_filename in (None, '', omit)

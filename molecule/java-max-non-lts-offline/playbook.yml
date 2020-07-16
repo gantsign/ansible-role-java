@@ -12,7 +12,7 @@
 
     - name: download JDK for offline install
       get_url:
-        url: "https://api.adoptopenjdk.net/v2/binary/releases/openjdk14?openjdk_impl=hotspot&os=linux&arch=x64&release={{ 'jdk-14+36' | urlencode }}&type=jdk&heap_size=normal"  # noqa 204
+        url: "https://api.adoptopenjdk.net/v3/binary/version/{{ 'jdk-14+36' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptopenjdk?project=jdk"  # noqa 204
         dest: '{{ java_local_archive_dir }}/OpenJDK14U-jdk_x64_linux_hotspot_14_36.tar.gz'
         force: no
         timeout: '{{ java_download_timeout_seconds }}'
@@ -22,7 +22,9 @@
   roles:
     - role: ansible-role-java
       java_use_local_archive: yes
-      java_version: 'jdk-14+36'
+      java_major_version: '14'
+      java_version: '14.0.0+36.1'
+      java_release_name: 'jdk-14+36'
       java_redis_filename: 'OpenJDK14U-jdk_x64_linux_hotspot_14_36.tar.gz'
       java_redis_sha256sum: '6c06853332585ab58834d9e8a02774b388e6e062ef6c4084b4f058c67f2e81b5'
 

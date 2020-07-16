@@ -7,9 +7,10 @@ Ansible Role: Java
 
 Role to install the Java JDK.
 
-**Important:** since the 8.0.0 release of this role the Oracle JDK is no longer
-supported, [AdoptOpenJDK](https://adoptopenjdk.net) is used for all Java
-versions. Due to this, support for Java 7 has been discontinued.
+**Important:** since the 9.0.0 release of this role the version numbers used
+have changed to use the semantic version from the AdoptOpenJDK v3 API. The
+fields required for offline install have also changed as have the install
+directories.
 
 Requirements
 ------------
@@ -59,7 +60,7 @@ are shown below):
 # Java version number
 # Specify '8', '9', '10', '11', '12', '13' or '14' to get the latest patch
 # version of that release.
-java_version: 'jdk-11.0.8+10'
+java_version: '11.0.8+10'
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
@@ -126,7 +127,7 @@ You can install a specific version of the JDK by specifying the `java_version`.
 - hosts: servers
   roles:
     - role: gantsign.java
-      java_version: 'jdk8u262-b10'
+      java_version: '8.0.262+10'
 ```
 
 **Note:** with [curl](https://curl.haxx.se) and
@@ -135,8 +136,10 @@ running the following command:
 
 ```bash
 for ((i = 8; i <= 14; i++)) do (curl --silent http \
-  "https://api.adoptopenjdk.net/v2/info/releases/openjdk$i?openjdk_impl=hotspot&os=linux" \
-  | jq --raw-output '.[].release_name'); done
+  "https://api.adoptopenjdk.net/v3/assets/feature_releases/$i/ga?\
+architecture=x64&heap_size=normal&image_type=jdk&jvm_impl=hotspot&\
+os=linux&project=jdk&sort_order=DESC&vendor=adoptopenjdk" \
+   | jq --raw-output '.[].version_data.semver'); done
 ```
 
 You can install the multiple versions of the JDK by using this role more than
@@ -157,8 +160,8 @@ once:
 ```
 
 To perform an offline install, you need to specify a bit more information (i.e.
-`java_redis_filename` and `java_redis_sha256sum`). E.g. to perform an offline
-install of `jdk-11.0.8+10`:
+`java_major_version`, `java_release_name`, `java_redis_filename` and
+`java_redis_sha256sum`). E.g. to perform an offline install of `11.0.8+10`:
 
 ```yaml
 # Before performing the offline install, download
@@ -167,7 +170,9 @@ install of `jdk-11.0.8+10`:
 - hosts: servers
   roles:
     - role: gantsign.java
-      java_version: 'jdk-11.0.8+10'
+      java_major_version: '11'
+      java_version: '11.0.8+10'
+      java_release_name: 'jdk-11.0.8+10'
       java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.8_10.tar.gz'
       java_redis_sha256sum: '6e4cead158037cb7747ca47416474d4f408c9126be5b96f9befd532e0a762b47'
 ```
@@ -179,11 +184,11 @@ This role exports the following Ansible facts for use by other roles:
 
 * `ansible_local.java.general.version`
 
-    * e.g. `8u222`
+    * e.g. `8u262`
 
 * `ansible_local.java.general.home`
 
-    * e.g. `/opt/java/jdk8u222`
+    * e.g. `/opt/java/jdk8u262`
 
 Overriding `java_fact_group_name` will change the names of the facts e.g.:
 
