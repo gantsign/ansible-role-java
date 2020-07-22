@@ -32,3 +32,5 @@
   set_fact:
     java_redis_sha256sum:
     java_redis_filename:
+    java_major_version:
+    java_release_name:
