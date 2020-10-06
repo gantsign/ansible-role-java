@@ -10,10 +10,10 @@ jobs:
   include:
     - env:
         - MOLECULE_SCENARIO=ubuntu-min-java-min-online
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
     - env:
         - MOLECULE_SCENARIO=ubuntu-min-java-max-lts-online
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
     - env:
         - MOLECULE_SCENARIO=ubuntu-max-java-min-offline
         - MOLECULEW_ANSIBLE=2.9.1
@@ -22,10 +22,10 @@ jobs:
         - MOLECULEW_ANSIBLE=2.9.1
     - env:
         - MOLECULE_SCENARIO=debian-min-java-min-online
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
     - env:
         - MOLECULE_SCENARIO=debian-min-java-max-lts-online
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
     - env:
         - MOLECULE_SCENARIO=debian-max-java-min-offline
         - MOLECULEW_ANSIBLE=2.9.1
@@ -34,10 +34,10 @@ jobs:
         - MOLECULEW_ANSIBLE=2.9.1
     - env:
         - MOLECULE_SCENARIO=centos-min-java-min-online
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
     - env:
         - MOLECULE_SCENARIO=centos-min-java-max-lts-online
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
     - env:
         - MOLECULE_SCENARIO=centos-max-java-min-offline
         - MOLECULEW_ANSIBLE=2.9.1
@@ -46,10 +46,10 @@ jobs:
         - MOLECULEW_ANSIBLE=2.9.1
     - env:
         - MOLECULE_SCENARIO=fedora-java-min-online
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
     - env:
         - MOLECULE_SCENARIO=opensuse-java-min-online
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
     - env:
         - MOLECULE_SCENARIO=fedora-java-min-online
         - MOLECULEW_ANSIBLE=2.9.1
@@ -58,7 +58,7 @@ jobs:
         - MOLECULEW_ANSIBLE=2.9.1
     - env:
         - MOLECULE_SCENARIO=ubuntu-min-java-max-non-lts-online
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
     - env:
         - MOLECULE_SCENARIO=ubuntu-max-java-max-non-lts-offline
         - MOLECULEW_ANSIBLE=2.9.1
