@@ -5,8 +5,11 @@ dependency:
 driver:
   name: docker
 
-lint:
-  name: yamllint
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  flake8
 
 platforms:
   - name: ansible-role-java-ubuntu-min-java-max-non-lts
@@ -16,15 +19,8 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    converge: ../java-max-non-lts-online/playbook.yml
-  lint:
-    name: ansible-lint
-
-scenario:
-  name: ubuntu-min-java-max-non-lts-online
+    converge: ../java-max-non-lts-online/converge.yml
 
 verifier:
   name: testinfra
   directory: ../java-max-non-lts/tests
-  lint:
-    name: flake8

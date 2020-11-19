@@ -3,6 +3,12 @@
   hosts: all
 
   pre_tasks:
+    - name: update apt cache
+      apt:
+        update_cache: yes
+      changed_when: no
+      when: ansible_pkg_mgr == 'apt'
+
     - name: create local archive directory
       file:
         state: directory
@@ -12,8 +18,8 @@
 
     - name: download JDK for offline install
       get_url:
-        url: "https://api.adoptopenjdk.net/v3/binary/version/{{ 'jdk-15+36' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptopenjdk?project=jdk"  # noqa 204
-        dest: '{{ java_local_archive_dir }}/OpenJDK15U-jdk_x64_linux_hotspot_15_36.tar.gz'
+        url: "https://api.adoptopenjdk.net/v3/binary/version/{{ 'jdk-11.0.8+10' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptopenjdk?project=jdk"  # noqa 204
+        dest: '{{ java_local_archive_dir }}/OpenJDK11U-jdk_x64_linux_hotspot_11.0.8_10.tar.gz'
         force: no
         timeout: '{{ java_download_timeout_seconds }}'
         mode: 'u=rw,go=r'
@@ -22,11 +28,11 @@
   roles:
     - role: ansible-role-java
       java_use_local_archive: yes
-      java_major_version: '15'
-      java_version: '15.0.0+36'
-      java_release_name: 'jdk-15+36'
-      java_redis_filename: 'OpenJDK15U-jdk_x64_linux_hotspot_15_36.tar.gz'
-      java_redis_sha256sum: 'c198593d1b5188ee3570e2ca33c3bc004aaefbda2c11e68e58ae7296cf5c3982'
+      java_major_version: '11'
+      java_version: '11.0.8+10'
+      java_release_name: 'jdk-11.0.8+10'
+      java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.8_10.tar.gz'
+      java_redis_sha256sum: '6e4cead158037cb7747ca47416474d4f408c9126be5b96f9befd532e0a762b47'
 
   post_tasks:
     - name: verify java facts
