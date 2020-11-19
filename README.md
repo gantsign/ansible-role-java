@@ -1,7 +1,7 @@
 Ansible Role: Java
 ==================
 
-[![Build Status](https://travis-ci.com/gantsign/ansible-role-java.svg?branch=master)](https://travis-ci.com/gantsign/ansible-role-java)
+[![Tests](https://github.com/gantsign/ansible-role-java/workflows/Tests/badge.svg)](https://github.com/gantsign/ansible-role-java/actions?query=workflow%3ATests)
 [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-gantsign.java-blue.svg)](https://galaxy.ansible.com/gantsign/java)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gantsign/ansible-role-java/master/LICENSE)
 
@@ -15,7 +15,7 @@ directories.
 Requirements
 ------------
 
-* Ansible >= 2.8
+* Ansible >= 2.7
 
 * Linux Distribution
 
