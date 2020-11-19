@@ -1,11 +1,5 @@
-import os
 import pytest
 import re
-
-import testinfra.utils.ansible_runner
-
-testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
 def test_java(host):
@@ -41,7 +35,7 @@ def test_java_installed(host, version_dir_pattern):
     assert java_exe.is_file
     assert java_exe.user == 'root'
     assert java_exe.group == 'root'
-    assert oct(java_exe.mode) == '0755'
+    assert oct(java_exe.mode) == '0o755'
 
 
 @pytest.mark.parametrize('fact_group_name', [
@@ -54,4 +48,4 @@ def test_facts_installed(host, fact_group_name):
     assert fact_file.is_file
     assert fact_file.user == 'root'
     assert fact_file.group == 'root'
-    assert oct(fact_file.mode) == '0644'
+    assert oct(fact_file.mode) == '0o644'
