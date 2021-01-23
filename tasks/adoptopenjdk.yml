@@ -1,4 +1,10 @@
 ---
+- name: load source vars
+  with_first_found:
+    - '../vars/packages/{{ ansible_pkg_mgr }}.yml'
+    - ../vars/packages/default.yml
+  include_vars: '{{ item }}'
+
 - name: create download directory
   file:
     state: directory
@@ -70,13 +76,10 @@
     group: root
     mode: 'u=rwx,go=rx'
 
-- name: install unarchive module dependencies (apt, yum, dnf, zypper)
+- name: install dependencies (apt, yum, dnf, zypper)
   become: yes
   package:
-    name:
-      - tar
-      - gzip
-      - unzip
+    name: '{{ java_dependencies }}'
     state: present
   when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
 
