@@ -36,6 +36,7 @@ Requirements
         * CentOS
 
             * 7
+            * 8
 
         * Fedora
 
