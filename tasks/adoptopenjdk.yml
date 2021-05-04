@@ -101,7 +101,7 @@
   unarchive:
     src: '{{ java_download_dir }}/{{ java_redis_filename }}'
     extra_opts:
-      - "--strip-components={{ (java_jdk_layout.rc == 0) | ternary('2', '1') }}"
+      - "--strip-components={{ (java_jdk_layout.rc == 0) | ternary('1', '2') }}"
     dest: '{{ java_home }}'
     creates: '{{ java_home }}/bin/java'
     copy: no
