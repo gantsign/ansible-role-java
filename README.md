@@ -8,7 +8,7 @@ Ansible Role: Java
 Role to install the Java JDK.
 
 **Important:** since the 9.0.0 release of this role the version numbers used
-have changed to use the semantic version from the AdoptOpenJDK v3 API. The
+have changed to use the semantic version from the Adoptium v3 API. The
 fields required for offline install have also changed as have the install
 directories.
 
@@ -105,7 +105,7 @@ java_implementation: hotspot
 # Timeout for JDK download response in seconds
 java_download_timeout_seconds: 600
 
-# The timeout for the AdoptOpenJDK API
+# The timeout for the Adoptium API
 java_api_timeout_seconds: 30
 ```
 
@@ -113,7 +113,7 @@ Example Playbooks
 -----------------
 
 By default this role will install the latest LTS JDK version provided by
-AdoptOpenJDK that has been tested and is known to work with this role:
+Adoptium that has been tested and is known to work with this role:
 
 ```yaml
 - hosts: servers
@@ -127,7 +127,7 @@ You can install a specific version of the JDK by specifying the `java_version`.
 - hosts: servers
   roles:
     - role: gantsign.java
-      java_version: '8.0.292+10'
+      java_version: '8.0.302+8'
 ```
 
 **Note:** with [curl](https://curl.haxx.se) and
@@ -136,9 +136,9 @@ running the following command:
 
 ```bash
 for ((i = 8; i <= 15; i++)) do (curl --silent http \
-  "https://api.adoptopenjdk.net/v3/assets/feature_releases/$i/ga?\
+  "https://api.adoptium.net/v3/assets/feature_releases/$i/ga?\
 architecture=x64&heap_size=normal&image_type=jdk&jvm_impl=hotspot&\
-os=linux&project=jdk&sort_order=DESC&vendor=adoptopenjdk" \
+os=linux&project=jdk&sort_order=DESC&vendor=adoptium" \
    | jq --raw-output '.[].version_data.semver'); done
 ```
 

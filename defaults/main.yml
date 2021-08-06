@@ -47,5 +47,5 @@ java_implementation: hotspot
 # Timeout for JDK download response in seconds
 java_download_timeout_seconds: 600
 
-# The timeout for the AdoptOpenJDK API
+# The timeout for the Adoptium API
 java_api_timeout_seconds: 30
