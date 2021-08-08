@@ -60,7 +60,7 @@ are shown below):
 # Java version number
 # Specify '8', '9', '10', '11', '12', '13', '14' or '15' to get the latest patch
 # version of that release.
-java_version: '11.0.11+9'
+java_version: '11.0.12+7'
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
@@ -161,20 +161,20 @@ once:
 
 To perform an offline install, you need to specify a bit more information (i.e.
 `java_major_version`, `java_release_name`, `java_redis_filename` and
-`java_redis_sha256sum`). E.g. to perform an offline install of `11.0.11+9`:
+`java_redis_sha256sum`). E.g. to perform an offline install of `11.0.12+7`:
 
 ```yaml
 # Before performing the offline install, download
-# `OpenJDK11U-jdk_x64_linux_hotspot_11.0.11_9.tar.gz` to
+# `OpenJDK11U-jdk_x64_linux_hotspot_11.0.12_7.tar.gz` to
 # `{{ playbook_dir }}/files/` on the local machine.
 - hosts: servers
   roles:
     - role: gantsign.java
       java_major_version: '11'
-      java_version: '11.0.11+9'
-      java_release_name: 'jdk-11.0.11+9'
-      java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.11_9.tar.gz'
-      java_redis_sha256sum: 'e99b98f851541202ab64401594901e583b764e368814320eba442095251e78cb'
+      java_version: '11.0.12+7'
+      java_release_name: 'jdk-11.0.12+7'
+      java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.12_7.tar.gz'
+      java_redis_sha256sum: '8770f600fc3b89bf331213c7aa21f8eedd9ca5d96036d1cd48cb2748a3dbefd2'
 ```
 
 Role Facts
