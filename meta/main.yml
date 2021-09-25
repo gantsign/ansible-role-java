@@ -23,7 +23,6 @@ galaxy_info:
     - name: Debian
       versions:
         - stretch
-        - jessie
         - buster
         - bullseye
   galaxy_tags:
