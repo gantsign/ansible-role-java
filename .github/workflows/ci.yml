@@ -32,8 +32,8 @@ jobs:
           - debian-min-java-max-lts-online
           - debian-max-java-min-offline
           - debian-max-java-max-lts-offline
-          - centos-java-min-offline
-          - centos-java-max-lts-offline
+          - rocky-java-min-offline
+          - rocky-java-max-lts-offline
           - fedora-java-min-online
           - opensuse-java-min-online
         include:

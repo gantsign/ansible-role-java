@@ -13,7 +13,7 @@ lint: |
 
 platforms:
   - name: ansible-role-java-centos-max-java-max-lts
-    image: centos:8
+    image: rockylinux/rockylinux:8
     dockerfile: ../default/Dockerfile.j2
 
 provisioner:
