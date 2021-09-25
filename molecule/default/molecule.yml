@@ -21,7 +21,7 @@ lint: |
 
 platforms:
   - name: ansible-role-java-default
-    image: ubuntu:18.04
+    image: ubuntu:20.04
 
 verifier:
   name: testinfra
