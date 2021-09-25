@@ -24,6 +24,8 @@ galaxy_info:
       versions:
         - stretch
         - jessie
+        - buster
+        - bullseye
   galaxy_tags:
     - java
     - jdk
