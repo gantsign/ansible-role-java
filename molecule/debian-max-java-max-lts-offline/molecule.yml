@@ -13,7 +13,7 @@ lint: |
 
 platforms:
   - name: ansible-role-java-debian-max-java-max-lts
-    image: debian:9
+    image: debian:11
     dockerfile: ../default/Dockerfile.j2
 
 provisioner:
