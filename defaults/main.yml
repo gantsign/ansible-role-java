@@ -4,6 +4,13 @@
 # release.
 java_version: '11.0.12+7'
 
+# The Java vendor
+# Must be either 'adoptopenjdk' or 'adoptium'.
+# Note: while the default is currently adoptopenjdk, this will change to
+# adoptium at a later point and adoptopenjdk will be removed when the service is
+# discontinued.
+java_vendor: adoptopenjdk
+
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
 
@@ -42,6 +49,8 @@ java_redis_mirror:
 java_redis_filename:
 
 # OpenJDK Implementation (hotspot, openj9)
+# Note: support for openj9 is deprecated. Openj9 is not available from Eclipse
+# Adoptium.
 java_implementation: hotspot
 
 # Timeout for JDK download response in seconds

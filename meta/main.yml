@@ -28,6 +28,7 @@ galaxy_info:
     - java
     - jdk
     - adoptopenjdk
+    - adoptium
     - development
     - web
     - system
