@@ -62,6 +62,13 @@ are shown below):
 # release.
 java_version: '11.0.12+7'
 
+# The Java vendor
+# Must be either 'adoptopenjdk' or 'adoptium'.
+# Note: while the default is currently adoptopenjdk, this will change to
+# adoptium at a later point and adoptopenjdk will be removed when the service is
+# discontinued.
+java_vendor: adoptopenjdk
+
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
 
@@ -100,12 +107,14 @@ java_redis_mirror:
 java_redis_filename:
 
 # OpenJDK Implementation (hotspot, openj9)
+# Note: support for openj9 is deprecated. Openj9 is not available from Eclipse
+# Adoptium.
 java_implementation: hotspot
 
 # Timeout for JDK download response in seconds
 java_download_timeout_seconds: 600
 
-# The timeout for the AdoptOpenJDK API
+# The timeout for the AdoptOpenJDK/Adoptium API
 java_api_timeout_seconds: 30
 ```
 
@@ -132,13 +141,25 @@ You can install a specific version of the JDK by specifying the `java_version`.
 
 **Note:** with [curl](https://curl.haxx.se) and
 [jq](https://stedolan.github.io/jq) you can view the available versions by
-running the following command:
+running the following commands:
+
+**AdoptOpenJDK**
 
 ```bash
 for i in 8 11 16 17; do (curl --silent http \
   "https://api.adoptopenjdk.net/v3/assets/feature_releases/$i/ga?\
 architecture=x64&heap_size=normal&image_type=jdk&jvm_impl=hotspot&\
 os=linux&project=jdk&sort_order=DESC&vendor=adoptopenjdk" \
+   | jq --raw-output '.[].version_data.semver'); done
+```
+
+**Eclipse Adoptium**
+
+```bash
+for i in 8 11 16 17; do (curl --silent http \
+  "https://api.adoptium.net/v3/assets/feature_releases/$i/ga?\
+architecture=x64&heap_size=normal&image_type=jdk&jvm_impl=hotspot&\
+os=linux&project=jdk&sort_order=DESC&vendor=adoptium" \
    | jq --raw-output '.[].version_data.semver'); done
 ```
 
