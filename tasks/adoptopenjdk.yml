@@ -61,7 +61,7 @@
   get_url:
     url: '{{ java_redis_url }}'
     dest: '{{ java_download_dir }}/{{ java_redis_filename }}'
-    sha256sum: '{{ java_redis_sha256sum }}'
+    checksum: 'sha256:{{ java_redis_sha256sum }}'
     force: no
     timeout: '{{ java_download_timeout_seconds }}'
     mode: 'u=rw,go=r'
