@@ -14,7 +14,6 @@ lint: |
 platforms:
   - name: ansible-role-java-ubuntu-max-java-max-non-lts
     image: ubuntu:20.04
-    dockerfile: ../default/Dockerfile.j2
 
 provisioner:
   name: ansible
