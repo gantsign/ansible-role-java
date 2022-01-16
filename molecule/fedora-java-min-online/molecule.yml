@@ -14,7 +14,6 @@ lint: |
 platforms:
   - name: ansible-role-java-fedora
     image: fedora:34
-    dockerfile: ../default/Dockerfile.j2
 
 provisioner:
   name: ansible
