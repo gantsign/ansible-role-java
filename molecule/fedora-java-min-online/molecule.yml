@@ -13,7 +13,7 @@ lint: |
 
 platforms:
   - name: ansible-role-java-fedora
-    image: fedora:34
+    image: fedora:35
 
 provisioner:
   name: ansible
