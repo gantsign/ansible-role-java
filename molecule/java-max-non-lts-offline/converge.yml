@@ -18,8 +18,8 @@
 
     - name: download JDK for offline install
       get_url:
-        url: "https://api.adoptopenjdk.net/v3/binary/version/{{ 'jdk-17+35' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptopenjdk?project=jdk"  # noqa 204
-        dest: '{{ java_local_archive_dir }}/OpenJDK17-jdk_x64_linux_hotspot_17_35.tar.gz'
+        url: "https://api.adoptopenjdk.net/v3/binary/version/{{ 'jdk-17.0.2+8' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptopenjdk?project=jdk"  # noqa 204
+        dest: '{{ java_local_archive_dir }}/OpenJDK17-jdk_x64_linux_hotspot_17.0.2_8.tar.gz'
         force: no
         timeout: '{{ java_download_timeout_seconds }}'
         mode: 'u=rw,go=r'
@@ -29,10 +29,10 @@
     - role: ansible-role-java
       java_use_local_archive: yes
       java_major_version: '17'
-      java_version: '17.0.0+35'
-      java_release_name: 'jdk-17+35'
-      java_redis_filename: 'OpenJDK17-jdk_x64_linux_hotspot_17_35.tar.gz'
-      java_redis_sha256sum: '6f1335d9a7855159f982dac557420397be9aa85f3f7bc84e111d25871c02c0c7'
+      java_version: '17.0.2+8'
+      java_release_name: 'jdk-17.0.2+8'
+      java_redis_filename: 'OpenJDK17-jdk_x64_linux_hotspot_17.0.2_8.tar.gz'
+      java_redis_sha256sum: '288f34e3ba8a4838605636485d0365ce23e57d5f2f68997ac4c2e4c01967cd48'
 
   post_tasks:
     - name: verify java facts
