@@ -60,7 +60,7 @@ are shown below):
 # Java version number
 # Specify '8', '11', '16' or '17' to get the latest patch version of that
 # release.
-java_version: '11.0.14+9'
+java_version: '17.0.2+8'
 
 # The Java vendor
 # Must be either 'adoptopenjdk' or 'adoptium'.
