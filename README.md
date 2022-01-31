@@ -7,11 +7,6 @@ Ansible Role: Java
 
 Role to install the Java JDK.
 
-**Important:** since the 9.0.0 release of this role the version numbers used
-have changed to use the semantic version from the AdoptOpenJDK v3 API. The
-fields required for offline install have also changed as have the install
-directories.
-
 Requirements
 ------------
 
@@ -63,11 +58,10 @@ are shown below):
 java_version: '17.0.2+8'
 
 # The Java vendor
-# Must be either 'adoptopenjdk' or 'adoptium'.
-# Note: while the default is currently adoptopenjdk, this will change to
-# adoptium at a later point and adoptopenjdk will be removed when the service is
-# discontinued.
-java_vendor: adoptopenjdk
+# Must be either 'adoptium' or 'adoptopenjdk'.
+# Note: the default is now 'adoptium', support for adoptopenjdk will be removed
+# when the service is discontinued.
+java_vendor: adoptium
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
@@ -114,7 +108,7 @@ java_implementation: hotspot
 # Timeout for JDK download response in seconds
 java_download_timeout_seconds: 600
 
-# The timeout for the AdoptOpenJDK/Adoptium API
+# The timeout for the Adoptium/AdoptOpenJDK API
 java_api_timeout_seconds: 30
 ```
 
@@ -143,16 +137,6 @@ You can install a specific version of the JDK by specifying the `java_version`.
 [jq](https://stedolan.github.io/jq) you can view the available versions by
 running the following commands:
 
-**AdoptOpenJDK**
-
-```bash
-for i in 8 11 16 17; do (curl --silent http \
-  "https://api.adoptopenjdk.net/v3/assets/feature_releases/$i/ga?\
-architecture=x64&heap_size=normal&image_type=jdk&jvm_impl=hotspot&\
-os=linux&project=jdk&sort_order=DESC&vendor=adoptopenjdk" \
-   | jq --raw-output '.[].version_data.semver'); done
-```
-
 **Eclipse Adoptium**
 
 ```bash
@@ -160,6 +144,16 @@ for i in 8 11 16 17; do (curl --silent http \
   "https://api.adoptium.net/v3/assets/feature_releases/$i/ga?\
 architecture=x64&heap_size=normal&image_type=jdk&jvm_impl=hotspot&\
 os=linux&project=jdk&sort_order=DESC&vendor=adoptium" \
+   | jq --raw-output '.[].version_data.semver'); done
+```
+
+**AdoptOpenJDK**
+
+```bash
+for i in 8 11 16 17; do (curl --silent http \
+  "https://api.adoptopenjdk.net/v3/assets/feature_releases/$i/ga?\
+architecture=x64&heap_size=normal&image_type=jdk&jvm_impl=hotspot&\
+os=linux&project=jdk&sort_order=DESC&vendor=adoptopenjdk" \
    | jq --raw-output '.[].version_data.semver'); done
 ```
 
