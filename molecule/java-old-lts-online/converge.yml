@@ -11,7 +11,7 @@
 
   roles:
     - role: ansible-role-java
-      java_vendor: 'adoptium'
+      java_version: '11'
       java_use_local_archive: no
 
   post_tasks:

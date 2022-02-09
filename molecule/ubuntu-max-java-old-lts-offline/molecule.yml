@@ -1,0 +1,25 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  flake8
+
+platforms:
+  - name: ansible-role-java-ubuntu-max-java-old-lts
+    image: ubuntu:20.04
+
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../java-old-lts-offline/converge.yml
+
+verifier:
+  name: testinfra
+  directory: ../java-old-lts/tests
