@@ -24,7 +24,7 @@
     java_redis_url: '{{ (java_api_response.json[0] | default(java_api_response.json)).binaries[0].package.link }}'
   when:
     - java_redis_mirror in (None, '', omit)
-    - java_redis_filename in (None, '', omit) or not remote_JDK_file.stat.exists
+    - java_redis_filename in (None, '', omit) or not remote_jdk_file.stat.exists
 
 - name: set checksum URL var from API
   set_fact:

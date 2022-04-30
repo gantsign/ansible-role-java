@@ -22,7 +22,7 @@
   stat:
     path: '{{ java_download_dir }}/{{ java_redis_filename }}'
     checksum_algorithm: sha256
-  register: remote_JDK_file
+  register: remote_jdk_file
   ignore_errors: yes
   when: java_redis_filename not in (None, '', omit)
 
@@ -33,7 +33,7 @@
     or java_release_name in (None, '', omit)
     or java_redis_filename in (None, '', omit)
     or java_redis_sha256sum in (None, '', omit)
-    or (java_redis_mirror in (None, '', omit) and not remote_JDK_file.stat.exists)
+    or (java_redis_mirror in (None, '', omit) and not remote_jdk_file.stat.exists)
 
 - name: java version to install
   debug:
@@ -47,15 +47,15 @@
   stat:
     path: '{{ java_download_dir }}/{{ java_redis_filename }}'
     checksum_algorithm: sha256
-  register: remote_JDK_file
+  register: remote_jdk_file
   ignore_errors: yes
 
 - name: assert existing JDK matches checksum
   assert:
     that:
-      - remote_JDK_file.stat.checksum == java_redis_sha256sum
-    msg: 'Checksum failed: {{ remote_JDK_file.stat.checksum }} != {{ java_redis_sha256sum }}'
-  when: remote_JDK_file.stat.exists
+      - remote_jdk_file.stat.checksum == java_redis_sha256sum
+    msg: 'Checksum failed: {{ remote_jdk_file.stat.checksum }} != {{ java_redis_sha256sum }}'
+  when: remote_jdk_file.stat.exists
 
 - name: download JDK
   get_url:
@@ -65,7 +65,7 @@
     force: no
     timeout: '{{ java_download_timeout_seconds }}'
     mode: 'u=rw,go=r'
-  when: not remote_JDK_file.stat.exists
+  when: not remote_jdk_file.stat.exists
 
 - name: create Java home directory
   become: yes
