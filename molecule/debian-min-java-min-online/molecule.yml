@@ -19,9 +19,6 @@ provisioner:
   name: ansible
   playbooks:
     converge: ../java-min-online/converge.yml
-  options:
-    extra-vars:
-      java_license_declaration: 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
 
 verifier:
   name: testinfra
