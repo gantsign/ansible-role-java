@@ -39,7 +39,7 @@ jobs:
           - fedora-java-min-online
           - opensuse-java-min-online
         include:
-          - ansible-version: '2.8.16'
+          - ansible-version: '2.9.1'
             molecule-scenario: ubuntu-min-java-min-online
 
     env:
