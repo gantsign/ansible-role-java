@@ -21,7 +21,7 @@ jobs:
       max-parallel: 3
       matrix:
         ansible-version:
-          - '2.9.1'
+          - '2.10.7'
         molecule-scenario:
           - ubuntu-min-java-max-lts-online
           # - ubuntu-min-java-max-non-lts-online
