@@ -57,12 +57,6 @@ are shown below):
 # release.
 java_version: '17.0.2+8'
 
-# The Java vendor
-# Must be either 'adoptium' or 'adoptopenjdk'.
-# Note: the default is now 'adoptium', support for adoptopenjdk will be removed
-# when the service is discontinued.
-java_vendor: adoptium
-
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
 
@@ -108,7 +102,7 @@ java_implementation: hotspot
 # Timeout for JDK download response in seconds
 java_download_timeout_seconds: 600
 
-# The timeout for the Adoptium/AdoptOpenJDK API
+# The timeout for the Adoptium API
 java_api_timeout_seconds: 30
 ```
 
@@ -116,7 +110,7 @@ Example Playbooks
 -----------------
 
 By default this role will install the latest LTS JDK version provided by
-AdoptOpenJDK that has been tested and is known to work with this role:
+Adoptium that has been tested and is known to work with this role:
 
 ```yaml
 - hosts: servers
@@ -135,25 +129,13 @@ You can install a specific version of the JDK by specifying the `java_version`.
 
 **Note:** with [curl](https://curl.haxx.se) and
 [jq](https://stedolan.github.io/jq) you can view the available versions by
-running the following commands:
-
-**Eclipse Adoptium**
+running the following command:
 
 ```bash
 for i in 8 11 16 17; do (curl --silent http \
   "https://api.adoptium.net/v3/assets/feature_releases/$i/ga?\
 architecture=x64&heap_size=normal&image_type=jdk&jvm_impl=hotspot&\
 os=linux&project=jdk&sort_order=DESC&vendor=adoptium" \
-   | jq --raw-output '.[].version_data.semver'); done
-```
-
-**AdoptOpenJDK**
-
-```bash
-for i in 8 11 16 17; do (curl --silent http \
-  "https://api.adoptopenjdk.net/v3/assets/feature_releases/$i/ga?\
-architecture=x64&heap_size=normal&image_type=jdk&jvm_impl=hotspot&\
-os=linux&project=jdk&sort_order=DESC&vendor=adoptopenjdk" \
    | jq --raw-output '.[].version_data.semver'); done
 ```
 
