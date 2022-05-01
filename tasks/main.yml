@@ -1,5 +1,5 @@
 ---
-- import_tasks: adoptopenjdk.yml
+- import_tasks: adoptium.yml
 
 - name: write environment config
   include_tasks: write-environment-config.yml

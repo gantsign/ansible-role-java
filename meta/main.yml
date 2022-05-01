@@ -27,8 +27,9 @@ galaxy_info:
   galaxy_tags:
     - java
     - jdk
-    - adoptopenjdk
+    - openjdk
     - adoptium
+    - temurin
     - development
     - web
     - system

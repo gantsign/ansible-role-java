@@ -18,7 +18,7 @@
 
     - name: download JDK for offline install
       get_url:
-        url: "https://api.adoptopenjdk.net/v3/binary/version/{{ 'jdk-17.0.2+8' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptopenjdk?project=jdk"  # noqa 204
+        url: "https://api.adoptium.net/v3/binary/version/{{ 'jdk-17.0.2+8' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptium?project=jdk"  # noqa 204
         dest: '{{ java_local_archive_dir }}/OpenJDK17-jdk_x64_linux_hotspot_17.0.2_8.tar.gz'
         force: no
         timeout: '{{ java_download_timeout_seconds }}'

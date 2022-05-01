@@ -12,7 +12,7 @@
     dest: '{{ java_download_dir }}'
 
 - name: copy local JDK
-  include_tasks: adoptopenjdk-copy-local-jdk.yml
+  include_tasks: adoptium-copy-local-jdk.yml
   when:
     - java_use_local_archive
     - java_redis_sha256sum not in (None, '', omit)
@@ -26,8 +26,8 @@
   ignore_errors: yes
   when: java_redis_filename not in (None, '', omit)
 
-- name: query AdoptOpenJDK
-  include_tasks: adoptopenjdk-query.yml
+- name: query Adoptium
+  include_tasks: adoptium-query.yml
   when: >
     (java_major_version | default(None)) in (None, '', omit)
     or java_release_name in (None, '', omit)

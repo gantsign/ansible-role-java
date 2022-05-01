@@ -4,12 +4,6 @@
 # release.
 java_version: '17.0.2+8'
 
-# The Java vendor
-# Must be either 'adoptium' or 'adoptopenjdk'.
-# Note: the default is now 'adoptium', support for adoptopenjdk will be removed
-# when the service is discontinued.
-java_vendor: adoptium
-
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
 
@@ -55,5 +49,5 @@ java_implementation: hotspot
 # Timeout for JDK download response in seconds
 java_download_timeout_seconds: 600
 
-# The timeout for the Adoptium/AdoptOpenJDK API
+# The timeout for the Adoptium API
 java_api_timeout_seconds: 30
