@@ -114,4 +114,4 @@
   command: '{{ java_home }}/bin/java -Xshare:dump'
   args:
     creates: "{{ java_home }}{{ (java_major_version == '8') | ternary('/jre/lib/amd64', '/lib') }}/server/classes.jsa"
-  when: java_major_version in ('8', '9', '10', '11') and java_implementation == 'hotspot'
+  when: java_major_version in ('8', '9', '10', '11')
