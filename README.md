@@ -95,11 +95,6 @@ java_redis_mirror:
 # File name for the JDK redistributable installation file
 java_redis_filename:
 
-# OpenJDK Implementation (hotspot, openj9)
-# Note: support for openj9 is deprecated. Openj9 is not available from Eclipse
-# Adoptium.
-java_implementation: hotspot
-
 # Timeout for JDK download response in seconds
 java_download_timeout_seconds: 600
 
