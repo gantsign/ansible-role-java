@@ -1,0 +1,2 @@
+# Architecture directory name
+java_arch_dir: '{{ java_arch }}'

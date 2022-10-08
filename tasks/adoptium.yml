@@ -1,5 +1,11 @@
 ---
-- name: load source vars
+- name: load architecture vars
+  with_first_found:
+    - '../vars/architecture/{{ java_arch }}.yml'
+    - ../vars/architecture/default.yml
+  include_vars: '{{ item }}'
+
+- name: load package mgr vars
   with_first_found:
     - '../vars/packages/{{ ansible_pkg_mgr }}.yml'
     - ../vars/packages/default.yml
@@ -113,5 +119,7 @@
   become: yes
   command: '{{ java_home }}/bin/java -Xshare:dump'
   args:
-    creates: "{{ java_home }}{{ (java_major_version == '8') | ternary('/jre/lib/amd64', '/lib') }}/server/classes.jsa"
+    creates: >-
+      {{ java_home }}{{ (java_major_version == '8') |
+      ternary('/jre/lib/' + java_arch_dir, '/lib') }}/server/classes.jsa
   when: java_major_version in ('8', '9', '10', '11')

@@ -13,7 +13,7 @@ lint: |
 
 platforms:
   - name: ansible-role-java-debian-min-java-max-lts
-    image: debian:9
+    image: arm64v8/debian:9
 
 provisioner:
   name: ansible
