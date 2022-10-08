@@ -20,6 +20,8 @@ jobs:
     strategy:
       max-parallel: 3
       matrix:
+        architecture:
+          - amd64
         ansible-version:
           - '2.10.7' # max-ansible-test-version
         molecule-scenario:
@@ -30,8 +32,6 @@ jobs:
           - ubuntu-max-java-max-lts-offline
           # - ubuntu-max-java-max-non-lts-offline
           - ubuntu-max-java-old-lts-offline
-          - debian-min-java-min-online
-          - debian-min-java-max-lts-online
           - debian-max-java-min-offline
           - debian-max-java-max-lts-offline
           - rocky-java-min-offline
@@ -39,8 +39,15 @@ jobs:
           - fedora-java-min-online
           - opensuse-java-min-online
         include:
-          - ansible-version: '2.9.26' # min-ansible-test-version
+          - architecture: amd64
+            ansible-version: '2.9.26' # min-ansible-test-version
             molecule-scenario: ubuntu-min-java-min-online
+          - architecture: arm64
+            ansible-version: '2.10.7' # max-ansible-test-version
+            molecule-scenario: debian-min-java-min-online
+          - architecture: arm64
+            ansible-version: '2.10.7' # max-ansible-test-version
+            molecule-scenario: debian-min-java-max-lts-online
 
     env:
       MOLECULEW_ANSIBLE: ${{ matrix.ansible-version }}
@@ -67,6 +74,12 @@ jobs:
 
       - name: Dependency versions
         run: ./moleculew wrapper-versions
+
+      - name: Set up QEMU
+        if: matrix.architecture != 'amd64'
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: ${{ matrix.architecture }}
 
       - name: Login to Docker Hub
         if: '!github.event.pull_request || github.event.pull_request.head.repo.full_name == github.repository'

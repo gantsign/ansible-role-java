@@ -15,7 +15,7 @@ java_api_request: "{{ java_api_server }}/v3/assets/version/{{ java_release | url
 java_os: linux
 
 # Architecture
-java_arch: x64
+java_arch: "{{ ((ansible_architecture | lower) == 'aarch64') | ternary('aarch64', 'x64') }}"
 
 # Heap size
 java_heap_size: normal
