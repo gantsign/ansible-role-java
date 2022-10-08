@@ -56,7 +56,7 @@ are shown below):
 # Java version number
 # Specify '8', '11', '17' or '18' to get the latest patch version of that
 # release.
-java_version: '17.0.4+8'
+java_version: '17.0.4.1+1'
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
