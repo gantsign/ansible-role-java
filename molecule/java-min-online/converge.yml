@@ -11,7 +11,7 @@
 
   roles:
     - role: ansible-role-java
-      java_version: 8.0.342+7
+      java_version: 8.0.352+8
       java_use_local_archive: no
 
   post_tasks:
