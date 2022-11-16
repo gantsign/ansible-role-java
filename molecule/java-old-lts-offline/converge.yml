@@ -18,8 +18,8 @@
 
     - name: download JDK for offline install
       get_url:
-        url: "https://api.adoptium.net/v3/binary/version/{{ 'jdk-11.0.16+8' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptium?project=jdk"  # noqa 204
-        dest: '{{ java_local_archive_dir }}/OpenJDK11U-jdk_x64_linux_hotspot_11.0.16_8.tar.gz'
+        url: "https://api.adoptium.net/v3/binary/version/{{ 'jdk-11.0.17+8' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptium?project=jdk"  # noqa 204
+        dest: '{{ java_local_archive_dir }}/OpenJDK11U-jdk_x64_linux_hotspot_11.0.17_8.tar.gz'
         force: no
         timeout: '{{ java_download_timeout_seconds }}'
         mode: 'u=rw,go=r'
@@ -29,10 +29,10 @@
     - role: ansible-role-java
       java_use_local_archive: yes
       java_major_version: '11'
-      java_version: '11.0.16+8'
-      java_release_name: 'jdk-11.0.16+8'
-      java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.16_8.tar.gz'
-      java_redis_sha256sum: 'f79506f80c796d8e6a382f00bd8c528a330c5e29581aaf5cb61e1831742d166f'
+      java_version: '11.0.17+8'
+      java_release_name: 'jdk-11.0.17+8'
+      java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.17_8.tar.gz'
+      java_redis_sha256sum: 'b8d46ed08ef4859476fe6421a7690d899ed83dce63f13fd894f994043177ef3c'
 
   post_tasks:
     - name: verify java facts
