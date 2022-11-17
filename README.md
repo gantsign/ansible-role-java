@@ -54,7 +54,7 @@ are shown below):
 
 ```yaml
 # Java version number
-# Specify '8', '11', '17' or '18' to get the latest patch version of that
+# Specify '8', '11', '17' or '19' to get the latest patch version of that
 # release.
 java_version: '17.0.5+8'
 
@@ -128,7 +128,7 @@ You can install a specific version of the JDK by specifying the `java_version`.
 running the following command:
 
 ```bash
-for i in 8 11 17 18; do (curl --silent http \
+for i in 8 11 17 19; do (curl --silent http \
   "https://api.adoptium.net/v3/assets/feature_releases/$i/ga?\
 architecture=x64&heap_size=normal&image_type=jdk&jvm_impl=hotspot&\
 os=linux&project=jdk&sort_order=DESC&vendor=adoptium" \
