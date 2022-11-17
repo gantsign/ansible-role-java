@@ -18,8 +18,8 @@
 
     - name: download JDK for offline install
       get_url:
-        url: "https://api.adoptium.net/v3/binary/version/{{ 'jdk-18.0.1+10' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptium?project=jdk"  # noqa 204
-        dest: '{{ java_local_archive_dir }}/OpenJDK17-jdk_x64_linux_hotspot_18.0.1_10.tar.gz'
+        url: "https://api.adoptium.net/v3/binary/version/{{ 'jdk-19.0.1+10' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptium?project=jdk"  # noqa 204
+        dest: '{{ java_local_archive_dir }}/OpenJDK19-jdk_x64_linux_hotspot_19.0.1_10.tar.gz'
         force: no
         timeout: '{{ java_download_timeout_seconds }}'
         mode: 'u=rw,go=r'
@@ -28,11 +28,11 @@
   roles:
     - role: ansible-role-java
       java_use_local_archive: yes
-      java_major_version: '18'
-      java_version: '18.0.1+10'
-      java_release_name: 'jdk-18.0.1+10'
-      java_redis_filename: 'OpenJDK17-jdk_x64_linux_hotspot_18.0.1_10.tar.gz'
-      java_redis_sha256sum: '16b1d9d75f22c157af04a1fd9c664324c7f4b5163c022b382a2f2e8897c1b0a2'
+      java_major_version: '19'
+      java_version: '19.0.1+10'
+      java_release_name: 'jdk-19.0.1+10'
+      java_redis_filename: 'OpenJDK19-jdk_x64_linux_hotspot_19.0.1_10.tar.gz'
+      java_redis_sha256sum: '163da7ea140210bae97c6a4590c757858ab4520a78af0e3e33129863d4087552'
 
   post_tasks:
     - name: verify java facts
