@@ -19,8 +19,8 @@
 
     - name: download JDK for offline install
       get_url:
-        url: 'https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u352-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u352b08.tar.gz'
-        dest: '{{ java_local_archive_dir }}/OpenJDK8U-jdk_x64_linux_hotspot_8u352b08.tar.gz'
+        url: 'https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz'
+        dest: '{{ java_local_archive_dir }}/OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz'
         force: no
         use_proxy: yes
         validate_certs: yes
@@ -32,11 +32,11 @@
   roles:
     - role: ansible-role-java
       java_major_version: '8'
-      java_version: '8.0.352+8'
-      java_release_name: 'jdk8u352-b08'
+      java_version: '8.0.362+9'
+      java_release_name: 'jdk8u362-b09'
       java_use_local_archive: yes
-      java_redis_filename: 'OpenJDK8U-jdk_x64_linux_hotspot_8u352b08.tar.gz'
-      java_redis_sha256sum: '1633bd7590cb1cd72f5a1378ae8294451028b274d798e2a4ac672059a2f00fee'
+      java_redis_filename: 'OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz'
+      java_redis_sha256sum: '1486a792fb224611ce0cd0e83d4aacd3503b56698549f8e9a9f0a6ebb83bdba1'
 
   post_tasks:
     - name: verify java facts
