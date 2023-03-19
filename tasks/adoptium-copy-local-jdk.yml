@@ -1,16 +1,16 @@
 ---
-- name: check for JDK on local box
-  stat:
+- name: Check for JDK on local box
+  ansible.builtin.stat:
     path: '{{ java_local_archive_dir }}/{{ java_redis_filename }}'
   delegate_to: localhost
   register: java_local_file
-  ignore_errors: yes
-  become: no
+  ignore_errors: true
+  become: false
   when: java_use_local_archive
 
-- name: copy JDK from local box
-  become: yes
-  copy:
+- name: Copy JDK from local box
+  become: true
+  ansible.builtin.copy:
     src: '{{ java_local_archive_dir }}/{{ java_redis_filename }}'
     dest: '{{ java_download_dir }}/{{ java_redis_filename }}'
     mode: 'u=rw,go=r'

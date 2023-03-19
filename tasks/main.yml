@@ -1,35 +1,36 @@
 ---
-- import_tasks: adoptium.yml
+- name: Install Adoptium JDK
+  ansible.builtin.import_tasks: adoptium.yml
 
-- name: write environment config
-  include_tasks: write-environment-config.yml
+- name: Write environment config
+  ansible.builtin.include_tasks: write-environment-config.yml
   when: java_is_default_installation
 
 # Set Java facts
-- name: create Ansible facts.d directory
-  become: yes
-  file:
+- name: Create Ansible facts.d directory
+  become: true
+  ansible.builtin.file:
     state: directory
     dest: /etc/ansible/facts.d
     owner: root
     group: root
     mode: 'u=rwx,go=rx'
 
-- name: install Java facts
-  become: yes
-  template:
+- name: Install Java facts
+  become: true
+  ansible.builtin.template:
     src: facts.j2
     dest: '/etc/ansible/facts.d/{{ java_fact_group_name }}.fact'
     owner: root
     group: root
     mode: 'u=rw,go=r'
 
-- name: re-read facts
-  setup:
+- name: Re-read facts
+  ansible.builtin.setup:
     filter: ansible_local
 
-- name: clear facts
-  set_fact:
+- name: Clear facts
+  ansible.builtin.set_fact:
     java_redis_sha256sum:
     java_redis_filename:
     java_major_version:

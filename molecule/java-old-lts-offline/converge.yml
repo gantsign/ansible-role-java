@@ -3,31 +3,31 @@
   hosts: all
 
   pre_tasks:
-    - name: update apt cache
-      apt:
-        update_cache: yes
-      changed_when: no
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+      changed_when: false
       when: ansible_pkg_mgr == 'apt'
 
-    - name: create local archive directory
-      file:
+    - name: Create local archive directory
+      ansible.builtin.file:
         state: directory
         mode: 'u=rwx,go=rx'
         dest: '{{ java_local_archive_dir }}'
       delegate_to: localhost
 
-    - name: download JDK for offline install
-      get_url:
+    - name: Download JDK for offline install
+      ansible.builtin.get_url:
         url: "https://api.adoptium.net/v3/binary/version/{{ 'jdk-11.0.18+10' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptium?project=jdk"  # noqa 204
         dest: '{{ java_local_archive_dir }}/OpenJDK11U-jdk_x64_linux_hotspot_11.0.18_10.tar.gz'
-        force: no
+        force: false
         timeout: '{{ java_download_timeout_seconds }}'
         mode: 'u=rw,go=r'
       delegate_to: localhost
 
   roles:
     - role: ansible-role-java
-      java_use_local_archive: yes
+      java_use_local_archive: true
       java_major_version: '11'
       java_version: '11.0.18+10'
       java_release_name: 'jdk-11.0.18+10'
@@ -35,14 +35,14 @@
       java_redis_sha256sum: '4a29efda1d702b8ff38e554cf932051f40ec70006caed5c4857a8cbc7a0b7db7'
 
   post_tasks:
-    - name: verify java facts
-      assert:
+    - name: Verify java facts
+      ansible.builtin.assert:
         that:
           - ansible_local.java.general.version is defined
           - ansible_local.java.general.home is defined
 
-    - name: install find - required for tests (dnf)
-      dnf:
+    - name: Install find - required for tests (dnf)
+      ansible.builtin.dnf:
         name: findutils
         state: present
       when: ansible_pkg_mgr == 'dnf'
