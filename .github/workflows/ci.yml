@@ -23,7 +23,7 @@ jobs:
         architecture:
           - amd64
         ansible-version:
-          - '2.10.7' # max-ansible-test-version
+          - '6.4.0' # max-ansible-test-version
         molecule-scenario:
           - ubuntu-min-java-max-lts-online
           # - ubuntu-min-java-max-non-lts-online
@@ -40,13 +40,13 @@ jobs:
           - opensuse-java-min-online
         include:
           - architecture: amd64
-            ansible-version: '2.9.26' # min-ansible-test-version
+            ansible-version: '5.10.0' # min-ansible-test-version
             molecule-scenario: ubuntu-min-java-min-online
           - architecture: arm64
-            ansible-version: '2.10.7' # max-ansible-test-version
+            ansible-version: '6.4.0' # max-ansible-test-version
             molecule-scenario: debian-min-java-min-online
           - architecture: arm64
-            ansible-version: '2.10.7' # max-ansible-test-version
+            ansible-version: '6.4.0' # max-ansible-test-version
             molecule-scenario: debian-min-java-max-lts-online
 
     env:

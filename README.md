@@ -10,7 +10,7 @@ Role to install the Java JDK.
 Requirements
 ------------
 
-* Ansible >= 2.9
+* Ansible >= 5 (Ansible Core >= 2.12)
 
 * Linux Distribution
 
@@ -69,12 +69,12 @@ java_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.an
 java_local_archive_dir: '{{ playbook_dir }}/files'
 
 # Wether to use installation packages in the local archive (if available)
-java_use_local_archive: yes
+java_use_local_archive: true
 
 # If this is the default installation, profile scripts will be written to set
 # the JAVA_HOME environment variable and add the bin directory to the PATH
 # environment variable.
-java_is_default_installation: yes
+java_is_default_installation: true
 
 # Name of the group of Ansible facts relating this Java installation.
 #
@@ -143,12 +143,12 @@ once:
   roles:
     - role: ansible-role-java
       java_version: '8'
-      java_is_default_installation: no
+      java_is_default_installation: false
       java_fact_group_name: java_8
 
     - role: ansible-role-java
       java_version: '11'
-      java_is_default_installation: yes
+      java_is_default_installation: true
       java_fact_group_name: java
 ```
 
