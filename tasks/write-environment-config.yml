@@ -1,15 +1,15 @@
 ---
-- name: install profile scripts (zypper)
-  become: yes
-  package:
+- name: Install profile scripts (zypper)
+  become: true
+  ansible.builtin.package:
     name: aaa_base
     state: present
   when: ansible_pkg_mgr == 'zypper'
 
 # Set JAVA_HOME
-- name: make sure /etc/profile.d exists
-  become: yes
-  file:
+- name: Make sure /etc/profile.d exists
+  become: true
+  ansible.builtin.file:
     path: /etc/profile.d
     state: directory
     owner: root
@@ -17,9 +17,9 @@
     mode: 'u=rwx,go=rx'
   when: java_is_default_installation
 
-- name: export JAVA_HOME and add to PATH
-  become: yes
-  template:
+- name: Export JAVA_HOME and add to PATH
+  become: true
+  ansible.builtin.template:
     src: java.sh.j2
     dest: /etc/profile.d/java.sh
     owner: root

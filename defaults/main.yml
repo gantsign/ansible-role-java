@@ -15,12 +15,12 @@ java_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.an
 java_local_archive_dir: '{{ playbook_dir }}/files'
 
 # Wether to use installation packages in the local archive (if available)
-java_use_local_archive: yes
+java_use_local_archive: true
 
 # If this is the default installation, profile scripts will be written to set
 # the JAVA_HOME environment variable and add the bin directory to the PATH
 # environment variable.
-java_is_default_installation: yes
+java_is_default_installation: true
 
 # Name of the group of Ansible facts relating this Java installation.
 #

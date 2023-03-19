@@ -3,27 +3,27 @@
   hosts: all
 
   pre_tasks:
-    - name: update apt cache
-      apt:
-        update_cache: yes
-      changed_when: no
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+      changed_when: false
       when: ansible_pkg_mgr == 'apt'
 
-    - name: create local archive directory
-      file:
+    - name: Create local archive directory
+      ansible.builtin.file:
         state: directory
         mode: 'u=rwx,go=rx'
         dest: '{{ java_local_archive_dir }}'
       delegate_to: localhost
       when: java_use_local_archive
 
-    - name: download JDK for offline install
-      get_url:
+    - name: Download JDK for offline install
+      ansible.builtin.get_url:
         url: 'https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz'
         dest: '{{ java_local_archive_dir }}/OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz'
-        force: no
-        use_proxy: yes
-        validate_certs: yes
+        force: false
+        use_proxy: true
+        validate_certs: true
         timeout: '{{ java_download_timeout_seconds }}'
         mode: 'u=rw,go=r'
       delegate_to: localhost
@@ -34,19 +34,19 @@
       java_major_version: '8'
       java_version: '8.0.362+9'
       java_release_name: 'jdk8u362-b09'
-      java_use_local_archive: yes
+      java_use_local_archive: true
       java_redis_filename: 'OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz'
       java_redis_sha256sum: '1486a792fb224611ce0cd0e83d4aacd3503b56698549f8e9a9f0a6ebb83bdba1'
 
   post_tasks:
-    - name: verify java facts
-      assert:
+    - name: Verify java facts
+      ansible.builtin.assert:
         that:
           - ansible_local.java.general.version is defined
           - ansible_local.java.general.home is defined
 
-    - name: install find - required for tests (dnf)
-      dnf:
+    - name: Install find - required for tests (dnf)
+      ansible.builtin.dnf:
         name: findutils
         state: present
       when: ansible_pkg_mgr == 'dnf'

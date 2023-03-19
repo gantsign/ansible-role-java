@@ -1,39 +1,39 @@
 ---
-- name: load architecture vars
+- name: Load architecture vars
+  ansible.builtin.include_vars: '{{ item }}'
   with_first_found:
     - '../vars/architecture/{{ java_arch }}.yml'
     - ../vars/architecture/default.yml
-  include_vars: '{{ item }}'
 
-- name: load package mgr vars
+- name: Load package mgr vars
+  ansible.builtin.include_vars: '{{ item }}'
   with_first_found:
     - '../vars/packages/{{ ansible_pkg_mgr }}.yml'
     - ../vars/packages/default.yml
-  include_vars: '{{ item }}'
 
-- name: create download directory
-  file:
+- name: Create download directory
+  ansible.builtin.file:
     state: directory
     mode: 'u=rwx,go=rx'
     dest: '{{ java_download_dir }}'
 
-- name: copy local JDK
-  include_tasks: adoptium-copy-local-jdk.yml
+- name: Copy local JDK
+  ansible.builtin.include_tasks: adoptium-copy-local-jdk.yml
   when:
     - java_use_local_archive
     - java_redis_sha256sum not in (None, '', omit)
     - java_redis_filename not in (None, '', omit)
 
-- name: check for JDK on remote box
-  stat:
+- name: Check for JDK on remote box
+  ansible.builtin.stat:
     path: '{{ java_download_dir }}/{{ java_redis_filename }}'
     checksum_algorithm: sha256
   register: remote_jdk_file
-  ignore_errors: yes
+  ignore_errors: true
   when: java_redis_filename not in (None, '', omit)
 
-- name: query Adoptium
-  include_tasks: adoptium-query.yml
+- name: Query Adoptium
+  ansible.builtin.include_tasks: adoptium-query.yml
   when: >
     (java_major_version | default(None)) in (None, '', omit)
     or java_release_name in (None, '', omit)
@@ -41,83 +41,83 @@
     or java_redis_sha256sum in (None, '', omit)
     or (java_redis_mirror in (None, '', omit) and not remote_jdk_file.stat.exists)
 
-- name: java version to install
-  debug:
+- name: Java version to install
+  ansible.builtin.debug:
     var: java_release_name
 
-- name: set JDK version
-  set_fact:
+- name: Set JDK version
+  ansible.builtin.set_fact:
     java_jdk_version: "{{ java_release_name | regex_replace('^jdk-?([0-9]+([u\\.][0-9]+)*).*', '\\1') }}"
 
-- name: check for JDK on remote box
-  stat:
+- name: Check for JDK on remote box
+  ansible.builtin.stat:
     path: '{{ java_download_dir }}/{{ java_redis_filename }}'
     checksum_algorithm: sha256
   register: remote_jdk_file
-  ignore_errors: yes
+  ignore_errors: true
 
-- name: assert existing JDK matches checksum
-  assert:
+- name: Assert existing JDK matches checksum
+  ansible.builtin.assert:
     that:
       - remote_jdk_file.stat.checksum == java_redis_sha256sum
     msg: 'Checksum failed: {{ remote_jdk_file.stat.checksum }} != {{ java_redis_sha256sum }}'
   when: remote_jdk_file.stat.exists
 
-- name: download JDK
-  get_url:
+- name: Download JDK
+  ansible.builtin.get_url:
     url: '{{ java_redis_url }}'
     dest: '{{ java_download_dir }}/{{ java_redis_filename }}'
     checksum: 'sha256:{{ java_redis_sha256sum }}'
-    force: no
+    force: false
     timeout: '{{ java_download_timeout_seconds }}'
     mode: 'u=rw,go=r'
   when: not remote_jdk_file.stat.exists
 
-- name: create Java home directory
-  become: yes
-  file:
+- name: Create Java home directory
+  become: true
+  ansible.builtin.file:
     path: '{{ java_home }}'
     state: directory
     owner: root
     group: root
     mode: 'u=rwx,go=rx'
 
-- name: install dependencies (apt, yum, dnf, zypper)
-  become: yes
-  package:
+- name: Install dependencies (apt, yum, dnf, zypper)
+  become: true
+  ansible.builtin.package:
     name: '{{ java_dependencies }}'
     state: present
   when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
 
 # Workaround for: https://github.com/AdoptOpenJDK/openjdk-build/issues/660
-- name: check JDK archive layout
-  become: yes
-  shell: |
+- name: Check JDK archive layout
+  become: true
+  ansible.builtin.shell: |
     set -o pipefail
     tar --list --file {{ (java_download_dir + '/' + java_redis_filename) | quote }} | grep --quiet '^\.'
   args:
     # [WARNING]: Consider using the unarchive module rather than running tar.
-    warn: no
+    warn: false
   register: java_jdk_layout
-  failed_when: no
-  changed_when: no
+  failed_when: false
+  changed_when: false
 
-- name: install JDK
-  become: yes
-  unarchive:
+- name: Install JDK
+  become: true
+  ansible.builtin.unarchive:
     src: '{{ java_download_dir }}/{{ java_redis_filename }}'
     extra_opts:
       - "--strip-components={{ (java_jdk_layout.rc == 0) | ternary('2', '1') }}"
     dest: '{{ java_home }}'
     creates: '{{ java_home }}/bin/java'
-    copy: no
+    copy: false
     owner: root
     group: root
     mode: 'go-w'
 
-- name: generate CDS archive
-  become: yes
-  command: '{{ java_home }}/bin/java -Xshare:dump'
+- name: Generate CDS archive
+  become: true
+  ansible.builtin.command: '{{ java_home }}/bin/java -Xshare:dump'
   args:
     creates: >-
       {{ java_home }}{{ (java_major_version == '8') |
