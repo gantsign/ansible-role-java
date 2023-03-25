@@ -1,6 +1,6 @@
 ---
 # Java version number
-# Specify '8', '11', '17' or '19' to get the latest patch version of that
+# Specify '8', '11', '17' or '20' to get the latest patch version of that
 # release.
 java_version: '17.0.6+10'
 
