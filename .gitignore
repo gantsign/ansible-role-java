@@ -250,3 +250,9 @@ __pycache__
 .molecule
 /tests/files/*
 /molecule/*/files/*
+
+### Tox ###
+.tox
+
+### For development ###
+.venv

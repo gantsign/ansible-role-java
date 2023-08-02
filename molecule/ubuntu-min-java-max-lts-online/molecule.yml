@@ -7,12 +7,6 @@ driver:
 
 role_name_check: 2
 
-lint: |
-  set -e
-  yamllint .
-  ansible-lint
-  flake8
-
 platforms:
   - name: ansible-role-java-ubuntu-min-java-max-lts
     image: ubuntu:18.04
