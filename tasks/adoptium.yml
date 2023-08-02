@@ -1,3 +1,4 @@
+# code: language=ansible
 ---
 - name: Load architecture vars
   ansible.builtin.include_vars: '{{ item }}'

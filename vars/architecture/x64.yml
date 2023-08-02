@@ -1,2 +1,4 @@
+# code: language=ansible
+---
 # Architecture directory name
 java_arch_dir: amd64

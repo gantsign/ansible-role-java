@@ -1,3 +1,5 @@
+# code: language=ansible
+---
 # Dependencies required to install/use Java
 java_dependencies:
   - tar

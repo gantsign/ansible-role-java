@@ -1,3 +1,4 @@
+# code: language=ansible
 ---
 # Java version number
 # Specify '8', '11', '17' or '20' to get the latest patch version of that
