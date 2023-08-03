@@ -189,8 +189,9 @@ tomli==2.0.1
     #   tox
 tox==4.5.1
     # via -r tox.in
-urllib3==2.0.4
+urllib3==1.26.16
     # via
+    #   -r molecule.in
     #   docker
     #   requests
 virtualenv==20.24.2
