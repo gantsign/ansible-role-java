@@ -66,11 +66,11 @@ jobs:
           - max
         molecule-scenario:
           - ubuntu-min-java-max-lts-online
-          # - ubuntu-min-java-max-non-lts-online
+          - ubuntu-min-java-max-non-lts-online
           - ubuntu-min-java-old-lts-online
           - ubuntu-max-java-min-offline
           - ubuntu-max-java-max-lts-offline
-          # - ubuntu-max-java-max-non-lts-offline
+          - ubuntu-max-java-max-non-lts-offline
           - ubuntu-max-java-old-lts-offline
           - debian-max-java-min-offline
           - debian-max-java-max-lts-offline
