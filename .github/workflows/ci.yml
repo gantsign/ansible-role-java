@@ -79,15 +79,15 @@ jobs:
           - fedora-java-min-online
           - opensuse-java-min-online
         include:
-          - architecture: amd64
+          - architecture: arm64
             ansible-version: min
-            molecule-scenario: ubuntu-min-java-min-online
+            molecule-scenario: ubuntu-max-arm64
           # - architecture: arm64
           #   ansible-version: max
           #   molecule-scenario: debian-min-java-min-online
           - architecture: arm64
             ansible-version: max
-            molecule-scenario: debian-min-java-max-lts-online
+            molecule-scenario: debian-max-arm64
 
     steps:
       - name: Checkout

@@ -8,8 +8,8 @@ driver:
 role_name_check: 2
 
 platforms:
-  - name: ansible-role-java-debian-min-java-max-lts
-    image: debian:10
+  - name: ansible-role-java-ubuntu-max-arm64
+    image: arm64v8/ubuntu:22.04
 
 provisioner:
   name: ansible
