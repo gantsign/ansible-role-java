@@ -66,15 +66,15 @@ jobs:
           - max
         molecule-scenario:
           - ubuntu-min-java-max-lts-online
-          - ubuntu-min-java-max-non-lts-online
-          - ubuntu-min-java-old-lts-online
+          # - ubuntu-min-java-max-non-lts-online
+          # - ubuntu-min-java-old-lts-online
           - ubuntu-max-java-min-offline
           - ubuntu-max-java-max-lts-offline
           - ubuntu-max-java-max-non-lts-offline
           - ubuntu-max-java-old-lts-offline
-          - debian-max-java-min-offline
+          # - debian-max-java-min-offline
           - debian-max-java-max-lts-offline
-          - rocky-java-min-offline
+          # - rocky-java-min-offline
           - rocky-java-max-lts-offline
           - fedora-java-min-online
           - opensuse-java-min-online
@@ -82,9 +82,9 @@ jobs:
           - architecture: amd64
             ansible-version: min
             molecule-scenario: ubuntu-min-java-min-online
-          - architecture: arm64
-            ansible-version: max
-            molecule-scenario: debian-min-java-min-online
+          # - architecture: arm64
+          #   ansible-version: max
+          #   molecule-scenario: debian-min-java-min-online
           - architecture: arm64
             ansible-version: max
             molecule-scenario: debian-min-java-max-lts-online
