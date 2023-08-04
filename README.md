@@ -119,7 +119,7 @@ You can install a specific version of the JDK by specifying the `java_version`.
 - hosts: servers
   roles:
     - role: gantsign.java
-      java_version: '8.0.372+7'
+      java_version: '8.0.382+5'
 ```
 
 **Note:** with [curl](https://curl.haxx.se) and
@@ -176,11 +176,11 @@ This role exports the following Ansible facts for use by other roles:
 
 * `ansible_local.java.general.version`
 
-    * e.g. `8u312`
+    * e.g. `8u382`
 
 * `ansible_local.java.general.home`
 
-    * e.g. `/opt/java/jdk8u312`
+    * e.g. `/opt/java/jdk8u382`
 
 Overriding `java_fact_group_name` will change the names of the facts e.g.:
 
