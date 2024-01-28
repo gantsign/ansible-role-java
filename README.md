@@ -127,11 +127,9 @@ You can install a specific version of the JDK by specifying the `java_version`.
 running the following command:
 
 ```bash
-for i in 8 11 17 21; do (curl --silent http \
-  "https://api.adoptium.net/v3/assets/feature_releases/$i/ga?\
-architecture=x64&heap_size=normal&image_type=jdk&jvm_impl=hotspot&\
-os=linux&project=jdk&sort_order=DESC&vendor=adoptium" \
-   | jq --raw-output '.[].version_data.semver'); done
+for i in 21 17 11 8; do (curl --silent http \
+  "https://api.adoptium.net/v3/info/release_names?version=%5B$i,$(($i + 1)))\
+&release_type=ga" | jq --raw-output '.releases[]' | sed -E 's/^jdk\-?//'); done
 ```
 
 You can install the multiple versions of the JDK by using this role more than
