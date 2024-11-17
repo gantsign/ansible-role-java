@@ -30,7 +30,7 @@ Requirements
 
         * Rocky Linux
 
-            * 8
+            * 9
 
         * Fedora
 
