@@ -12,9 +12,9 @@ ansible-compat==3.0.2 \
     --hash=sha256:1c051fb7cedd7a067c5b8fca86e76109bff69cdd31115dea751e3166296a73da \
     --hash=sha256:a10ea191f9efe08590ff64cb46a31af1f8142c08618db1a4bc827ed257c68230
     # via -r lint.in
-ansible-core==2.14.8 \
-    --hash=sha256:637f62c9547023fb4704cd5de1329dc7c02ef9e583cea1c3be2ce6c2fde7739c \
-    --hash=sha256:7830a988112ca148390bfb7db25193f51a95ef6f8b9e0e54e67f65957db8f60d
+ansible-core==2.14.18 \
+    --hash=sha256:5219ab3f415790ad63e1485532ce9911c669c934a20e8ee4fb869ee9e2c28e10 \
+    --hash=sha256:a953acb0db9e851c7044da9876b98924b7c2941148cab0c45f094309f17f8fd7
     # via
     #   -r lint.in
     #   ansible
