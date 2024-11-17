@@ -17,7 +17,6 @@ galaxy_info:
         - '15.4'
     - name: Ubuntu
       versions:
-        - bionic
         - focal
         - jammy
     - name: Debian
