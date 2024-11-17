@@ -10,9 +10,9 @@ ansible-compat==3.0.2 \
     # via
     #   -r molecule.in
     #   molecule
-ansible-core==2.15.2 \
-    --hash=sha256:07a8f0476904876aaaf51401c617519cdd9cfb6e1e3ac46597c35699b0b83d52 \
-    --hash=sha256:84251b001f2f9c0914beedffcf19529e745a13108159d1fe27de9e3a6a63ac5a
+ansible-core==2.14.18 \
+    --hash=sha256:5219ab3f415790ad63e1485532ce9911c669c934a20e8ee4fb869ee9e2c28e10 \
+    --hash=sha256:a953acb0db9e851c7044da9876b98924b7c2941148cab0c45f094309f17f8fd7
     # via ansible-compat
 arrow==1.2.3 \
     --hash=sha256:3934b30ca1b9f292376d9db15b19446088d12ec58629bc3f0da28fd55fb633a1 \
@@ -248,10 +248,6 @@ idna==3.7 \
     --hash=sha256:028ff3aadf0609c1fd278d8ea3089299412a7a8b9bd005dd08b9f8285bcb5cfc \
     --hash=sha256:82fee1fc78add43492d3a1898bfa6d8a904cc97d8427f683ed8e798d07761aa0
     # via requests
-importlib-resources==5.0.7 \
-    --hash=sha256:2238159eb743bd85304a16e0536048b3e991c531d1cd51c4a834d1ccf2829057 \
-    --hash=sha256:4df460394562b4581bb4e4087ad9447bd433148fba44241754ec3152499f1d1b
-    # via ansible-core
 iniconfig==2.0.0 \
     --hash=sha256:2d91e135bf72d31a410b17c16da610a82cb55f6b0477d1a902134b24a455b8b3 \
     --hash=sha256:b6a85871a79d2e3b22d2d1b94ac2824226a63c6b741c88f7ae975f18b6778374
@@ -437,9 +433,9 @@ requests==2.31.0 \
     #   cookiecutter
     #   docker
     #   molecule-docker
-resolvelib==1.0.1 \
-    --hash=sha256:04ce76cbd63fded2078ce224785da6ecd42b9564b1390793f64ddecbe997b309 \
-    --hash=sha256:d2da45d1a8dfee81bdd591647783e340ef3bcb104b54c383f70d422ef5cc7dbf
+resolvelib==0.8.1 \
+    --hash=sha256:c6ea56732e9fb6fca1b2acc2ccc68a0b6b8c566d8f3e78e0443310ede61dbd37 \
+    --hash=sha256:d9b7907f055c3b3a2cfc56c914ffd940122915826ff5fb5b1de0c99778f4de98
     # via ansible-core
 rich==13.5.2 \
     --hash=sha256:146a90b3b6b47cac4a73c12866a499e9817426423f57c5a66949c086191a8808 \

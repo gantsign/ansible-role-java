@@ -10,8 +10,9 @@ ansible-compat==3.0.2 \
     # via
     #   -r molecule.in
     #   molecule
-ansible-core==2.12.10 \
-    --hash=sha256:feb1df61738cfc1f5e893b42a2ec1a7de32977d67e86707b45eb63d0c5c3c236
+ansible-core==2.14.18 \
+    --hash=sha256:5219ab3f415790ad63e1485532ce9911c669c934a20e8ee4fb869ee9e2c28e10 \
+    --hash=sha256:a953acb0db9e851c7044da9876b98924b7c2941148cab0c45f094309f17f8fd7
     # via
     #   -r ansible-min.in
     #   ansible-compat

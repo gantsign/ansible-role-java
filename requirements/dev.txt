@@ -11,7 +11,7 @@ ansible-compat==3.0.2
     #   -r lint.in
     #   -r molecule.in
     #   molecule
-ansible-core==2.14.5
+ansible-core==2.14.18
     # via
     #   -r ansible-max.in
     #   -r lint.in
