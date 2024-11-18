@@ -10,6 +10,13 @@
       changed_when: false
       when: ansible_pkg_mgr == 'apt'
 
+    # Workaround for Fedora 41 https://github.com/ansible/ansible/issues/84206
+    - name: Install python3-libdnf5
+      become: true
+      ansible.builtin.command: dnf install -y python3-libdnf5
+      when: ansible_facts.pkg_mgr == 'dnf5'
+      changed_when: false
+
   roles:
     - role: ansible-role-java
       java_version: 8.0.402+6
@@ -23,7 +30,7 @@
           - ansible_local.java.general.home is defined
 
     - name: Install find - required for tests (dnf)
-      ansible.builtin.dnf:
+      ansible.builtin.package:
         name: findutils
         state: present
-      when: ansible_pkg_mgr == 'dnf'
+      when: ansible_pkg_mgr in ('dnf', 'dnf5')

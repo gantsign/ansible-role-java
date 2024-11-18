@@ -88,7 +88,7 @@
   ansible.builtin.package:
     name: '{{ java_dependencies }}'
     state: present
-  when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
+  when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'dnf5', 'zypper')
 
 # Workaround for: https://github.com/AdoptOpenJDK/openjdk-build/issues/660
 - name: Check JDK archive layout

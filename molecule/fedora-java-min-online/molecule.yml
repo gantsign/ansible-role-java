@@ -9,7 +9,7 @@ role_name_check: 2
 
 platforms:
   - name: ansible-role-java-fedora
-    image: fedora:35
+    image: fedora:41
 
 provisioner:
   name: ansible
