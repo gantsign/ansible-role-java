@@ -143,7 +143,7 @@ pyproject-hooks==1.2.0
 pytest==8.3.3
     # via pytest-testinfra
 pytest-testinfra==10.1.1
-    # via testinfra
+    # via -r molecule.in
 pyyaml==6.0.2
     # via
     #   ansible-compat
@@ -180,8 +180,6 @@ subprocess-tee==0.4.2
     # via
     #   ansible-compat
     #   ansible-lint
-testinfra==6.0.0
-    # via -r molecule.in
 tomli==2.1.0
     # via
     #   black
