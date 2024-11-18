@@ -9,7 +9,7 @@ role_name_check: 2
 
 platforms:
   - name: ansible-role-java-centos-max-java-max-lts
-    image: rockylinux/rockylinux:8
+    image: rockylinux/rockylinux:9
 
 provisioner:
   name: ansible
