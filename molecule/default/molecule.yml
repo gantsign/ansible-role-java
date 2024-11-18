@@ -14,7 +14,7 @@ role_name_check: 2
 
 platforms:
   - name: ansible-role-java-default
-    image: ubuntu:22.04
+    image: ubuntu:24.04
 
 verifier:
   name: testinfra
