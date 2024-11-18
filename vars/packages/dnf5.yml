@@ -1,0 +1,10 @@
+# code: language=ansible
+---
+# Dependencies required to install/use Java
+java_dependencies:
+  - tar
+  - gzip
+  - unzip
+  - freetype
+  - fontconfig
+  - dejavu-sans-fonts
