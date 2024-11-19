@@ -52,9 +52,9 @@ are shown below):
 
 ```yaml
 # Java version number
-# Specify '8', '11', '17' or '21' to get the latest patch version of that
+# Specify '8', '11', '17', '21' or '23' to get the latest patch version of that
 # release.
-java_version: '21.0.2+13'
+java_version: '21.0.5+11'
 
 # Base installation directory for any Java distribution
 java_install_dir: '/opt/java'
@@ -118,7 +118,7 @@ You can install a specific version of the JDK by specifying the `java_version`.
 - hosts: servers
   roles:
     - role: gantsign.java
-      java_version: '8.0.402+6'
+      java_version: '8.0.432+6'
 ```
 
 **Note:** with [curl](https://curl.haxx.se) and
@@ -126,7 +126,7 @@ You can install a specific version of the JDK by specifying the `java_version`.
 running the following command:
 
 ```bash
-for i in 21 17 11 8; do (curl --silent http \
+for i in 23 21 17 11 8; do (curl --silent http \
   "https://api.adoptium.net/v3/info/release_names?version=%5B$i,$(($i + 1)))\
 &release_type=ga" | jq --raw-output '.releases[]' | sed -E 's/^jdk\-?//'); done
 ```
@@ -150,20 +150,20 @@ once:
 
 To perform an offline install, you need to specify a bit more information (i.e.
 `java_major_version`, `java_release_name`, `java_redis_filename` and
-`java_redis_sha256sum`). E.g. to perform an offline install of `11.0.22+7`:
+`java_redis_sha256sum`). E.g. to perform an offline install of `11.0.25+9`:
 
 ```yaml
 # Before performing the offline install, download
-# `OpenJDK11U-jdk_x64_linux_hotspot_11.0.22_7.tar.gz` to
+# `OpenJDK11U-jdk_x64_linux_hotspot_11.0.25_9.tar.gz` to
 # `{{ playbook_dir }}/files/` on the local machine.
 - hosts: servers
   roles:
     - role: gantsign.java
       java_major_version: '11'
-      java_version: '11.0.22+7'
-      java_release_name: 'jdk-11.0.22+7'
-      java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.22_7.tar.gz'
-      java_redis_sha256sum: '25cf602cac350ef36067560a4e8042919f3be973d419eac4d839e2e0000b2cc8'
+      java_version: '11.0.25+9'
+      java_release_name: 'jdk-11.0.25+9'
+      java_redis_filename: 'OpenJDK11U-jdk_x64_linux_hotspot_11.0.25_9.tar.gz'
+      java_redis_sha256sum: '191baa2e052627614022171400a917d28f0987dc54da48aaf07b06f552bb9884'
 ```
 
 Role Facts
