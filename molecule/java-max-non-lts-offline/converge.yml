@@ -26,8 +26,8 @@
 
     - name: Download JDK for offline install
       ansible.builtin.get_url:
-        url: "https://api.adoptium.net/v3/binary/version/{{ 'jdk-20.0.2+9' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptium?project=jdk"  # noqa 204
-        dest: '{{ java_local_archive_dir }}/OpenJDK20-jdk_x64_linux_hotspot_20.0.2_9.tar.gz'
+        url: "https://api.adoptium.net/v3/binary/version/{{ 'jdk-23.0.1+11' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptium?project=jdk"  # noqa 204
+        dest: '{{ java_local_archive_dir }}/OpenJDK23-jdk_x64_linux_hotspot_23.0.1_11.tar.gz'
         force: false
         timeout: '{{ java_download_timeout_seconds }}'
         mode: 'u=rw,go=r'
@@ -36,11 +36,11 @@
   roles:
     - role: ansible-role-java
       java_use_local_archive: true
-      java_major_version: '20'
-      java_version: '20.0.2+9'
-      java_release_name: 'jdk-20.0.2+9'
-      java_redis_filename: 'OpenJDK20-jdk_x64_linux_hotspot_20.0.2_9.tar.gz'
-      java_redis_sha256sum: '3d91842e9c172967ac397076523249d05a82ead51b0006838f5f0315ad52222c'
+      java_major_version: '23'
+      java_version: '23.0.1+11'
+      java_release_name: 'jdk-23.0.1+11'
+      java_redis_filename: 'OpenJDK23-jdk_x64_linux_hotspot_23.0.1_11.tar.gz'
+      java_redis_sha256sum: '2400267e4e9c0f6ae880a4d763af6caf18c673714bdee5debf8388b0b5d52886'
 
   post_tasks:
     - name: Verify java facts
