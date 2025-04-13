@@ -26,8 +26,8 @@
 
     - name: Download JDK for offline install
       ansible.builtin.get_url:
-        url: "https://api.adoptium.net/v3/binary/version/{{ 'jdk-21.0.5+11' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptium?project=jdk"  # noqa 204
-        dest: '{{ java_local_archive_dir }}/OpenJDK21-jdk_x64_linux_hotspot_21.0.5_11.tar.gz'
+        url: "https://api.adoptium.net/v3/binary/version/{{ 'jdk-21.0.6+7' | urlencode }}/linux/x64/jdk/hotspot/normal/adoptium?project=jdk"  # noqa 204
+        dest: '{{ java_local_archive_dir }}/OpenJDK21-jdk_x64_linux_hotspot_21.0.6_7.tar.gz'
         force: false
         timeout: '{{ java_download_timeout_seconds }}'
         mode: 'u=rw,go=r'
@@ -37,11 +37,11 @@
     - role: ansible-role-java
       java_use_local_archive: true
       java_major_version: '21'
-      java_version: '21.0.5+11'
-      java_release_name: 'jdk-21.0.5+11'
+      java_version: '21.0.6+7'
+      java_release_name: 'jdk-21.0.6+7'
 
-      java_redis_filename: 'OpenJDK21-jdk_x64_linux_hotspot_21.0.5_11.tar.gz'
-      java_redis_sha256sum: '3c654d98404c073b8a7e66bffb27f4ae3e7ede47d13284c132d40a83144bfd8c'
+      java_redis_filename: 'OpenJDK21-jdk_x64_linux_hotspot_21.0.6_7.tar.gz'
+      java_redis_sha256sum: 'a2650fba422283fbed20d936ce5d2a52906a5414ec17b2f7676dddb87201dbae'
 
   post_tasks:
     - name: Verify java facts
