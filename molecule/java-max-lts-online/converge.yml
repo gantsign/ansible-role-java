@@ -28,8 +28,8 @@
           - ansible_local.java.general.version is defined
           - ansible_local.java.general.home is defined
 
-    - name: Install find - required for tests (dnf)
+    - name: Install find - required for tests (dnf, zypper)
       ansible.builtin.package:
         name: findutils
         state: present
-      when: ansible_pkg_mgr in ('dnf', 'dnf5')
+      when: ansible_pkg_mgr in ('dnf', 'dnf5', 'zypper')
