@@ -10,7 +10,7 @@ Role to install the Java JDK.
 Requirements
 ------------
 
-* Ansible Core >= 2.16
+* Ansible Core >= 2.17
 
 * Linux Distribution
 
